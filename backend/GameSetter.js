@@ -14,17 +14,13 @@ export function setGame(players, mapinfo){
     const items_in_use = pickToolsByFeature(items, crimeInfo)
 
     // 플레이어 데이터맵 생성
-    const preparedPlayerTimelineMap = createPlayerTimeline(players, map_places, roles, items_in_use, crimeInfo)
+    const preparedPlayerTimelineMap, playersRoles = createPlayerTimeline(players, map_places, roles, items_in_use, crimeInfo)
 
-    // 플레이어 가변데이터맵
-    // 거짓진술용
+    // 거짓진술용 빈 플레이어 데이터맵
     const inGamePlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)  
 
     // 라운드별 힌트 생성 함수
     const hintsPerRound = createHintsPerRound(preparedPlayerTimelineMap, crimeInfo, map_places)
-    // 힌트용 장소는 범행시각때 나온 장소의 빈도수별...
-    // 도구는 특징으로 힌트
-
 
     return ""
 }
@@ -57,7 +53,7 @@ export function createPlayerTimeline(players, map_places, roles, items_in_use, c
     // 타임라인 생성 
     const preparedPlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)
     
-    return preparedPlayerTimelineMap
+    return preparedPlayerTimelineMap, playersRoles
 }
 
 // 배열 내 랜덤 지정 함수
@@ -352,15 +348,50 @@ function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
     })
     const sortedPlaces= Object.entries(placeCount).sort((a,b)=>b[1]-a[1]).map(([place])=>place)
     let round1Places = [crimeInfo.crimePlace, ...sortedPlaces.slice(0,5)]
+    if(round1Places.length<6){
+        const randomFill = map_places.filter(m=>!round1Places.includes(m)).sort(()=>0.5-Math.random())
+        round1Places.push(...randomFill.slice(0,6-round1Places.length))
+    }
+    hints.round1= round1Places
 
     // 2라운드: 6개의 시간중 범행시각 + 범행시각 가까운 2개의 시간대 선정
+    const times = Object.keys(preparedPlayerTimelineMap[0].alibi).map(Number).sort((a,b)=>a-b); // 전체 시각 목록
+    const idx = times.indexOf(crimeInfo.crimeTime)
+    const round2Times = [crimeInfo.crimeTime]
+    if(idx>0) round2Times.push(times[idx-1])
+    if(idx<times.length-1) round2Times.push(times[idx+1])
+    hints.round2= round2Times
 
     // 3라운드: 범행도구 특징 공개
+    hints.round3= [
+        {"sharp":"예리한 흉기에 의한 자상"},
+        {"blunt":"둔기에 의한 두부 손상"},
+        {"poison":"독성 물질에 의한 중독"},
+        {"asphyxia":"기도 압박에 의한 질식"}]
 
     // 4라운드: 1라운드에서 선정된 6개의 장소중, 범행장소 포함하여, 범행시각 내 최다빈도 장소 2개 추가선정, 부족분 랜덤지정
+    const round4Places = [crimeInfo.crimePlace, ...sortedPlaces.slice(0,2)]
+    if(round4Places.length<3){
+        const randomFill = round1Places.filter(p=>!round4Places.includes(p)).sort(()=>0.5-Math.random())
+        round4Places.push(...randomFill.slice(0,3-round4Places.length))
+    }
+    hints.round4=round4Places
 
     // 5라운드: 3라운드에서 추출된 3개의 범행시각 == 9개 section중 범행시각에 해당하는 3개의 section 들을 포함하며, 2 section 추가 추출
     // 범행시각 이전시각과 이후시각이 있다면, 이전시각의 마지막 section 1개, 이후시각의 첫 section 1개 추출
     // 범행시각 이후 시각이 없다면, 이전시각의 마지막 두 section 추출
+    const round5Sections = ["section02","section24","section46"].map(sec=>({time:crimeInfo.crimeTime, section:sec}))
+    if(idx>0){
+        round5Sections.push({time:times[idx-1], section:"section46"})
+    }
+    if(idx<times.length-1){
+        round5Sections.push({time:times[idx+1], section:"section02"})
+    } else if(idx>0){
+        //이후 시작 없을 경우 이전시각의 마지막 두 section
+        round5Sections.push({time: times[idx-1], section:"section24"})
+        round5Sections.push({time:times[idx-1], section:"section46"})
+    }
+    hints.round5 = round5Sections
     
+    return hints
 }
