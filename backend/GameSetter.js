@@ -1,8 +1,6 @@
-
-
-export function setGame(players, mapinfo){
+export function setGame(users, mapinfo){
     // 플레이어 수 설정
-    const players = players //user들이 담긴 배열
+    const players = users //user들이 담긴 배열
     const map_places = mapinfo.map_places 
     const roles = mapinfo.roles
     const items = mapinfo.items
@@ -10,11 +8,11 @@ export function setGame(players, mapinfo){
     // 범행정보 생성
     const crimeInfo = createCrime(map_places,roles,items)
 
-        // 맵 내 사용도구 선정
+    // 맵 내 사용도구 선정
     const items_in_use = pickToolsByFeature(items, crimeInfo)
 
     // 플레이어 데이터맵 생성
-    const preparedPlayerTimelineMap, playersRoles = createPlayerTimeline(players, map_places, roles, items_in_use, crimeInfo)
+    const {preparedPlayerTimelineMap, playersRoles} = createPlayerTimeline(players, map_places, roles, items_in_use, crimeInfo)
 
     // 거짓진술용 빈 플레이어 데이터맵
     const inGamePlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)  
@@ -22,12 +20,12 @@ export function setGame(players, mapinfo){
     // 라운드별 힌트 생성 함수
     const hintsPerRound = createHintsPerRound(preparedPlayerTimelineMap, crimeInfo, map_places)
 
-    return ""
+    return {crimeInfo, preparedPlayerTimelineMap, playersRoles, inGamePlayerTimelineMap, hintsPerRound}
 }
 
 
 // 범행생성 함수
-export function createCrime(map_places, roles, items){
+function createCrime(map_places, roles, items){
     // 범행 시각 생성 (13시~23시)
     const crimeTime = Math.floor(Math.random() * 10) +13
 
@@ -40,10 +38,10 @@ export function createCrime(map_places, roles, items){
     const crimeRole = pickOneRandomly(roles)
     const crimeItem = pickOneRandomly(items)
     
-    return {crimeInfo: {crimeTime, timeSection, crimePlace, crimeRole, crimeItem}}
+    return {crimeTime, timeSection:crimeTimeSection, crimePlace, crimeRole, crimeItem}
 }
 
-export function createPlayerTimeline(players, map_places, roles, items_in_use, crimeInfo){
+function createPlayerTimeline(players, map_places, roles, items_in_use, crimeInfo){
     // 전체 플레이어 데이터맵 구조 생성
     const PlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)                                 
 
@@ -51,9 +49,9 @@ export function createPlayerTimeline(players, map_places, roles, items_in_use, c
     const playersRoles = assingRolesToPlayers(players, roles, crimeInfo)
 
     // 타임라인 생성 
-    const preparedPlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)
+    const preparedPlayerTimelineMap = createPlayersAlibi(PlayerTimelineMap, playersRoles,players,map_places,items_in_use,crimeInfo)
     
-    return preparedPlayerTimelineMap, playersRoles
+    return {preparedPlayerTimelineMap, playersRoles}
 }
 
 // 배열 내 랜덤 지정 함수
@@ -231,17 +229,17 @@ function createPlayersAlibi(playerTimelineMap, playersRoles, players, map_places
 // 알리바이 모순 검사 함수
 function checkAlibiValidation(PlayerTimelineMap, playerObj, timeKey, sectionKey, alibi, crimeInfo, playersRoles){
     // 시간:section 내의 장소 2인이상 모순 검사
-    const placeCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali.place === alibi.place) 
+    const placeCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.place === alibi.place) 
 
     if (placeCheck.length >= 2) return false;
 
     // 시간:section 내의 동일 도구 중복 소유 검사
-    const itemCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali.item && ali.item.item_id === alibi.item?.item_id)
+    const itemCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.item && ali?.item.item_id === alibi.item?.item_id)
     if (itemCheck.length >= 1) return false
 
     // 범행 장소 동행자 금지
     if (timeKey === crimeInfo.crimeTime && sectionKey === crimeInfo.timeSection){
-        const player_role = playersRoles.find(pr=>pr.player._id === playerObj.player._id)
+        const player_role = playersRoles.find(pr=>pr.player._id === playerObj._id)
         if(alibi.place === crimeInfo.crimePlace && player_role.role.role_id !== crimeInfo.crimeRole.role_id) return false
         if(alibi.item?.item_id === crimeInfo.crimeItem.item_id && player_role.role.role_id !== crimeInfo.crimeRole.role_id) return false
     }
@@ -292,9 +290,11 @@ function assingRolesToPlayers(players,roles,crimeInfo){
     const randomRoles = shuffled.slice(0, players.length-1)
 
     const selectedRoles = [crimeRole, ...randomRoles]
+
+    const shuffledSelectedRoles = selectedRoles.sort(()=>0.5-Math.random())
     
     const roleAssignments = players.map((player, idx)=>{
-        return {player: player, role: selectedRoles[idx]}
+        return {player: player, role: shuffledSelectedRoles[idx]}
     })
     return roleAssignments
 }
@@ -307,9 +307,9 @@ function pickToolsByFeature(items, crimeInfo){
         if (!acc[feat]) acc[feat] = []
         acc[feat].push(item)
         return acc
-    })
+    }, {})
 
-    return selectedItems = []
+    const selectedItems = []
     // 범행도구 추가
     selectedItems.push(crimeInfo.crimeItem)
 
@@ -342,7 +342,7 @@ function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
         ["section02","section24","section46"].forEach(sec=>{
             const place= tl.alibi[crimeInfo.crimeTime][sec]?.place
             if(place){
-                placeCount[place] = (placeCount[place]||0)+1
+                placeCount[place.place_id] = (placeCount[place.place_id]||0)+1
             }
         })
     })
