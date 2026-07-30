@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import authRouter from "./routes/auth_routes.js";
+import roomRouter from "./routes/room_routes.js";
 
 const app = express();
 
@@ -9,5 +10,9 @@ app.use(express.json());
 
 // 인증 API
 app.use("/api/auth", authRouter);
+
+
+// 방 API
+app.use("/api/rooms", roomRouter);
 
 export default app;

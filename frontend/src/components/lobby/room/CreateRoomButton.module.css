@@ -1,0 +1,81 @@
+.button {
+  min-width: 132px;
+  height: 48px;
+  padding: 0 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  color: #ffffff;
+  background: #d3232c;
+  border: 1px solid #e43b43;
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 24px rgb(211 35 44 / 22%),
+    inset 0 1px 0 rgb(255 255 255 / 12%);
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: #e02b34;
+  border-color: #f05158;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgb(211 35 44 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 15%);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.button:focus-visible {
+  outline: 3px solid rgb(224 43 52 / 28%);
+  outline-offset: 3px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
+}
+
+.icon {
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .button {
+    min-width: 108px;
+    height: 43px;
+    padding: 0 15px;
+
+    font-size: 12px;
+  }
+
+  .icon {
+    font-size: 17px;
+  }
+}

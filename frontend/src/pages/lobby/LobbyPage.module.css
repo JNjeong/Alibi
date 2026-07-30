@@ -1,0 +1,42 @@
+.page {
+  min-height: 100vh;
+
+  color: #f4f4f7;
+  background: #080811;
+}
+
+.content {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 28px 32px 60px;
+
+  box-sizing: border-box;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  align-items: start;
+  gap: 24px;
+}
+
+.main {
+  min-width: 0;
+}
+
+.social {
+  min-width: 0;
+}
+
+@media (max-width: 1000px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .content {
+    padding: 20px 16px 40px;
+  }
+}
