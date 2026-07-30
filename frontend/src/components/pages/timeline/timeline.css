@@ -1,0 +1,257 @@
+/* ===== PrivateTimeline ===== */
+.private-timeline-page{
+    width:100%;
+    min-height:100vh;
+    padding:32px;
+    background:#0b0b14;
+}
+
+.private-timeline-container{
+    display:grid;
+    grid-template-columns:360px 1fr;
+    gap:32px;
+    align-items:start;
+}
+
+/* ===== RolePanel ===== */
+.private-layout{
+    display:grid;
+    grid-template-columns:300px 1fr;
+    height:100%;
+}
+
+.role-panel{
+    padding:24px;
+    border-right:1px solid rgba(255,255,255,.08);
+}
+
+.role-badges{
+    display:flex;
+    gap:8px;
+    margin:18px 0 26px;
+}
+
+.badge{
+    padding:6px 14px;
+    border-radius:999px;
+    background:#1b1f2b;
+    border:1px solid #2e3448;
+    color:#a4acc4;
+    font-size:12px;
+}
+
+.badge.active{
+    background:#7f1d1d;
+    border-color:#b71c1c;
+    color:#fff;
+}
+
+.role-profile{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:26px;
+}
+
+.profile-circle{
+    width:88px;
+    height:88px;
+    border-radius:50%;
+    border:2px solid #434b64;
+    background:#181b27;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:34px;
+    font-weight:700;
+    color:#fff;
+}
+
+.role-profile h2{
+    margin-top:18px;
+    color:#fff;
+    font-size:24px;
+}
+
+.role-profile p{
+    margin-top:6px;
+    color:#8f95a8;
+    font-size:14px;
+}
+
+.info-card{
+    margin-top:18px;
+    padding:18px;
+    background:#151925;
+    border:1px solid #2d3144;
+    border-radius:14px;
+}
+
+.info-card.danger{
+    border-color:#5f2222;
+    background:#21161a;
+}
+
+.card-title{
+    display:block;
+    margin-bottom:12px;
+    color:#d8dce9;
+    font-size:13px;
+    font-weight:700;
+}
+
+.info-card p{
+    color:#b3b8c8;
+    line-height:1.7;
+    font-size:13px;
+}
+
+/* ===== TimelineBlock ===== */
+.timeline-title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.timeline-desc{
+    margin-top:6px;
+    color:#7d849b;
+    font-size:13px;
+}
+
+.secret-btn{
+    padding:8px 14px;
+    border:1px solid #2d3144;
+    border-radius:10px;
+    background:#161a27;
+    color:#c4cad8;
+    cursor:pointer;
+}
+
+.timeline-scale{
+    margin-top:28px;
+}
+
+.time-labels{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    color:#7c8499;
+    font-size:12px;
+}
+
+.timeline-track{
+    display:flex;
+    height:58px;
+    overflow:hidden;
+    border-radius:12px;
+    border:1px solid #2d3144;
+}
+
+.timeline-segment{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-right:1px solid rgba(255,255,255,.08);
+    color:#fff;
+    font-size:13px;
+    font-weight:600;
+}
+
+.timeline-segment:last-child{
+    border-right:none;
+}
+
+.timeline-segment.gray{
+    background:#50586b;
+}
+
+.timeline-segment.red{
+    background:#7d2727;
+}
+
+.timeline-segment.green{
+    background:#2f6b4f;
+}
+
+.timeline-segment.dark{
+    background:#323232;
+}
+
+/* ===== EventCard ===== */
+.event-title{
+    margin:32px 0 16px;
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+}
+
+.event-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.event-card{
+    background:#171b26;
+    border:1px solid #2b3144;
+    border-radius:14px;
+    padding:18px;
+    transition:.2s;
+}
+
+.event-card:hover{
+    border-color:#9f2d2d;
+    transform:translateY(-2px);
+}
+
+.event-card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:14px;
+}
+
+.event-card-header h4{
+    margin:0;
+    color:#fff;
+    font-size:15px;
+}
+
+.event-card-header span{
+    margin-top:4px;
+    display:block;
+    color:#8d95aa;
+    font-size:12px;
+}
+
+.event-card p{
+    margin:0;
+    color:#d3d7e5;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.event-badge{
+    padding:5px 12px;
+    border-radius:999px;
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+}
+
+.event-badge.red{
+    background:#8b2d2d;
+}
+
+.event-badge.gray{
+    background:#545d71;
+}
+
+.event-badge.green{
+    background:#2f7251;
+}
+
+.event-badge.dark{
+    background:#3b3b3b;
+}
