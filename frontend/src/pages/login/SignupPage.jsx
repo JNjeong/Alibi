@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { signup } from "../api/auth_api.js";
+import { signup } from "../../api/auth_api.js";
+import styles from "./SignupPage.module.css";
 
 const SignupPage = () => {
     const navigate = useNavigate();
@@ -38,45 +39,60 @@ const SignupPage = () => {
     };
 
     return (
-        <div>
-            <h1>회원가입</h1>
+        <div className={styles.page}>
 
-            <form onSubmit={handleSubmit}>
+        <h1 className={styles.logo}>ALIBI</h1>
+
+        <p className={styles.subtitle}>
+            새로운 플레이어 등록
+        </p>
+
+        <div className={styles.card}>
+
+            <h2 className={styles.title}>
+                회원가입
+            </h2>
+
+            <form className={styles.form} onSubmit={handleSubmit}>
+
                 <input
+                    className={styles.input}
                     name="username"
                     placeholder="아이디"
-                    value={form.username}
-                    onChange={handleChange}
                 />
 
                 <input
+                    className={styles.input}
                     type="password"
                     name="password"
                     placeholder="비밀번호"
-                    value={form.password}
-                    onChange={handleChange}
                 />
 
                 <input
+                    className={styles.input}
                     type="password"
                     name="confirmPassword"
                     placeholder="비밀번호 확인"
-                    value={form.confirmPassword}
-                    onChange={handleChange}
                 />
 
                 <input
+                    className={styles.input}
                     name="nickname"
                     placeholder="닉네임"
-                    value={form.nickname}
-                    onChange={handleChange}
                 />
 
-                <button type="submit">
+                <button
+                    className={styles.signupButton}
+                    type="submit"
+                >
                     회원가입
                 </button>
+
             </form>
+
         </div>
+
+    </div>
     );
 };
 

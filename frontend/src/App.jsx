@@ -1,17 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
-// import MainPage from "./pages/MainPage";
-
+import SignupPage from "./pages/login/SignupPage";
+import LoginPage from "./pages/login/LoginPage";
 // 로비
 import LobbyPage from "./pages/lobby/LobbyPage";
 
-import ProtectedRoute from "./components/ProtectedRoute"
-import PublicRoute from "./components/PublicRoute"
+import ProtectedRoute from "./components/Route/ProtectedRoute"
+import PublicRoute from "./components/Route/PublicRoute"
 
 import useAuthStore from "./store/authStore"
 import { useEffect } from "react";
+
+// 관리자 페이지
+import AdminRoute from "./components/Route/AdminRoute";
+import AdminPage from "./pages/Admin/AdminPage"
+
 
 function App() {
 
@@ -43,19 +46,19 @@ function App() {
                         <LoginPage />
                       </PublicRoute>}
                 />
-                {/* <Route
-                    path="/main"
-                    element={
-                      <ProtectedRoute>
-                        <MainPage />
-                      </ProtectedRoute>}
-                /> */}
                 <Route
                     path="/lobby"
                     element={
                       <ProtectedRoute>
                         <LobbyPage />
                       </ProtectedRoute>}
+                />
+                <Route
+                    path="/admin"
+                    element={
+                      <AdminRoute>
+                        <AdminPage />
+                      </AdminRoute>}
                 />
             </Routes>
         </BrowserRouter>

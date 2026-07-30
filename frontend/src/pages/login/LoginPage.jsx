@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, getMe } from "../api/auth_api";
-import useAuthStore from "../store/authStore";
+import { login, getMe } from "../../api/auth_api";
+import useAuthStore from "../../store/authStore";
+import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
     const navigate = useNavigate()
@@ -33,8 +34,7 @@ const LoginPage = () => {
             setUser(user)               // 3.Store에 사용자 저장
 
             alert("로그인 성공!")
-
-            navigate("/lobby") // 4.로비 페이지로 이동
+            
 
         } catch (error) {
             alert(
@@ -45,11 +45,29 @@ const LoginPage = () => {
     }
 
     return (
-        <div>
-            <h1>로그인</h1>
+    <div className={styles.page}>
 
-            <form onSubmit={handleSubmit}>
+        <h1 className={styles.logo}>
+            ALIBI
+        </h1>
+
+        <p className={styles.subtitle}>
+            언제나 진실은 하나
+        </p>
+
+        <div className={styles.card}>
+
+            <h2 className={styles.title}>
+                로그인
+            </h2>
+
+            <form
+                className={styles.form}
+                onSubmit={handleSubmit}
+            >
+
                 <input
+                    className={styles.input}
                     name="username"
                     placeholder="아이디"
                     value={form.username}
@@ -57,6 +75,7 @@ const LoginPage = () => {
                 />
 
                 <input
+                    className={styles.input}
                     type="password"
                     name="password"
                     placeholder="비밀번호"
@@ -64,17 +83,32 @@ const LoginPage = () => {
                     onChange={handleChange}
                 />
 
-                <button type="submit">
+                <button
+                    className={styles.loginButton}
+                    type="submit"
+                >
                     로그인
                 </button>
+
             </form>
 
-            <p>계정이 없으신가요?</p>
-            <button type="submit" onClick={()=> navigate("/signup")}>
+            <div className={styles.signupArea}>
+
+                계정이 없으신가요?
+
+                <button
+                    className={styles.signupButton}
+                    onClick={() => navigate("/signup")}
+                >
                     회원가입
-            </button>
+                </button>
+
+            </div>
+
         </div>
-    )
+
+    </div>
+);
 }
 
 export default LoginPage;
