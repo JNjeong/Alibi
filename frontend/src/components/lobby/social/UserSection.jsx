@@ -1,37 +1,24 @@
-
-import useAuthStore from "../../../store/authStore"
+import { useState } from "react"
 import UserList from "./UserList"
-
+import FriendRequestList from "./FriendRequestList"
+import FriendList from "./FriendList"
 
 function UserSection() {
-  const user = useAuthStore((state) => state.user)
-  const displayName = user?.nickname || "사용자"
-  const username = user?.username || "-"
+  const [friendRefreshKey, setFriendRefreshKey] = useState(0)
+
+  const handleFriendAccepted = () => {
+    setFriendRefreshKey((prev) => prev + 1)
+  }
 
   return (
     <section className="user-section">
-      {/* <div className="section-title-row">
-        <h2>내 정보</h2>
-        <span>온라인</span>
-      </div>
-      
-      <div className="current-user-card">
-        <div className="current-user-avatar">
-          {displayName.slice(0, 1).toUpperCase()}
-        </div>
-
-        <div>
-          <strong>{displayName}</strong>
-          <p>@{username}</p>
-        </div>
-      </div> */}
-
       <UserList />
 
+      <FriendRequestList
+        onFriendAccepted={handleFriendAccepted}
+      />
 
-      <p className="social-panel-note">
-        친구 목록과 초대 기능은 이후 이 영역에 추가할 예정...
-      </p>
+      <FriendList refreshKey={friendRefreshKey} />
     </section>
   )
 }
