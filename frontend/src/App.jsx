@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
+import MainGamePage from "./pages/MainGamePage";
 
 import ProtectedRoute from "./components/ProtectedRoute"
 import PublicRoute from "./components/PublicRoute"
@@ -55,6 +56,14 @@ function App() {
             <ProtectedRoute>
               <MainPage />
             </ProtectedRoute>}
+        />
+
+         <Route
+          path="/main-game"
+          element={
+            <PublicRoute>
+              <MainGamePage />
+            </PublicRoute>}
         />
       </Routes>
     </BrowserRouter>
