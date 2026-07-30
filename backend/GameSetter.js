@@ -10,13 +10,18 @@ export function setGame(players, mapinfo){
     // 범행정보 생성
     const crimeInfo = createCrime(map_places,roles,items)
 
+        // 맵 내 사용도구 선정
+    const items_in_use = pickToolsByFeature(items, crimeInfo)
+
     // 플레이어 데이터맵 생성
-    const preparedPlayerTimelineMap = createPlayerTimeline(players, map_places, roles, items, crimeInfo)
+    const preparedPlayerTimelineMap = createPlayerTimeline(players, map_places, roles, items_in_use, crimeInfo)
 
     // 플레이어 가변데이터맵
     // 거짓진술용
+    const inGamePlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)  
 
     // 라운드별 힌트 생성 함수
+    const hintsPerRound = createHintsPerRound(preparedPlayerTimelineMap, crimeInfo, map_places)
     // 힌트용 장소는 범행시각때 나온 장소의 빈도수별...
     // 도구는 특징으로 힌트
 
@@ -42,22 +47,17 @@ export function createCrime(map_places, roles, items){
     return {crimeInfo: {crimeTime, timeSection, crimePlace, crimeRole, crimeItem}}
 }
 
-export function createPlayerTimeline(players, map_places, roles, items, crimeInfo){
+export function createPlayerTimeline(players, map_places, roles, items_in_use, crimeInfo){
     // 전체 플레이어 데이터맵 구조 생성
     const PlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)                                 
 
     // 역할분배
     const playersRoles = assingRolesToPlayers(players, roles, crimeInfo)
 
-    // 맵 내 사용도구 선정
-    const items_in_use = pickToolsByFeature(items, crimeInfo)
-
     // 타임라인 생성 
-    const inGamePlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)
-
-    // 반환
-
-
+    const preparedPlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)
+    
+    return preparedPlayerTimelineMap
 }
 
 // 배열 내 랜덤 지정 함수
@@ -334,4 +334,33 @@ function pickToolsByFeature(items, crimeInfo){
         selectedItems.push(...shuffled.slice(0,2))
     })
     return selectedItems.slice(0,8)
+}
+
+// 라운드별 힌트 생성 함수
+function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
+    const hints= {}
+
+    // 1라운드: 12개 장소중 범행장소포함하여, 범행시각(+section1~3)내 최다 빈도 장소 5개 추가선정, 부족분 랜덤지정
+    const placeCount = {} // 빈도수계산
+    preparedPlayerTimelineMap.forEach(tl=>{
+        ["section02","section24","section46"].forEach(sec=>{
+            const place= tl.alibi[crimeInfo.crimeTime][sec]?.place
+            if(place){
+                placeCount[place] = (placeCount[place]||0)+1
+            }
+        })
+    })
+    const sortedPlaces= Object.entries(placeCount).sort((a,b)=>b[1]-a[1]).map(([place])=>place)
+    let round1Places = [crimeInfo.crimePlace, ...sortedPlaces.slice(0,5)]
+
+    // 2라운드: 6개의 시간중 범행시각 + 범행시각 가까운 2개의 시간대 선정
+
+    // 3라운드: 범행도구 특징 공개
+
+    // 4라운드: 1라운드에서 선정된 6개의 장소중, 범행장소 포함하여, 범행시각 내 최다빈도 장소 2개 추가선정, 부족분 랜덤지정
+
+    // 5라운드: 3라운드에서 추출된 3개의 범행시각 == 9개 section중 범행시각에 해당하는 3개의 section 들을 포함하며, 2 section 추가 추출
+    // 범행시각 이전시각과 이후시각이 있다면, 이전시각의 마지막 section 1개, 이후시각의 첫 section 1개 추출
+    // 범행시각 이후 시각이 없다면, 이전시각의 마지막 두 section 추출
+    
 }
