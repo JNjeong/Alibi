@@ -2,7 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
-import MainPage from "./pages/MainPage";
+// import MainPage from "./pages/MainPage";
+
+// 로비
+import LobbyPage from "./pages/lobby/LobbyPage";
 
 import ProtectedRoute from "./components/ProtectedRoute"
 import PublicRoute from "./components/PublicRoute"
@@ -40,11 +43,18 @@ function App() {
                         <LoginPage />
                       </PublicRoute>}
                 />
-                <Route
+                {/* <Route
                     path="/main"
                     element={
                       <ProtectedRoute>
                         <MainPage />
+                      </ProtectedRoute>}
+                /> */}
+                <Route
+                    path="/lobby"
+                    element={
+                      <ProtectedRoute>
+                        <LobbyPage />
                       </ProtectedRoute>}
                 />
             </Routes>

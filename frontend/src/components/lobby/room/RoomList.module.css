@@ -1,0 +1,44 @@
+.roomList,
+.roomList * {
+  box-sizing: border-box;
+}
+
+.roomList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.messageBox,
+.emptyBox {
+  width: 100%;
+  padding: 46px 24px;
+  border: 1px solid #252735;
+  border-radius: 20px;
+  background: #10111b;
+  color: #858797;
+  text-align: center;
+}
+
+.errorMessage {
+  border-color: rgba(213, 44, 59, 0.38);
+  color: #ff6772;
+}
+
+.emptyBox {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emptyBox strong {
+  color: #e6e6ed;
+  font-size: 16px;
+}
+
+.emptyBox span {
+  color: #737586;
+  font-size: 13px;
+}

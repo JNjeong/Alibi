@@ -7,7 +7,7 @@ const PublicRoute = ({ children }) => {
     )
 
     if (isAuthenticated) {
-        return <Navigate to="/main" replace />;
+        return <Navigate to="/lobby" replace />;
     }
 
     return children

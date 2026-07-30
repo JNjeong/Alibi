@@ -34,7 +34,7 @@ const LoginPage = () => {
 
             alert("로그인 성공!")
 
-            navigate("/main")
+            navigate("/lobby") // 4.로비 페이지로 이동
 
         } catch (error) {
             alert(
