@@ -20,7 +20,7 @@ export const acceptFriendRequest = async (requesterUsername) => {
 
 // 친구 요청 거절
 export const rejectFriendRequest = async (requesterUsername) => {
-  const response = await api.post(`/friends/reject/${requesterUsername}`)
+  const response = await api.delete(`/friends/reject/${requesterUsername}`)
   return response.data
 }
 
