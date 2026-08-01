@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
-import MainPage from "./pages/MainPage";
-import MainGamePage from "./pages/MainGamePage";
+import SignupPage from "./pages/login/SignupPage";
+import LoginPage from "./pages/login/LoginPage";
+// 로비
+import LobbyPage from "./pages/lobby/LobbyPage";
 
-import ProtectedRoute from "./components/ProtectedRoute"
-import PublicRoute from "./components/PublicRoute"
+import ProtectedRoute from "./components/Route/ProtectedRoute"
+import PublicRoute from "./components/Route/PublicRoute"
 
 // 게임 페이지 import
 import GameLayout from "./components/layout/GameLayout"
@@ -20,6 +20,11 @@ import FinalDeduction from "./components/pages/deduction/FinalDeduction"
 import useAuthStore from "./store/authStore"
 import { useEffect } from "react";
 
+// 관리자 페이지
+import AdminRoute from "./components/Route/AdminRoute";
+import AdminPage from "./pages/Admin/AdminPage"
+
+
 function App() {
 
   const checkAuth = useAuthStore((state) => state.checkAuth)
@@ -32,42 +37,41 @@ function App() {
   if (loading) {
     return <div> ~ 로딩 중 ~ </div>
   }
-
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/signup"
-          element={
-            <PublicRoute>
-              <SignupPage />
-            </PublicRoute>}
-        />
-        <Route
-          path="/"
-          element={
-            <PublicRoute>
-              <LoginPage />
-            </PublicRoute>}
-        />
-        <Route
-          path="/main"
-          element={
-            <ProtectedRoute>
-              <MainPage />
-            </ProtectedRoute>}
-        />
-
-         <Route
-          path="/main-game"
-          element={
-            <PublicRoute>
-              <MainGamePage />
-            </PublicRoute>}
-        />
-      </Routes>
-    </BrowserRouter>
-  );
+  
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path="/signup"
+                    element={
+                      <PublicRoute>
+                        <SignupPage />
+                      </PublicRoute>}
+                />
+                <Route
+                    path="/"
+                    element={
+                      <PublicRoute>
+                        <LoginPage />
+                      </PublicRoute>}
+                />
+                <Route
+                    path="/lobby"
+                    element={
+                      <ProtectedRoute>
+                        <LobbyPage />
+                      </ProtectedRoute>}
+                />
+                <Route
+                    path="/admin"
+                    element={
+                      <AdminRoute>
+                        <AdminPage />
+                      </AdminRoute>}
+                />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
