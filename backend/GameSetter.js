@@ -17,12 +17,35 @@ export function setGame(users, mapinfo){
     // 거짓진술용 빈 플레이어 데이터맵
     const inGamePlayerTimelineMap = createPlayerTimelineMap(players,crimeInfo)  
 
-    // 라운드별 힌트 생성 함수
+    // 라운드별 힌트 생성
     const hintsPerRound = createHintsPerRound(preparedPlayerTimelineMap, crimeInfo, map_places)
 
-    return {crimeInfo, preparedPlayerTimelineMap, playersRoles, inGamePlayerTimelineMap, hintsPerRound}
-}
+    // 유저별 동행/목격 정보
+    const witnessesMap = createWitnessesMap(preparedPlayerTimelineMap)
 
+    return {crimeInfo, preparedPlayerTimelineMap, playersRoles, inGamePlayerTimelineMap, hintsPerRound, witnessesMap}
+}
+// 인게임 모순검사 함수
+export function inGameCheckValidation(inGamePlayerTimelineMap,inGameWitnessesMap, playerObj, timeKeyA, sectionKeyA, timeKeyB, sectionKeyB, alibi=null, qa=null){
+    if(alibi){ // 알리바이 모순
+        // 시간:section 내의 장소 2인이상 모순 검사
+        const placeCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.place === alibi.place) 
+
+        if (placeCheck.length >= 2) {
+            return {valid:false, conflicts: placeCheck}
+        };
+
+        // 시간:section 내의 동일 도구 중복 소유 검사
+        const itemCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.item && ali?.item.item_id === alibi.item?.item_id)
+        if (itemCheck.length >= 1) return {valid:false, conflicts: itemCheck}
+        
+    } else if(qa){ // 목격 관련 모순
+        
+
+    } else { // 모순없음
+        return {}
+    }
+}
 
 // 범행생성 함수
 function createCrime(map_places, roles, items){
@@ -363,11 +386,11 @@ function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
     hints.round2= round2Times
 
     // 3라운드: 범행도구 특징 공개
-    hints.round3= [
+    hints.round3= pickOneRandomly([
         {"sharp":"예리한 흉기에 의한 자상"},
         {"blunt":"둔기에 의한 두부 손상"},
         {"poison":"독성 물질에 의한 중독"},
-        {"asphyxia":"기도 압박에 의한 질식"}]
+        {"asphyxia":"기도 압박에 의한 질식"}])
 
     // 4라운드: 1라운드에서 선정된 6개의 장소중, 범행장소 포함하여, 범행시각 내 최다빈도 장소 2개 추가선정, 부족분 랜덤지정
     const round4Places = [crimeInfo.crimePlace, ...sortedPlaces.slice(0,2)]
@@ -394,4 +417,49 @@ function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
     hints.round5 = round5Sections
     
     return hints
+}
+
+// 유저별 동행/목격 정보 생성 함수
+function createWitnessesMap(preparedPlayerTimelineMap){
+    const witnessesMap = []
+    
+    preparedPlayerTimelineMap.forEach(player=>{
+        witnessesMap.push({
+            player: player.player._id,
+            witnesses: []
+        })
+    })
+
+    const placeGroups={}
+    preparedPlayerTimelineMap.forEach(player=>{
+        Object.keys(player.alibi).forEach(time=>{
+            Object.keys(player.alibi[time]).forEach(section=>{
+                const placeid = player.alibi[time][section]?.place.place_id
+                if(!placeid) return
+
+                const key = `${time}%${section}%${placeid}`
+                if(!placeGroups[key]) placeGroups[key] = []
+                placeGroups[key].push(player.player._id)
+            })
+        })
+    })
+
+    // 목격자 관계 생성
+    Object.entries(placeGroups).forEach(([key, players])=>{
+        if(players.length>1){
+            const [time, section, place] = key.split("%")
+            players.forEach(pid=>{
+                const entry = witnessesMap.find(wit=>wit.player === pid)
+                players.filter(x=>x!==pid).forEach(other=>{
+                    entry.witnesses.push({
+                        time: parseInt(time),
+                        section,
+                        place,
+                        witness: other
+                    })
+                })
+            })
+        }
+    })
+    return witnessesMap
 }
