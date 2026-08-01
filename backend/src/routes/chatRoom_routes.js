@@ -5,13 +5,15 @@ import authMiddleware from "../middlewares/auth_middleware.js"
 import {
   openChatRoom,
   getMyChatRooms,
-  getChatRoomById
+  getChatRoomById,
+  
 } from "../controllers/chatRoom_controller.js"
 
 
 import {
   getMessages,
   sendMessage,
+  sendRoomInvite,
 } from "../controllers/message_controller.js"
 
 const router = express.Router()
@@ -45,6 +47,13 @@ router.post(
   "/:chatRoomId/messages",
   authMiddleware,
   sendMessage
+)
+
+// 특정 친구에게 게임방 초대 메시지 전송
+router.post(
+  "/:chatRoomId/room-invite",
+  authMiddleware,
+  sendRoomInvite
 )
 
 // 특정 채팅방 조회

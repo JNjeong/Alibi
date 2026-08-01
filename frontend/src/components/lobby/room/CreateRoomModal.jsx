@@ -2,6 +2,11 @@ import { useEffect, useState } from "react"
 import styles from "./CreateRoomModal.module.css"
 import api from "../../../api/axios"
 
+import {
+  openChatRoom,
+  sendRoomInvite,
+} from "../../../api/chat_api"
+
 const getCurrentUserKeys = () => {
   const keys = new Set()
 
@@ -54,6 +59,8 @@ const getCurrentUserKeys = () => {
   return keys
 }
 
+
+
 function CreateRoomModal({
   open,
   room,
@@ -68,6 +75,55 @@ function CreateRoomModal({
   const [friends, setFriends] = useState([])
   const [friendsLoading, setFriendsLoading] = useState(false)
   const [friendsError,setFriendsError] = useState("")
+  const [invitingFriendId, setInvitingFriendId] =
+  useState("")
+
+const handleInviteFriend = async (friend) => {
+  if (!friend?.userId || !roomId) {
+    return
+  }
+
+  try {
+    setInvitingFriendId(friend.userId)
+
+    // 친구와의 채팅방 조회 또는 생성
+    const chatData = await openChatRoom(
+      friend.userId
+    )
+
+    const chatRoomId =
+      chatData?.chatRoom?._id
+
+    if (!chatRoomId) {
+      throw new Error(
+        "채팅방 정보를 불러오지 못했습니다."
+      )
+    }
+
+    // 채팅방에 게임방 초대 메시지 전송
+    await sendRoomInvite(
+      chatRoomId,
+      roomId
+    )
+
+    alert(
+      `${friend.nickname || friend.username}님에게 초대를 보냈습니다.`
+    )
+  } catch (error) {
+    console.error(
+      "친구 초대 실패:",
+      error
+    )
+
+    alert(
+      error.response?.data?.message ||
+        error.message ||
+        "초대를 보내지 못했습니다."
+    )
+  } finally {
+    setInvitingFriendId("")
+  }
+}
 
 
   useEffect(() => {
@@ -344,13 +400,19 @@ function CreateRoomModal({
         </div>
 
         <button
-          type="button"
-          className={styles.inviteLabel}
-          disabled
-          title="초대 기능은 추후 연결 예정입니다."
-        >
-          초대
-        </button>
+  type="button"
+  className={styles.inviteLabel}
+  onClick={() =>
+    handleInviteFriend(friend)
+  }
+  disabled={
+    invitingFriendId === friend.userId
+  }
+>
+  {invitingFriendId === friend.userId
+    ? "전송 중..."
+    : "초대"}
+</button>
       </div>
     )
   })}
