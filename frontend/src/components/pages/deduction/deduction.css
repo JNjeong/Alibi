@@ -1,0 +1,212 @@
+.final-deduction{
+    display:grid;
+    grid-template-columns:1fr 320px;
+    gap:32px;
+    width:100%;
+    height:100%;
+}
+
+.deduction-form{
+    padding:56px 72px;
+    display:flex;
+    flex-direction:column;
+}
+
+.deduction-header{
+    text-align:center;
+    margin-bottom:48px;
+}
+
+.deduction-header h1{
+    margin:10px 0;
+    color:#fff;
+    font-size:54px;
+    font-weight:700;
+}
+
+.deduction-header p{
+    color:#8a90a6;
+    font-size:15px;
+}
+
+.section-label{
+    letter-spacing:4px;
+    font-size:12px;
+    color:#8b2d2d;
+}
+
+.deduction-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.deduction-select{
+    background:#181b28;
+    border:1px solid #2d3144;
+    border-radius:16px;
+    padding:18px;
+}
+
+.select-header{
+    display:flex;
+    gap:8px;
+    margin-bottom:14px;
+}
+
+.select-number{
+    color:#8a90a6;
+    font-size:12px;
+}
+
+.select-title{
+    color:#bfc6d8;
+    font-size:12px;
+}
+
+.deduction-dropdown{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #34384c;
+    background:#10131f;
+    color:#fff;
+    outline:none;
+    font-size:14px;
+}
+
+.deduction-dropdown:focus{
+    border-color:#8b2d2d;
+}
+
+.deduction-actions{
+    display:flex;
+    gap:24px;
+    width:100%;
+    margin-top:32px;
+}
+
+.note-btn,
+.deduction-submit-btn{
+    flex:1;
+    width:0;              
+    height:64px;          
+    padding:0 24px;       
+    border-radius:14px;
+    font-size:18px;
+    font-weight:600;
+    box-sizing:border-box; 
+}
+
+.note-btn{
+    background:transparent;
+    border:1px solid #323648;
+    color:#cfd4e3;
+}
+
+.deduction-submit-btn{
+    background:#8b2d2d;
+    border:1px solid #8b3b33;
+    color:#fff;
+}
+
+/* ====== SubmissionStatus ======  */
+.submission-status{
+    width:320px;
+    border-left:1px solid rgba(255,255,255,.06);
+    background:#0d0d16;
+    display:flex;
+    flex-direction:column;
+}
+
+.submission-header{
+    padding:28px 24px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.submission-header h2{
+    margin-top:8px;
+    color:#fff;
+}
+
+.status-list{
+    flex:1;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.player-status{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px;
+    border-radius:14px;
+    background:#171b26;
+}
+
+.player-status.me{
+    border:1px solid #34384c;
+}
+
+.player-left{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.player-avatar{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#25293a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-size:13px;
+    font-weight:600;
+}
+
+.player-info h4{
+    margin:0;
+    color:#fff;
+    font-size:14px;
+}
+
+.player-info p{
+    margin-top:4px;
+    color:#8a90a6;
+    font-size:12px;
+}
+
+.complete{
+    color:#61d98b !important;
+    font-weight:600;
+}
+
+.player-progress{
+    color:#f5c65a;
+    font-weight:700;
+}
+
+.submission-notice{
+    margin:20px;
+    padding:18px;
+    border-radius:14px;
+    border:1px solid #2d3144;
+    background:#171b26;
+}
+
+.submission-notice h4{
+    margin:0 0 10px;
+    color:#fff;
+}
+
+.submission-notice p{
+    margin:0;
+    color:#8a90a6;
+    font-size:13px;
+    line-height:1.6;
+}

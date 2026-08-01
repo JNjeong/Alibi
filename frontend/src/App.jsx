@@ -8,6 +8,15 @@ import LobbyPage from "./pages/lobby/LobbyPage";
 import ProtectedRoute from "./components/Route/ProtectedRoute"
 import PublicRoute from "./components/Route/PublicRoute"
 
+// 게임 페이지 import
+import GameLayout from "./components/layout/GameLayout"
+import CaseBriefing from "./components/pages/briefing/CaseBriefing";
+import PrivateTimeline from "./components/pages/timeline/PrivateTimeline"
+import OfficialStatement from "./components/pages/statement/OfficialStatement";
+import OfficialQuestion from "./components/pages/question/OfficialQuestion"
+import FinalDeduction from "./components/pages/deduction/FinalDeduction"
+
+
 import useAuthStore from "./store/authStore"
 import { useEffect } from "react";
 
@@ -25,7 +34,7 @@ function App() {
     checkAuth()
   }, [])
 
-  if(loading) {
+  if (loading) {
     return <div> ~ 로딩 중 ~ </div>
   }
   
