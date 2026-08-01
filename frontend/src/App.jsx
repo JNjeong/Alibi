@@ -6,6 +6,8 @@ import LoginPage from "./pages/login/LoginPage"
 
 // 로비
 import LobbyPage from "./pages/lobby/LobbyPage"
+import WaitingRoomPage from "./pages/waiting/WaitingRoomPage"
+import ResultPage from "./pages/result/ResultPage"
 
 // 라우트 보호
 import ProtectedRoute from "./components/Route/ProtectedRoute"
@@ -66,6 +68,26 @@ function App() {
           element={
             <ProtectedRoute>
               <LobbyPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 대기실 */}
+        <Route
+          path="/waiting-room/:roomId"
+          element={
+            <ProtectedRoute>
+              <WaitingRoomPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 게임 결과 */}
+        <Route
+          path="/result/:roomId"
+          element={
+            <ProtectedRoute>
+              <ResultPage />
             </ProtectedRoute>
           }
         />
