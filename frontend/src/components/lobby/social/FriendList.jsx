@@ -1,17 +1,40 @@
 import { useEffect, useState } from "react"
-import { getFriendsList , deleteFriend} from "../../../api/friend_api"
+
+import {
+  getFriendsList,
+  deleteFriend,
+} from "../../../api/friend_api"
+
 import useAuthStore from "../../../store/authStore"
+
 import styles from "./UserList.module.css"
 
-function FriendList({ refreshKey }) {
-  const currentUser = useAuthStore((state) => state.user) // 현재 로그인한 사용자 정보
+function FriendList({
+  refreshKey,
+  onOpenChat,
+  selectedFriendId,
+  openingFriendId,
+}) {
+  const currentUser = useAuthStore(
+    (state) => state.user
+  )
 
-  const [friendships, setFriendships] = useState([]) 
-  const [loading, setLoading] = useState(true) // 친구 목록 로딩 상태
-  const [error, setError] = useState("") // 친구 목록 조회 에러 상태
-  const [isOpen, setIsOpen] = useState(true) // 친구 목록 패널 열림/닫힘 상태
+  const [friendships, setFriendships] =
+    useState([])
 
-  const [deletingUsername, setDeletingUsername] = useState("") // 친구 삭제 중인 사용자 아이디 
+  const [loading, setLoading] =
+    useState(true)
+
+  const [error, setError] =
+    useState("")
+
+  const [isOpen, setIsOpen] =
+    useState(true)
+
+  const [
+    deletingUsername,
+    setDeletingUsername,
+  ] = useState("")
 
   // 친구 목록 조회
   const fetchFriends = async () => {
@@ -19,11 +42,17 @@ function FriendList({ refreshKey }) {
       setLoading(true)
       setError("")
 
-      const data = await getFriendsList()
+      const data =
+        await getFriendsList()
 
-      setFriendships(data.friends || [])
+      setFriendships(
+        data.friends || []
+      )
     } catch (error) {
-      console.error("친구 목록 조회 실패:", error)
+      console.error(
+        "친구 목록 조회 실패:",
+        error
+      )
 
       setError(
         error.response?.data?.message ||
@@ -33,64 +62,78 @@ function FriendList({ refreshKey }) {
       setLoading(false)
     }
   }
-  const handleDeleteFriend = async (friendUsername) => {
-  const isConfirmed = window.confirm(
-    `${friendUsername}님을 친구 목록에서 삭제할까요?`
-  )
 
-  if (!isConfirmed) {
-    return
+  // 친구 삭제
+  const handleDeleteFriend = async (
+    friendUsername
+  ) => {
+    const isConfirmed =
+      window.confirm(
+        `${friendUsername}님을 친구 목록에서 삭제할까요?`
+      )
+
+    if (!isConfirmed) {
+      return
+    }
+
+    try {
+      setDeletingUsername(
+        friendUsername
+      )
+
+      const data =
+        await deleteFriend(
+          friendUsername
+        )
+
+      await fetchFriends()
+
+      alert(
+        data.message ||
+          "친구를 삭제했습니다."
+      )
+    } catch (error) {
+      console.error(
+        "친구 삭제 실패:",
+        error
+      )
+
+      alert(
+        error.response?.data?.message ||
+          "친구를 삭제하지 못했습니다."
+      )
+    } finally {
+      setDeletingUsername("")
+    }
   }
-
-  try {
-    setDeletingUsername(friendUsername)
-
-    const data = await deleteFriend(friendUsername)
-
-    // 삭제 후 서버에서 친구 목록 다시 조회
-    await fetchFriends()
-
-    alert(data.message || "친구를 삭제했습니다.")
-  } catch (error) {
-    console.error("친구 삭제 실패:", error)
-
-    alert(
-      error.response?.data?.message ||
-        "친구를 삭제하지 못했습니다."
-    )
-  } finally {
-    setDeletingUsername("")
-  }
-}
 
   useEffect(() => {
     fetchFriends()
-  }, [refreshKey]) // refreshKey가 변경될 때마다 친구 목록을 새로 조회
+  }, [refreshKey])
 
   /*
-    백엔드 응답은 친구 사용자만 오는 게 아니라
-    다음과 같은 Friendship 문서가 배열로 옴.
-
-    {
-      requester: 사용자,
-      receiver: 사용자,
-      status: "accepted"
-    }
-
-    따라서 requester와 receiver 중
+    Friendship의 requester와 receiver 중
     현재 로그인 사용자가 아닌 쪽을 친구로 선택
   */
   const friendUsers = friendships
     .map((friendship) => {
-      const requester = friendship.requester
-      const receiver = friendship.receiver
+      const requester =
+        friendship.requester
 
-      if (!currentUser?._id || !requester || !receiver) {
+      const receiver =
+        friendship.receiver
+
+      if (
+        !currentUser?._id ||
+        !requester ||
+        !receiver
+      ) {
         return null
       }
 
       const isCurrentUserRequester =
-        String(requester._id) === String(currentUser._id)
+        String(requester._id) ===
+        String(currentUser._id)
 
       return isCurrentUserRequester
         ? receiver
@@ -98,30 +141,72 @@ function FriendList({ refreshKey }) {
     })
     .filter(Boolean)
 
+  // 친구 카드 클릭
+  const handleFriendClick = (friend) => {
+    if (
+      typeof onOpenChat !== "function"
+    ) {
+      console.error(
+        "onOpenChat 함수가 전달되지 않았습니다."
+      )
+
+      return
+    }
+
+    onOpenChat(friend)
+  }
+
   return (
     <section
-      className={`${styles["friend-panel"]} ${
-        styles["member-panel"]
-      }`}
+      className={[
+        styles["friend-panel"],
+        styles["member-panel"],
+      ].join(" ")}
     >
       <button
         type="button"
-        className={styles["member-toggle"]}
-        onClick={() => setIsOpen((prev) => !prev)}
+        className={
+          styles["member-toggle"]
+        }
+        onClick={() =>
+          setIsOpen((prev) => !prev)
+        }
         aria-expanded={isOpen}
       >
-        <div className={styles["member-heading"]}>
-          <p className={styles["member-label"]}>
+        <div
+          className={
+            styles["member-heading"]
+          }
+        >
+          <p
+            className={
+              styles["member-label"]
+            }
+          >
             MY FRIENDS
           </p>
 
-          <h2 className={styles["member-title"]}>
+          <h2
+            className={
+              styles["member-title"]
+            }
+          >
             친구 목록
           </h2>
         </div>
 
-        <div className={styles["member-toggle-right"]}>
-          <span className={styles["member-count"]}>
+        <div
+          className={
+            styles[
+              "member-toggle-right"
+            ]
+          }
+        >
+          <span
+            className={
+              styles["member-count"]
+            }
+          >
             {friendUsers.length}명
           </span>
 
@@ -129,7 +214,9 @@ function FriendList({ refreshKey }) {
             className={[
               styles["member-chevron"],
               isOpen
-                ? styles["member-chevron-open"]
+                ? styles[
+                    "member-chevron-open"
+                  ]
                 : "",
             ].join(" ")}
             aria-hidden="true"
@@ -140,19 +227,40 @@ function FriendList({ refreshKey }) {
       </button>
 
       {isOpen && (
-        <div className={styles["member-body"]}>
-          <div className={styles["member-scroll-area"]}>
+        <div
+          className={
+            styles["member-body"]
+          }
+        >
+          <div
+            className={
+              styles[
+                "member-scroll-area"
+              ]
+            }
+          >
             {loading && (
-              <p className={styles["member-message"]}>
+              <p
+                className={
+                  styles[
+                    "member-message"
+                  ]
+                }
+              >
                 친구 목록을 불러오는 중...
               </p>
             )}
 
             {!loading && error && (
               <p
-                className={`${styles["member-message"]} ${
-                  styles["member-error"]
-                }`}
+                className={[
+                  styles[
+                    "member-message"
+                  ],
+                  styles[
+                    "member-error"
+                  ],
+                ].join(" ")}
               >
                 {error}
               </p>
@@ -160,84 +268,190 @@ function FriendList({ refreshKey }) {
 
             {!loading &&
               !error &&
-              friendUsers.length === 0 && (
-                <p className={styles["member-message"]}>
+              friendUsers.length ===
+                0 && (
+                <p
+                  className={
+                    styles[
+                      "member-message"
+                    ]
+                  }
+                >
                   아직 친구가 없습니다.
                 </p>
               )}
 
             {!loading &&
               !error &&
-              friendUsers.length > 0 && (
-                <div className={styles["member-list"]}>
-                  {friendUsers.map((friend) => {
-                    const initial =
-                      friend.nickname
-                        ?.trim()
-                        .charAt(0) ||
-                      friend.username
-                        ?.trim()
-                        .charAt(0) ||
-                      "?"
+              friendUsers.length >
+                0 && (
+                <div
+                  className={
+                    styles[
+                      "member-list"
+                    ]
+                  }
+                >
+                  {friendUsers.map(
+                    (friend) => {
+                      const initial =
+                        friend.nickname
+                          ?.trim()
+                          .charAt(0) ||
+                        friend.username
+                          ?.trim()
+                          .charAt(0) ||
+                        "?"
 
-                    return (
-                      <article
-                        key={friend._id}
-                        className={styles["member-card"]}
-                      >
-                        <div
-                          className={
-                            styles["member-profile"]
+                      const isSelected =
+                        String(
+                          selectedFriendId
+                        ) ===
+                        String(friend._id)
+
+                      const isOpening =
+                        String(
+                          openingFriendId
+                        ) ===
+                        String(friend._id)
+
+                      return (
+                        <article
+                          key={
+                            friend._id
                           }
+                          className={[
+                            styles[
+                              "member-card"
+                            ],
+                            styles[
+                              "friend-chat-card"
+                            ],
+                            isSelected
+                              ? styles[
+                                  "friend-chat-card-selected"
+                                ]
+                              : "",
+                          ].join(" ")}
+                          role="button"
+                          tabIndex={0}
+                          onClick={() =>
+                            handleFriendClick(
+                              friend
+                            )
+                          }
+                          onKeyDown={(
+                            event
+                          ) => {
+                            if (
+                              event.key ===
+                                "Enter" ||
+                              event.key ===
+                                " "
+                            ) {
+                              event.preventDefault()
+
+                              handleFriendClick(
+                                friend
+                              )
+                            }
+                          }}
                         >
                           <div
                             className={
-                              styles["member-avatar"]
+                              styles[
+                                "member-profile"
+                              ]
                             }
                           >
-                            {initial}
+                            <div
+                              className={
+                                styles[
+                                  "member-avatar"
+                                ]
+                              }
+                            >
+                              {initial}
+                            </div>
                           </div>
-                        </div>
 
-                        <div
-                          className={
-                            styles["member-info"]
-                          }
-                        >
-                          <strong
+                          <div
                             className={
-                              styles["member-nickname"]
+                              styles[
+                                "member-info"
+                              ]
                             }
                           >
-                            {friend.nickname ||
-                              "닉네임 없음"}
-                          </strong>
+                            <strong
+                              className={
+                                styles[
+                                  "member-nickname"
+                                ]
+                              }
+                            >
+                              {friend.nickname ||
+                                "닉네임 없음"}
+                            </strong>
 
-                          <span
-                            className={
-                              styles["member-username"]
-                            }
-                          >
-                            @{friend.username}
-                          </span>
-                            <button
+                            <span
+                              className={
+                                styles[
+                                  "member-username"
+                                ]
+                              }
+                            >
+                              @{friend.username}
+                            </span>
+
+                            {isOpening && (
+                              <span
+                                className={
+                                  styles[
+                                    "chat-opening"
+                                  ]
+                                }
+                              >
+                                채팅방 여는 중...
+                              </span>
+                            )}
+                          </div>
+
+                          <button
                             type="button"
-                            className={styles["friend-delete-button"]}
-                            onClick={() =>
-                              handleDeleteFriend(friend.username)
+                            className={
+                              styles[
+                                "friend-delete-button"
+                              ]
                             }
+                            onClick={(
+                              event
+                            ) => {
+                              /*
+                                삭제 버튼 클릭이
+                                친구 카드 클릭으로
+                                전달되지 않도록 방지
+                              */
+                              event.stopPropagation()
+
+                              handleDeleteFriend(
+                                friend.username
+                              )
+                            }}
                             disabled={
-                              deletingUsername === friend.username
+                              deletingUsername ===
+                                friend.username ||
+                              isOpening
                             }
                           >
-                            {deletingUsername === friend.username
+                            {deletingUsername ===
+                            friend.username
                               ? "삭제 중..."
                               : "삭제"}
                           </button>
-                        </div>
-                      </article>
-                    )
-                  })}
+                        </article>
+                      )
+                    }
+                  )}
                 </div>
               )}
           </div>

@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import authRouter from "./routes/auth_routes.js";
 import roomRouter from "./routes/room_routes.js";
-import friendRoutes from "./routes/friend_routes.js"
+import friendRoutes from "./routes/friend_routes.js";
+import chatRoomRoutes from "./routes/chatRoom_routes.js";
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use("/api/auth", authRouter);
 // 방 API
 app.use("/api/rooms", roomRouter);
 app.use("/api/friends", friendRoutes);
+app.use("/api/chat-rooms", chatRoomRoutes);
 
 export default app;
