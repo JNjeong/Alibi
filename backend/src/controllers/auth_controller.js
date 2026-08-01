@@ -125,3 +125,51 @@ export const getMe = async (req, res) => {
         })
     }
 }
+
+// 모든 사용자 조회 - 나 제외 
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({
+      _id: { $ne: req.user.userId }
+    }).select("-password")
+
+    return res.status(200).json({
+      users
+    })
+  } catch (error) {
+    console.error("전체 사용자 조회 실패:", error)
+
+    return res.status(500).json({
+      message: "서버 오류",
+    })
+  }
+}
+
+// 사용자 아이디로 검색 -> 자기 자신은 제외하고 검색 결과 반환 
+export const searchUsers = async (req, res) => {
+    try {
+        const { userId } = req.query // 검색어
+
+        if (!userId || userId.trim() === "") { 
+            return res.status(400).json({
+                message: "아이디를 입력해주세요."
+            })
+        }
+
+        const users = await User.find({
+            _id: { $ne: req.user.userId }, // 자기 자신 제외
+            $or: [ // username  검색어가 포함된 사용자 검색
+                { username: { $regex: userId, $options: "i" } }
+              
+            ]
+        }).select("-password")
+
+        return res.status(200).json(users)
+    } catch (error) {
+        console.error(error)
+
+        return res.status(500).json({
+            message: "서버 오류",
+        })
+    }
+}
