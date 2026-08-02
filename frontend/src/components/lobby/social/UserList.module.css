@@ -1,0 +1,633 @@
+/* .member-panel {
+  border: 5px solid lime !important;
+} */
+.member-panel,
+.member-panel * {
+  box-sizing: border-box;
+}
+
+.member-panel {
+  width: 100%;
+  max-width: 680px;
+  padding: 28px;
+  border: 1px solid #252836;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 24, 34, 0.98),
+      rgba(11, 12, 19, 0.98)
+    );
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  color: #f6f7fb;
+}
+
+/* 제목 영역 */
+
+.member-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.member-label {
+  margin: 0 0 6px;
+  color: #d84b57;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.member-title {
+  margin: 0;
+  color: #f7f7fb;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.member-count {
+  padding: 6px 11px;
+  border: 1px solid #303344;
+  border-radius: 999px;
+  background: #191b25;
+  color: #9093a4;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* 검색창 */
+
+.member-search {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.member-search-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.member-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 17px;
+  color: #707386;
+  font-size: 22px;
+  line-height: 1;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.member-search-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 18px 0 48px;
+  border: 1px solid #303342;
+  border-radius: 14px;
+  background: #171924;
+  color: #f6f7fb;
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.member-search-input::placeholder {
+  color: #656879;
+}
+
+.member-search-input:focus {
+  border-color: #b6323e;
+  background: #1a1c28;
+  box-shadow: 0 0 0 4px rgba(198, 47, 61, 0.12);
+}
+
+.member-search-button {
+  flex-shrink: 0;
+  min-width: 82px;
+  height: 52px;
+  padding: 0 20px;
+  border: 1px solid #b42a37;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #d83b49, #a81e2b);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    filter 0.2s ease;
+}
+
+.member-search-button:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.member-search-button:active {
+  transform: translateY(0);
+}
+
+/* 사용자 목록 */
+
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.member-card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 76px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  background: transparent;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.member-card:hover {
+  border-color: #292c3b;
+  background: rgba(255, 255, 255, 0.035);
+  transform: translateX(3px);
+}
+
+/* 프로필 */
+
+.member-profile {
+  position: relative;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+}
+
+.member-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #383b50;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #292c3d, #1b1d29);
+  color: #d4d5e1;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.member-online-dot {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  width: 13px;
+  height: 13px;
+  border: 3px solid #11131c;
+  border-radius: 50%;
+  background: #20d879;
+}
+
+/* 회원 정보 */
+
+.member-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  margin-left: 15px;
+}
+
+.member-nickname {
+  overflow: hidden;
+  color: #f3f3f8;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.member-username {
+  overflow: hidden;
+  margin-top: 4px;
+  color: #76798c;
+  font-size: 13px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 친구 추가 버튼 */
+
+.member-friend-button {
+  flex-shrink: 0;
+  min-width: 92px;
+  height: 38px;
+  margin-left: 14px;
+  padding: 0 13px;
+  border: 1px solid rgba(217, 53, 68, 0.65);
+  border-radius: 10px;
+  background: rgba(187, 33, 47, 0.12);
+  color: #ff5d69;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.member-friend-button:hover {
+  border-color: #ec4351;
+  background: rgba(210, 45, 59, 0.22);
+  color: #ff7a84;
+}
+
+/* 안내 문구 */
+
+.member-message {
+  margin: 0;
+  padding: 40px 16px;
+  color: #777a8b;
+  font-size: 14px;
+  text-align: center;
+}
+
+.member-error {
+  color: #ff737d;
+}
+
+.member-reset-button {
+  width: 100%;
+  height: 44px;
+  margin-top: 18px;
+  border: 1px solid #303342;
+  border-radius: 12px;
+  background: #181a24;
+  color: #9a9dae;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.member-reset-button:hover {
+  border-color: #45495e;
+  background: #20222e;
+  color: #f1f1f6;
+}
+
+/* 모바일 */
+
+@media (max-width: 600px) {
+  .member-panel {
+    padding: 22px 16px;
+    border-radius: 16px;
+  }
+
+  .member-title {
+    font-size: 24px;
+  }
+
+  .member-search {
+    gap: 7px;
+  }
+
+  .member-search-input {
+    height: 48px;
+    padding-left: 43px;
+    font-size: 14px;
+  }
+
+  .member-search-button {
+    min-width: 66px;
+    height: 48px;
+    padding: 0 14px;
+  }
+
+  .member-card {
+    min-height: 70px;
+    padding: 10px 7px;
+  }
+
+  .member-profile,
+  .member-avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .member-info {
+    margin-left: 12px;
+  }
+
+  .member-friend-button {
+    min-width: 70px;
+    margin-left: 7px;
+    padding: 0 9px;
+    font-size: 12px;
+  }
+}
+
+
+/* 전체 크기 축소 */
+
+.member-panel {
+  max-width: 480px;
+  padding: 22px 24px;
+  border-radius: 16px;
+}
+
+/* 제목 영역 */
+
+.member-header {
+  margin-bottom: 18px;
+}
+
+.member-label {
+  margin-bottom: 4px;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+
+.member-title {
+  font-size: 25px;
+}
+
+.member-count {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/* 검색창 */
+
+.member-search {
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.member-search-input {
+  height: 44px;
+  padding: 0 14px 0 42px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.member-search-icon {
+  left: 15px;
+  font-size: 19px;
+}
+
+.member-search-button {
+  min-width: 68px;
+  height: 44px;
+  padding: 0 15px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+/* 회원 목록 */
+
+.member-list {
+  gap: 4px;
+}
+
+.member-card {
+  min-height: 62px;
+  padding: 7px 8px;
+  border-radius: 12px;
+}
+
+/* 프로필 크기 */
+
+.member-profile,
+.member-avatar {
+  width: 42px;
+  height: 42px;
+}
+
+.member-avatar {
+  font-size: 15px;
+}
+
+.member-online-dot {
+  width: 11px;
+  height: 11px;
+  border-width: 2px;
+}
+
+/* 회원 정보 */
+
+.member-info {
+  margin-left: 12px;
+}
+
+.member-nickname {
+  font-size: 14px;
+}
+
+.member-username {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+/* 친구 추가 버튼 */
+
+.member-friend-button {
+  min-width: 82px;
+  height: 34px;
+  margin-left: 10px;
+  padding: 0 10px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+
+/* 접기/펼치기 헤더 */
+
+.member-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.member-heading {
+  min-width: 0;
+}
+
+.member-toggle-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.member-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: #777a8c;
+  font-size: 18px;
+  transform: rotate(-90deg);
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.member-chevron-open {
+  color: #e4e5ed;
+  transform: rotate(0deg);
+}
+
+.member-toggle:hover .member-chevron {
+  color: #ff5d69;
+}
+
+/* 펼쳐지는 내부 영역 */
+
+.member-body {
+  margin-top: 22px;
+  animation: member-open 0.18s ease;
+}
+
+@keyframes member-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 회원 목록 스크롤 영역 */
+
+.member-scroll-area {
+  max-height: 350px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 8px;
+}
+
+/* 스크롤바 */
+
+.member-scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.member-scroll-area::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: transparent;
+}
+
+.member-scroll-area::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #303342;
+}
+
+.member-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #474b60;
+}
+
+/* Firefox */
+
+.member-scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: #303342 transparent;
+}
+
+.member-friend-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.friend-panel {
+  margin-top: 16px;
+}
+
+.friend-delete-button {
+  width: auto;
+  min-width: 72px;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: 7px 11px;
+
+  border: 1px solid rgba(220, 67, 75, 0.4);
+  border-radius: 8px;
+  background: rgba(220, 67, 75, 0.1);
+
+  color: #e15c63;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+
+.friend-delete-button:hover {
+  background: rgba(220, 67, 75, 0.2);
+}
+
+.friend-delete-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+
+.friend-chat-card {
+  cursor: pointer;
+}
+
+.friend-chat-card:hover {
+  border-color:
+    rgba(216, 75, 87, 0.45);
+  background:
+    rgba(216, 75, 87, 0.07);
+}
+
+.friend-chat-card-selected {
+  border-color:
+    rgba(216, 75, 87, 0.8);
+  background:
+    rgba(216, 75, 87, 0.12);
+}
+
+.friend-chat-card:focus-visible {
+  outline: 2px solid #d84b57;
+  outline-offset: 2px;
+}
+
+.chat-opening {
+  margin-top: 3px;
+  color: #d84b57;
+  font-size: 10px;
+  font-weight: 700;
+}

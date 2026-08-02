@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+}
+
+.game-layout {
+  /* width: 100vw; */
+  min-height: 100vh;
+  background: #0a0a14;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 게임 화면 */
+.game-content {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
+}
