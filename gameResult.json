@@ -1,0 +1,5857 @@
+{
+  "crimeInfo": {
+    "crimeTime": 13,
+    "timeSection": "section24",
+    "crimePlace": {
+      "_id": "6a6c526a335807f0d7d6303c",
+      "place_id": "map_ReceptionRoom",
+      "place_name": "응접실",
+      "place_action": [
+        "소파에 앉기",
+        "차 마시기",
+        "잡지 읽기",
+        "신문 확인하기",
+        "손님 맞이하기",
+        "창밖 바라보기",
+        "꽃병 매만지기",
+        "커튼 열기",
+        "시간 확인하기",
+        "손님 기다리기"
+      ]
+    },
+    "crimeRole": {
+      "_id": "6a6c526a335807f0d7d63056",
+      "role_id": "role_char15",
+      "role_name": "홍예린(탐사 기자)",
+      "role_motiv": "취재원을 보호하려다 불법 녹음과 협박에 연루되었다."
+    },
+    "crimeItem": {
+      "_id": "6a6c526a335807f0d7d6306f",
+      "item_id": "item_tool20",
+      "item_name": "전기 연장 코드",
+      "item_feature": "asphyxia",
+      "item_location": "map_Hallway"
+    }
+  },
+  "preparedPlayerTimelineMap": [
+    {
+      "player": {
+        "_id": "user1",
+        "id": "1111",
+        "name": "Player1",
+        "password": "Player1%1111",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63066",
+              "item_id": "item_tool11",
+              "item_name": "청동 말 조각상",
+              "item_feature": "blunt",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "피아노 연주하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "음식 데우기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "바 테이블 이용하기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63066",
+              "item_id": "item_tool11",
+              "item_name": "청동 말 조각상",
+              "item_feature": "blunt",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "소파에 앉기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "샹들리에 바라보기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "겉옷 입기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "샹들리에 바라보기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "침대에 앉기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "옷 갈아입기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "장식장 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "옷장 열기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "주변 둘러보기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": null,
+            "action": "장식품 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "식탁 닦기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "피아노 조율하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "샹들리에 바라보기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "디저트 챙기기"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user2",
+        "id": "2222",
+        "name": "Player2",
+        "password": "Player2%2222",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": null,
+            "action": "삽 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "와인병 꺼내기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "책 읽기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": null,
+            "action": "김사과씨 찾기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": null,
+            "action": "금고 확인하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": null,
+            "action": "책장 둘러보기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "침대 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "짐 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "냉장고 열기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "야식 훔치기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "상자 옮기기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "당구공 정리하기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "휴대폰 충전하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": null,
+            "action": "병 닦기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": null,
+            "action": "요리하기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "휴대폰 충전하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "장식장 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "그릇 치우기"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user3",
+        "id": "3333",
+        "name": "Player3",
+        "password": "Player3%3333",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": null,
+            "action": "바 테이블 이용하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": null,
+            "action": "잡지 읽기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": null,
+            "action": "춤 연습하기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "장식장 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "그릇 치우기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "문 잠그기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": null,
+            "action": "전화하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": null,
+            "action": "카드놀이 하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": null,
+            "action": "딸기 뜯어먹기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "창문 열기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "휴식하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "메모 작성하기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "식기 가져오기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "와인 따르기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "그릇 치우기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "주변 서성이기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": null,
+            "action": "디저트 챙기기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": null,
+            "action": "선반 정리하기"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user4",
+        "id": "4444",
+        "name": "Player4",
+        "password": "Player4%4444",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "냉장고 열기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "디저트 챙기기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "온도 조절하기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "누워서 휴식하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "옷 갈아입기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "편지 봉투 정리하기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "서랍 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303e",
+              "place_id": "map_Hallway",
+              "place_name": "1층복도",
+              "place_action": [
+                "걸어가기",
+                "창밖보기",
+                "액자 감상하기",
+                "화분 옮기기",
+                "바닥 청소하기",
+                "창문 열기",
+                "조명 켜기",
+                "카펫 정리하기",
+                "머뭇거리며 서성이기",
+                "창틀 먼지 쓸기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "창틀 먼지 쓸기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": null,
+            "action": "삽 정리하기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": null,
+            "action": "책장 둘러보기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "침대 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": null,
+            "action": "침대 정리하기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "무대 둘러보기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "휴식하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": null,
+            "action": "식물 관찰하기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "누워서 휴식하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "벌레 잡기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "배개 정리하기"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user5",
+        "id": "5555",
+        "name": "Player5",
+        "password": "Player5%5555",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "장식장 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "꽃병 매만지기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": null,
+            "action": "휴대폰 충전하기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "계단 내려오기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": null,
+            "action": "디캔터 사용하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303e",
+              "place_id": "map_Hallway",
+              "place_name": "1층복도",
+              "place_action": [
+                "걸어가기",
+                "창밖보기",
+                "액자 감상하기",
+                "화분 옮기기",
+                "바닥 청소하기",
+                "창문 열기",
+                "조명 켜기",
+                "카펫 정리하기",
+                "머뭇거리며 서성이기",
+                "창틀 먼지 쓸기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "액자 감상하기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "식기 가져오기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": null,
+            "action": "손님 맞이하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "장식품 정리하기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "피아노 연주하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "벽시계 확인하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "온도 조절하기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "와인 따르기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "(경)★☆피해자 살인♬★☆(축)"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": null,
+            "action": "점수 사기치기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "원예가위 사용하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303e",
+              "place_id": "map_Hallway",
+              "place_name": "1층복도",
+              "place_action": [
+                "걸어가기",
+                "창밖보기",
+                "액자 감상하기",
+                "화분 옮기기",
+                "바닥 청소하기",
+                "창문 열기",
+                "조명 켜기",
+                "카펫 정리하기",
+                "머뭇거리며 서성이기",
+                "창틀 먼지 쓸기"
+              ]
+            },
+            "item": null,
+            "action": "창틀 먼지 쓸기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "김사과씨 찾기"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user6",
+        "id": "6666",
+        "name": "Player6",
+        "password": "Player6%6666",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303e",
+              "place_id": "map_Hallway",
+              "place_name": "1층복도",
+              "place_action": [
+                "걸어가기",
+                "창밖보기",
+                "액자 감상하기",
+                "화분 옮기기",
+                "바닥 청소하기",
+                "창문 열기",
+                "조명 켜기",
+                "카펫 정리하기",
+                "머뭇거리며 서성이기",
+                "창틀 먼지 쓸기"
+              ]
+            },
+            "item": null,
+            "action": "조명 켜기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": null,
+            "action": "쓰레기 버리기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63066",
+              "item_id": "item_tool11",
+              "item_name": "청동 말 조각상",
+              "item_feature": "blunt",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "벽시계 확인하기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": null,
+            "action": "꽃 손질하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "디캔터 사용하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "물 마시기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "와인병 꺼내기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "꽃병 살펴보기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "자... 게임을 시작하지 외치기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": null,
+            "action": "쉬기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "와인병 꺼내기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "옷장 열기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "책장 둘러보기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "차 마시기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63066",
+              "item_id": "item_tool11",
+              "item_name": "청동 말 조각상",
+              "item_feature": "blunt",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "커튼 열기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "휴식하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "화장하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303e",
+              "place_id": "map_Hallway",
+              "place_name": "1층복도",
+              "place_action": [
+                "걸어가기",
+                "창밖보기",
+                "액자 감상하기",
+                "화분 옮기기",
+                "바닥 청소하기",
+                "창문 열기",
+                "조명 켜기",
+                "카펫 정리하기",
+                "머뭇거리며 서성이기",
+                "창틀 먼지 쓸기"
+              ]
+            },
+            "item": null,
+            "action": "창밖보기"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user7",
+        "id": "7777",
+        "name": "Player7",
+        "password": "Player7%7777",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "큐 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "와인잔 가져가기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": null,
+            "action": "꽃병 매만지기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": null,
+            "action": "커피 내리기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "창문 열기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": null,
+            "action": "디캔터 사용하기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303e",
+              "place_id": "map_Hallway",
+              "place_name": "1층복도",
+              "place_action": [
+                "걸어가기",
+                "창밖보기",
+                "액자 감상하기",
+                "화분 옮기기",
+                "바닥 청소하기",
+                "창문 열기",
+                "조명 켜기",
+                "카펫 정리하기",
+                "머뭇거리며 서성이기",
+                "창틀 먼지 쓸기"
+              ]
+            },
+            "item": null,
+            "action": "걸어가기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "옷장 열기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63066",
+              "item_id": "item_tool11",
+              "item_name": "청동 말 조각상",
+              "item_feature": "blunt",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "책장 둘러보기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "침대 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63066",
+              "item_id": "item_tool11",
+              "item_name": "청동 말 조각상",
+              "item_feature": "blunt",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "벌레 잡기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "식탁 닦기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": null,
+            "action": "서랍 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "카드놀이 하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "손님 맞이하기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": null,
+            "action": "김사과씨 찾기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "드레스/의복 입어보기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user8",
+        "id": "8888",
+        "name": "Player8",
+        "password": "Player8%8888",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303e",
+              "place_id": "map_Hallway",
+              "place_name": "1층복도",
+              "place_action": [
+                "걸어가기",
+                "창밖보기",
+                "액자 감상하기",
+                "화분 옮기기",
+                "바닥 청소하기",
+                "창문 열기",
+                "조명 켜기",
+                "카펫 정리하기",
+                "머뭇거리며 서성이기",
+                "창틀 먼지 쓸기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306f",
+              "item_id": "item_tool20",
+              "item_name": "전기 연장 코드",
+              "item_feature": "asphyxia",
+              "item_location": "map_Hallway"
+            },
+            "action": "화분 옮기기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": null,
+            "action": "휴대폰 충전하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "김사과씨 찾기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": null,
+            "action": "배개 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": null,
+            "action": "책장 둘러보기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "협탁 서랍 열기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": null,
+            "action": "식물 관찰하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": null,
+            "action": "선반 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": null,
+            "action": "커튼 열기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "거울 보기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": null,
+            "action": "춤 연습하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": null,
+            "action": "야식 훔치기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": null,
+            "action": "소파에 앉기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "디저트 챙기기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "꽃병 살펴보기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": null,
+            "action": "큐 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "식기 가져오기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": null,
+            "action": "자... 게임을 시작하지 외치기"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user9",
+        "id": "9999",
+        "name": "Player9",
+        "password": "Player9%9999",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": null,
+            "action": "시간 확인하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "물 마시기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "식사하기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "물 마시기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": null,
+            "action": "배개 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": null,
+            "action": "당구치기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "휴대폰 충전하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": null,
+            "action": "커피 내리기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63067",
+              "item_id": "item_tool12",
+              "item_name": "독성 원예 약품",
+              "item_feature": "poison",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "차 마시기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": null,
+            "action": "피아노 연주하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "회계장부 확인하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "메모 작성하기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": null,
+            "action": "상자 옮기기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63040",
+              "place_id": "map_Kitchen",
+              "place_name": "주방",
+              "place_action": [
+                "커피 내리기",
+                "물 마시기",
+                "요리하기",
+                "냉장고 열기",
+                "컵 씻기",
+                "접시 정리하기",
+                "칼 꺼내기",
+                "음식 데우기",
+                "쓰레기 버리기",
+                "야식 훔치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306e",
+              "item_id": "item_tool19",
+              "item_name": "가죽 허리띠",
+              "item_feature": "asphyxia",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "쓰레기 버리기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63041",
+              "place_id": "map_Greenhouse",
+              "place_name": "온실",
+              "place_action": [
+                "딸기 뜯어먹기",
+                "김사과씨 찾기",
+                "가지치기",
+                "비료 확인하기",
+                "원예가위 사용하기",
+                "온도 조절하기",
+                "삽 정리하기",
+                "식물 관찰하기",
+                "꽃 손질하기",
+                "벌레 잡기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "꽃 손질하기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306b",
+              "item_id": "item_tool16",
+              "item_name": "장식 지팡이 칼",
+              "item_feature": "sharp",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "소파에 앉기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63066",
+              "item_id": "item_tool11",
+              "item_name": "청동 말 조각상",
+              "item_feature": "blunt",
+              "item_location": "map_ReceptionRoom"
+            },
+            "action": "짐 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": null,
+            "action": "손님 기다리기"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user10",
+        "id": "10101010",
+        "name": "Player10",
+        "password": "Player10%10101010",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "휴식하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "냅킨 정리하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "계단 오르기"
+          }
+        },
+        "10": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d63060",
+              "item_id": "item_tool05",
+              "item_name": "정원용 전지가위",
+              "item_feature": "sharp",
+              "item_location": "map_Greenhouse"
+            },
+            "action": "옷장 열기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63042",
+              "place_id": "map_Ballroom",
+              "place_name": "무도회장",
+              "place_action": [
+                "피아노 연주하기",
+                "피아노 조율하기",
+                "와인 마시기",
+                "춤 연습하기",
+                "장식품 정리하기",
+                "무대 둘러보기",
+                "거울 보기",
+                "디저트 챙기기",
+                "의자 옮기기",
+                "드레스/의복 입어보기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "의자 옮기기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "물 마시기"
+          }
+        },
+        "11": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": null,
+            "action": "큐 정리하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63045",
+              "place_id": "map_GuestRoom",
+              "place_name": "손님방",
+              "place_action": [
+                "짐 정리하기",
+                "여행가방 열기",
+                "옷 갈아입기",
+                "침대 정리하기",
+                "누워서 휴식하기",
+                "책 읽기",
+                "휴대폰 충전하기",
+                "메모 작성하기",
+                "쉬기",
+                "배개 정리하기"
+              ]
+            },
+            "item": null,
+            "action": "누워서 휴식하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303e",
+              "place_id": "map_Hallway",
+              "place_name": "1층복도",
+              "place_action": [
+                "걸어가기",
+                "창밖보기",
+                "액자 감상하기",
+                "화분 옮기기",
+                "바닥 청소하기",
+                "창문 열기",
+                "조명 켜기",
+                "카펫 정리하기",
+                "머뭇거리며 서성이기",
+                "창틀 먼지 쓸기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6305f",
+              "item_id": "item_tool04",
+              "item_name": "조각용 망치",
+              "item_feature": "blunt",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "바닥 청소하기"
+          }
+        },
+        "12": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "와인 테이스팅하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303f",
+              "place_id": "map_DiningRoom",
+              "place_name": "식당",
+              "place_action": [
+                "식사하기",
+                "디저트먹기",
+                "밥상뒤엎기",
+                "식탁 닦기",
+                "와인 따르기",
+                "물 마시기",
+                "식기 가져오기",
+                "냅킨 정리하기",
+                "촛불 켜기",
+                "그릇 치우기"
+              ]
+            },
+            "item": null,
+            "action": "와인 따르기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": null,
+            "action": "책 읽기"
+          }
+        },
+        "13": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303c",
+              "place_id": "map_ReceptionRoom",
+              "place_name": "응접실",
+              "place_action": [
+                "소파에 앉기",
+                "차 마시기",
+                "잡지 읽기",
+                "신문 확인하기",
+                "손님 맞이하기",
+                "창밖 바라보기",
+                "꽃병 매만지기",
+                "커튼 열기",
+                "시간 확인하기",
+                "손님 기다리기"
+              ]
+            },
+            "item": null,
+            "action": "소파에 앉기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303d",
+              "place_id": "map_Study",
+              "place_name": "서재",
+              "place_action": [
+                "계약서 읽기",
+                "회계장부 확인하기",
+                "책 읽기",
+                "서랍 정리하기",
+                "금고 확인하기",
+                "메모 작성하기",
+                "전화하기",
+                "편지 봉투 정리하기",
+                "책장 둘러보기",
+                "서류 파쇄하기"
+              ]
+            },
+            "item": null,
+            "action": "계약서 읽기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63044",
+              "place_id": "map_MasterBedroom",
+              "place_name": "안방",
+              "place_action": [
+                "침대 정리하기",
+                "이불 빨래하기",
+                "옷 갈아입기",
+                "옷장 열기",
+                "화장하기",
+                "거울 보기",
+                "협탁 서랍 열기",
+                "휴식하기",
+                "침대에 앉기",
+                "XX (※본 게임은 19세 이상 사용자들의 플레이를 권장합니다.)"
+              ]
+            },
+            "item": null,
+            "action": "옷 갈아입기"
+          }
+        },
+        "14": {
+          "section02": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63046",
+              "place_id": "map_WineCellar",
+              "place_name": "와인저장고",
+              "place_action": [
+                "와인 고르기",
+                "와인병 꺼내기",
+                "와인 테이스팅하기",
+                "디캔터 사용하기",
+                "와인잔 가져가기",
+                "선반 정리하기",
+                "병 닦기",
+                "라벨 확인하기",
+                "상자 옮기기",
+                "문 잠그기"
+              ]
+            },
+            "item": null,
+            "action": "라벨 확인하기"
+          },
+          "section24": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d63043",
+              "place_id": "map_BiliardRoom",
+              "place_name": "당구실",
+              "place_action": [
+                "당구치기",
+                "당구공 정리하기",
+                "큐 정리하기",
+                "바 테이블 이용하기",
+                "음료 마시기",
+                "점수 기록하기",
+                "카드놀이 하기",
+                "음악 듣기",
+                "자... 게임을 시작하지 외치기",
+                "점수 사기치기"
+              ]
+            },
+            "item": {
+              "_id": "6a6c526a335807f0d7d6306d",
+              "item_id": "item_tool18",
+              "item_name": "사진 현상액",
+              "item_feature": "poison",
+              "item_location": "map_GuestRoom"
+            },
+            "action": "점수 기록하기"
+          },
+          "section46": {
+            "place": {
+              "_id": "6a6c526a335807f0d7d6303b",
+              "place_id": "map_GrandHall",
+              "place_name": "그랜드 홀",
+              "place_action": [
+                "주변 둘러보기",
+                "샹들리에 바라보기",
+                "계단 오르기",
+                "계단 내려오기",
+                "벽시계 확인하기",
+                "장식장 정리하기",
+                "꽃병 살펴보기",
+                "창문 열기",
+                "주변 서성이기",
+                "겉옷 입기"
+              ]
+            },
+            "item": null,
+            "action": "꽃병 살펴보기"
+          }
+        }
+      }
+    }
+  ],
+  "playersRoles": [
+    {
+      "player": {
+        "_id": "user1",
+        "id": "1111",
+        "name": "Player1",
+        "password": "Player1%1111",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d63048",
+        "role_id": "role_char01",
+        "role_name": "윤서진(유산 관리 변호사)",
+        "role_motiv": "유언장 위조 의혹이 공개되면 변호사 자격과 명성을 잃는다"
+      }
+    },
+    {
+      "player": {
+        "_id": "user2",
+        "id": "2222",
+        "name": "Player2",
+        "password": "Player2%2222",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d63049",
+        "role_id": "role_char02",
+        "role_name": "한도윤(가정의)",
+        "role_motiv": "피해자가 불법 처방과 진료 기록 조작을 폭로하려 했다."
+      }
+    },
+    {
+      "player": {
+        "_id": "user3",
+        "id": "3333",
+        "name": "Player3",
+        "password": "Player3%3333",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d6304a",
+        "role_id": "role_char03",
+        "role_name": "박정원(수석 정원사)",
+        "role_motiv": "피해자가 횡령 의혹을 이유로 해고와 고발을 예고했다."
+      }
+    },
+    {
+      "player": {
+        "_id": "user4",
+        "id": "4444",
+        "name": "Player4",
+        "password": "Player4%4444",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d63055",
+        "role_id": "role_char14",
+        "role_name": "임도현(저택 보수 건축가)",
+        "role_motiv": "부실 공사와 공사비 과다 청구 자료를 피해자가 확보했다."
+      }
+    },
+    {
+      "player": {
+        "_id": "user5",
+        "id": "5555",
+        "name": "Player5",
+        "password": "Player5%5555",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d63056",
+        "role_id": "role_char15",
+        "role_name": "홍예린(탐사 기자)",
+        "role_motiv": "취재원을 보호하려다 불법 녹음과 협박에 연루되었다."
+      }
+    },
+    {
+      "player": {
+        "_id": "user6",
+        "id": "6666",
+        "name": "Player6",
+        "password": "Player6%6666",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d63052",
+        "role_id": "role_char11",
+        "role_name": "서지훈(가문 기록관리인)",
+        "role_motiv": "가문 기록을 조작해 금품을 받은 사실이 들킬 위기였다."
+      }
+    },
+    {
+      "player": {
+        "_id": "user7",
+        "id": "7777",
+        "name": "Player7",
+        "password": "Player7%7777",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d6305b",
+        "role_id": "role_char20",
+        "role_name": "류시아(사진작가)",
+        "role_motiv": "비공개 사진을 판매한 사실과 현상 약품 관리 문제가 드러날 위기였다."
+      }
+    },
+    {
+      "player": {
+        "_id": "user8",
+        "id": "8888",
+        "name": "Player8",
+        "password": "Player8%8888",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d63050",
+        "role_id": "role_char09",
+        "role_name": "문태성(경호 책임자)",
+        "role_motiv": "보안 공백과 금품 수수 사실을 피해자가 해고 사유로 삼았다."
+      }
+    },
+    {
+      "player": {
+        "_id": "user9",
+        "id": "9999",
+        "name": "Player9",
+        "password": "Player9%9999",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d6304b",
+        "role_id": "role_char04",
+        "role_name": "최유진(저택 집사)",
+        "role_motiv": "저택 관리비 유용 사실을 피해자가 알아냈다."
+      }
+    },
+    {
+      "player": {
+        "_id": "user10",
+        "id": "10101010",
+        "name": "Player10",
+        "password": "Player10%10101010",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "role": {
+        "_id": "6a6c526a335807f0d7d6304f",
+        "role_id": "role_char08",
+        "role_name": "김하진(피해자 비서)",
+        "role_motiv": "기밀 문서 유출 사실이 드러나면 모든 책임을 떠안을 처지였다"
+      }
+    }
+  ],
+  "inGamePlayerTimelineMap": [
+    {
+      "player": {
+        "_id": "user1",
+        "id": "1111",
+        "name": "Player1",
+        "password": "Player1%1111",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user2",
+        "id": "2222",
+        "name": "Player2",
+        "password": "Player2%2222",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user3",
+        "id": "3333",
+        "name": "Player3",
+        "password": "Player3%3333",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user4",
+        "id": "4444",
+        "name": "Player4",
+        "password": "Player4%4444",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user5",
+        "id": "5555",
+        "name": "Player5",
+        "password": "Player5%5555",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user6",
+        "id": "6666",
+        "name": "Player6",
+        "password": "Player6%6666",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user7",
+        "id": "7777",
+        "name": "Player7",
+        "password": "Player7%7777",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user8",
+        "id": "8888",
+        "name": "Player8",
+        "password": "Player8%8888",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user9",
+        "id": "9999",
+        "name": "Player9",
+        "password": "Player9%9999",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    },
+    {
+      "player": {
+        "_id": "user10",
+        "id": "10101010",
+        "name": "Player10",
+        "password": "Player10%10101010",
+        "winCnt": 0,
+        "lostCnt": 0
+      },
+      "alibi": {
+        "9": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "10": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "11": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "12": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "13": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        },
+        "14": {
+          "section02": {},
+          "section24": {},
+          "section46": {}
+        }
+      }
+    }
+  ],
+  "hintsPerRound": {
+    "round1": [
+      {
+        "_id": "6a6c526a335807f0d7d6303c",
+        "place_id": "map_ReceptionRoom",
+        "place_name": "응접실",
+        "place_action": [
+          "소파에 앉기",
+          "차 마시기",
+          "잡지 읽기",
+          "신문 확인하기",
+          "손님 맞이하기",
+          "창밖 바라보기",
+          "꽃병 매만지기",
+          "커튼 열기",
+          "시간 확인하기",
+          "손님 기다리기"
+        ]
+      },
+      "map_ReceptionRoom",
+      "map_DiningRoom",
+      "map_Ballroom",
+      "map_Study",
+      "map_GrandHall"
+    ],
+    "round2": [
+      13,
+      12,
+      14
+    ],
+    "round3": {
+      "sharp": "예리한 흉기에 의한 자상"
+    },
+    "round4": [
+      {
+        "_id": "6a6c526a335807f0d7d6303c",
+        "place_id": "map_ReceptionRoom",
+        "place_name": "응접실",
+        "place_action": [
+          "소파에 앉기",
+          "차 마시기",
+          "잡지 읽기",
+          "신문 확인하기",
+          "손님 맞이하기",
+          "창밖 바라보기",
+          "꽃병 매만지기",
+          "커튼 열기",
+          "시간 확인하기",
+          "손님 기다리기"
+        ]
+      },
+      "map_ReceptionRoom",
+      "map_DiningRoom"
+    ],
+    "round5": [
+      {
+        "time": 13,
+        "section": "section02"
+      },
+      {
+        "time": 13,
+        "section": "section24"
+      },
+      {
+        "time": 13,
+        "section": "section46"
+      },
+      {
+        "time": 12,
+        "section": "section46"
+      },
+      {
+        "time": 14,
+        "section": "section02"
+      }
+    ]
+  },
+  "witnessesMap": [
+    {
+      "player": "user1",
+      "witnesses": [
+        {
+          "time": 9,
+          "section": "section24",
+          "place": "map_Kitchen",
+          "witness": "user6"
+        },
+        {
+          "time": 10,
+          "section": "section24",
+          "place": "map_GrandHall",
+          "witness": "user7"
+        },
+        {
+          "time": 11,
+          "section": "section02",
+          "place": "map_MasterBedroom",
+          "witness": "user2"
+        },
+        {
+          "time": 11,
+          "section": "section24",
+          "place": "map_GrandHall",
+          "witness": "user6"
+        },
+        {
+          "time": 12,
+          "section": "section02",
+          "place": "map_GuestRoom",
+          "witness": "user6"
+        },
+        {
+          "time": 12,
+          "section": "section24",
+          "place": "map_GrandHall",
+          "witness": "user5"
+        },
+        {
+          "time": 12,
+          "section": "section46",
+          "place": "map_MasterBedroom",
+          "witness": "user6"
+        },
+        {
+          "time": 13,
+          "section": "section24",
+          "place": "map_Ballroom",
+          "witness": "user8"
+        },
+        {
+          "time": 13,
+          "section": "section46",
+          "place": "map_DiningRoom",
+          "witness": "user3"
+        },
+        {
+          "time": 14,
+          "section": "section24",
+          "place": "map_GrandHall",
+          "witness": "user2"
+        }
+      ]
+    },
+    {
+      "player": "user2",
+      "witnesses": [
+        {
+          "time": 11,
+          "section": "section02",
+          "place": "map_MasterBedroom",
+          "witness": "user1"
+        },
+        {
+          "time": 14,
+          "section": "section24",
+          "place": "map_GrandHall",
+          "witness": "user1"
+        },
+        {
+          "time": 9,
+          "section": "section24",
+          "place": "map_WineCellar",
+          "witness": "user7"
+        },
+        {
+          "time": 9,
+          "section": "section46",
+          "place": "map_GuestRoom",
+          "witness": "user5"
+        },
+        {
+          "time": 10,
+          "section": "section02",
+          "place": "map_Greenhouse",
+          "witness": "user6"
+        },
+        {
+          "time": 10,
+          "section": "section24",
+          "place": "map_Study",
+          "witness": "user8"
+        },
+        {
+          "time": 10,
+          "section": "section46",
+          "place": "map_Study",
+          "witness": "user4"
+        },
+        {
+          "time": 11,
+          "section": "section24",
+          "place": "map_GuestRoom",
+          "witness": "user10"
+        },
+        {
+          "time": 12,
+          "section": "section24",
+          "place": "map_WineCellar",
+          "witness": "user6"
+        },
+        {
+          "time": 14,
+          "section": "section02",
+          "place": "map_GuestRoom",
+          "witness": "user4"
+        }
+      ]
+    },
+    {
+      "player": "user3",
+      "witnesses": [
+        {
+          "time": 13,
+          "section": "section46",
+          "place": "map_DiningRoom",
+          "witness": "user1"
+        },
+        {
+          "time": 9,
+          "section": "section02",
+          "place": "map_BiliardRoom",
+          "witness": "user7"
+        },
+        {
+          "time": 9,
+          "section": "section24",
+          "place": "map_ReceptionRoom",
+          "witness": "user5"
+        },
+        {
+          "time": 10,
+          "section": "section02",
+          "place": "map_GrandHall",
+          "witness": "user5"
+        },
+        {
+          "time": 10,
+          "section": "section46",
+          "place": "map_WineCellar",
+          "witness": "user7"
+        },
+        {
+          "time": 11,
+          "section": "section02",
+          "place": "map_Study",
+          "witness": "user4"
+        },
+        {
+          "time": 11,
+          "section": "section46",
+          "place": "map_Greenhouse",
+          "witness": "user4"
+        },
+        {
+          "time": 12,
+          "section": "section24",
+          "place": "map_MasterBedroom",
+          "witness": "user4"
+        },
+        {
+          "time": 12,
+          "section": "section46",
+          "place": "map_GuestRoom",
+          "witness": "user4"
+        },
+        {
+          "time": 13,
+          "section": "section02",
+          "place": "map_DiningRoom",
+          "witness": "user5"
+        },
+        {
+          "time": 14,
+          "section": "section24",
+          "place": "map_Ballroom",
+          "witness": "user7"
+        }
+      ]
+    },
+    {
+      "player": "user4",
+      "witnesses": [
+        {
+          "time": 10,
+          "section": "section46",
+          "place": "map_Study",
+          "witness": "user2"
+        },
+        {
+          "time": 14,
+          "section": "section02",
+          "place": "map_GuestRoom",
+          "witness": "user2"
+        },
+        {
+          "time": 11,
+          "section": "section02",
+          "place": "map_Study",
+          "witness": "user3"
+        },
+        {
+          "time": 11,
+          "section": "section46",
+          "place": "map_Greenhouse",
+          "witness": "user3"
+        },
+        {
+          "time": 12,
+          "section": "section24",
+          "place": "map_MasterBedroom",
+          "witness": "user3"
+        },
+        {
+          "time": 12,
+          "section": "section46",
+          "place": "map_GuestRoom",
+          "witness": "user3"
+        },
+        {
+          "time": 9,
+          "section": "section46",
+          "place": "map_Greenhouse",
+          "witness": "user8"
+        },
+        {
+          "time": 10,
+          "section": "section02",
+          "place": "map_GuestRoom",
+          "witness": "user8"
+        },
+        {
+          "time": 10,
+          "section": "section24",
+          "place": "map_GuestRoom",
+          "witness": "user9"
+        },
+        {
+          "time": 13,
+          "section": "section46",
+          "place": "map_Greenhouse",
+          "witness": "user9"
+        }
+      ]
+    },
+    {
+      "player": "user5",
+      "witnesses": [
+        {
+          "time": 12,
+          "section": "section24",
+          "place": "map_GrandHall",
+          "witness": "user1"
+        },
+        {
+          "time": 9,
+          "section": "section46",
+          "place": "map_GuestRoom",
+          "witness": "user2"
+        },
+        {
+          "time": 9,
+          "section": "section24",
+          "place": "map_ReceptionRoom",
+          "witness": "user3"
+        },
+        {
+          "time": 10,
+          "section": "section02",
+          "place": "map_GrandHall",
+          "witness": "user3"
+        },
+        {
+          "time": 13,
+          "section": "section02",
+          "place": "map_DiningRoom",
+          "witness": "user3"
+        },
+        {
+          "time": 10,
+          "section": "section24",
+          "place": "map_WineCellar",
+          "witness": "user6"
+        },
+        {
+          "time": 12,
+          "section": "section02",
+          "place": "map_Ballroom",
+          "witness": "user9"
+        },
+        {
+          "time": 13,
+          "section": "section24",
+          "place": "map_ReceptionRoom",
+          "witness": "user6"
+        },
+        {
+          "time": 14,
+          "section": "section02",
+          "place": "map_Greenhouse",
+          "witness": "user7"
+        }
+      ]
+    },
+    {
+      "player": "user6",
+      "witnesses": [
+        {
+          "time": 9,
+          "section": "section24",
+          "place": "map_Kitchen",
+          "witness": "user1"
+        },
+        {
+          "time": 11,
+          "section": "section24",
+          "place": "map_GrandHall",
+          "witness": "user1"
+        },
+        {
+          "time": 12,
+          "section": "section02",
+          "place": "map_GuestRoom",
+          "witness": "user1"
+        },
+        {
+          "time": 12,
+          "section": "section46",
+          "place": "map_MasterBedroom",
+          "witness": "user1"
+        },
+        {
+          "time": 10,
+          "section": "section02",
+          "place": "map_Greenhouse",
+          "witness": "user2"
+        },
+        {
+          "time": 12,
+          "section": "section24",
+          "place": "map_WineCellar",
+          "witness": "user2"
+        },
+        {
+          "time": 10,
+          "section": "section24",
+          "place": "map_WineCellar",
+          "witness": "user5"
+        },
+        {
+          "time": 13,
+          "section": "section24",
+          "place": "map_ReceptionRoom",
+          "witness": "user5"
+        },
+        {
+          "time": 9,
+          "section": "section02",
+          "place": "map_Hallway",
+          "witness": "user8"
+        },
+        {
+          "time": 9,
+          "section": "section46",
+          "place": "map_GrandHall",
+          "witness": "user10"
+        },
+        {
+          "time": 10,
+          "section": "section46",
+          "place": "map_DiningRoom",
+          "witness": "user10"
+        },
+        {
+          "time": 13,
+          "section": "section02",
+          "place": "map_Study",
+          "witness": "user7"
+        },
+        {
+          "time": 13,
+          "section": "section46",
+          "place": "map_ReceptionRoom",
+          "witness": "user7"
+        }
+      ]
+    },
+    {
+      "player": "user7",
+      "witnesses": [
+        {
+          "time": 10,
+          "section": "section24",
+          "place": "map_GrandHall",
+          "witness": "user1"
+        },
+        {
+          "time": 9,
+          "section": "section24",
+          "place": "map_WineCellar",
+          "witness": "user2"
+        },
+        {
+          "time": 9,
+          "section": "section02",
+          "place": "map_BiliardRoom",
+          "witness": "user3"
+        },
+        {
+          "time": 10,
+          "section": "section46",
+          "place": "map_WineCellar",
+          "witness": "user3"
+        },
+        {
+          "time": 14,
+          "section": "section24",
+          "place": "map_Ballroom",
+          "witness": "user3"
+        },
+        {
+          "time": 14,
+          "section": "section02",
+          "place": "map_Greenhouse",
+          "witness": "user5"
+        },
+        {
+          "time": 13,
+          "section": "section02",
+          "place": "map_Study",
+          "witness": "user6"
+        },
+        {
+          "time": 13,
+          "section": "section46",
+          "place": "map_ReceptionRoom",
+          "witness": "user6"
+        },
+        {
+          "time": 12,
+          "section": "section02",
+          "place": "map_MasterBedroom",
+          "witness": "user8"
+        }
+      ]
+    },
+    {
+      "player": "user8",
+      "witnesses": [
+        {
+          "time": 13,
+          "section": "section24",
+          "place": "map_Ballroom",
+          "witness": "user1"
+        },
+        {
+          "time": 10,
+          "section": "section24",
+          "place": "map_Study",
+          "witness": "user2"
+        },
+        {
+          "time": 9,
+          "section": "section46",
+          "place": "map_Greenhouse",
+          "witness": "user4"
+        },
+        {
+          "time": 10,
+          "section": "section02",
+          "place": "map_GuestRoom",
+          "witness": "user4"
+        },
+        {
+          "time": 9,
+          "section": "section02",
+          "place": "map_Hallway",
+          "witness": "user6"
+        },
+        {
+          "time": 12,
+          "section": "section02",
+          "place": "map_MasterBedroom",
+          "witness": "user7"
+        },
+        {
+          "time": 11,
+          "section": "section46",
+          "place": "map_ReceptionRoom",
+          "witness": "user9"
+        },
+        {
+          "time": 13,
+          "section": "section02",
+          "place": "map_ReceptionRoom",
+          "witness": "user10"
+        }
+      ]
+    },
+    {
+      "player": "user9",
+      "witnesses": [
+        {
+          "time": 10,
+          "section": "section24",
+          "place": "map_GuestRoom",
+          "witness": "user4"
+        },
+        {
+          "time": 13,
+          "section": "section46",
+          "place": "map_Greenhouse",
+          "witness": "user4"
+        },
+        {
+          "time": 12,
+          "section": "section02",
+          "place": "map_Ballroom",
+          "witness": "user5"
+        },
+        {
+          "time": 11,
+          "section": "section46",
+          "place": "map_ReceptionRoom",
+          "witness": "user8"
+        },
+        {
+          "time": 9,
+          "section": "section24",
+          "place": "map_DiningRoom",
+          "witness": "user10"
+        },
+        {
+          "time": 12,
+          "section": "section46",
+          "place": "map_Study",
+          "witness": "user10"
+        }
+      ]
+    },
+    {
+      "player": "user10",
+      "witnesses": [
+        {
+          "time": 11,
+          "section": "section24",
+          "place": "map_GuestRoom",
+          "witness": "user2"
+        },
+        {
+          "time": 9,
+          "section": "section46",
+          "place": "map_GrandHall",
+          "witness": "user6"
+        },
+        {
+          "time": 10,
+          "section": "section46",
+          "place": "map_DiningRoom",
+          "witness": "user6"
+        },
+        {
+          "time": 13,
+          "section": "section02",
+          "place": "map_ReceptionRoom",
+          "witness": "user8"
+        },
+        {
+          "time": 9,
+          "section": "section24",
+          "place": "map_DiningRoom",
+          "witness": "user9"
+        },
+        {
+          "time": 12,
+          "section": "section46",
+          "place": "map_Study",
+          "witness": "user9"
+        }
+      ]
+    }
+  ]
+}

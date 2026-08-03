@@ -8,7 +8,7 @@ const MapSchema = new mongoose.Schema({
             place_name:{type:String},
             place_action: {type:[String]}
         }],
-        defualt: [
+        default: [
             {
                 place_id:"map_GrandHall",
                 place_name:"그랜드 홀",
@@ -165,102 +165,102 @@ const MapSchema = new mongoose.Schema({
             {
                 item_id:"item_tool01",
                 item_name:"은제 편지칼",
-                item_featrue:"sharp",
+                item_feature:"sharp",
                 item_location:"map_Study"
             },{
                 item_id:"item_tool02",
                 item_name:"황동 촛대",
-                item_featrue:"blunt",
+                item_feature:"blunt",
                 item_location:"map_DiningRoom"
             },{
                 item_id:"item_tool03",
                 item_name:"크리스탈 디캔터",
-                item_featrue:"blunt",
+                item_feature:"blunt",
                 item_location:"map_WineCellar"
             },{
                 item_id:"item_tool04",
                 item_name:"조각용 망치",
-                item_featrue:"blunt",
+                item_feature:"blunt",
                 item_location:"map_GuestRoom"
             },{
                 item_id:"item_tool05",
                 item_name:"정원용 전지가위",
-                item_featrue:"sharp",
+                item_feature:"sharp",
                 item_location:"map_Greenhouse"
             },{
                 item_id:"item_tool06",
                 item_name:"셰프 나이프",
-                item_featrue:"sharp",
+                item_feature:"sharp",
                 item_location:"map_Kitchen"
             },{
                 item_id:"item_tool07",
                 item_name:"고농도 수면제",
-                item_featrue:"poison",
+                item_feature:"poison",
                 item_location:"map_GuestRoom"
             },{
-                item_id:"ite_tool08",
+                item_id:"item_tool08",
                 item_name:"의료용 주사기",
-                item_featrue:"poison",
+                item_feature:"poison",
                 item_location:"map_GuestRoom"
             },{
                 item_id:"item_tool09",
                 item_name:"실크 커튼끈",
-                item_featrue:"asphyxia",
+                item_feature:"asphyxia",
                 item_location:"map_GrandHall"
             },{
                 item_id:"item_tool10",
                 item_name:"피아노 와이어",
-                item_featrue:"asphyxia",
+                item_feature:"asphyxia",
                 item_location:"map_Ballroom"
             },{
                 item_id:"item_tool11",
                 item_name:"청동 말 조각상",
-                item_featrue:"blunt",
+                item_feature:"blunt",
                 item_location:"map_ReceptionRoom"
             },{
                 item_id:"item_tool12",
                 item_name:"독성 원예 약품",
-                item_featrue:"poison",
+                item_feature:"poison",
                 item_location:"map_Greenhouse"
             },{
                 item_id:"item_tool13",
                 item_name:"대리선 문진",
-                item_featrue:"blunt",
+                item_feature:"blunt",
                 item_location:"map_Study"
             },{
                 item_id:"item_tool14",
                 item_name:"사냥용 단검",
-                item_featrue:"sharp",
+                item_feature:"sharp",
                 item_location:"map_MasterBedroom"
             },{
                 item_id:"item_tool15",
                 item_name:"와인 코르크스크루",
-                item_featrue:"sharp",
+                item_feature:"sharp",
                 item_location:"map_WineCellar"
             },{
                 item_id:"item_tool16",
                 item_name:"장식 지팡이 칼",
-                item_featrue:"sharp",
+                item_feature:"sharp",
                 item_location:"map_ReceptionRoom"
             },{
                 item_id:"item_tool17",
                 item_name:"유리 재떨이",
-                item_featrue:"blunt",
+                item_feature:"blunt",
                 item_location:"map_BiliardRoom"
             },{
                 item_id:"item_tool18",
                 item_name:"사진 현상액",
-                item_featrue:"poison",
+                item_feature:"poison",
                 item_location:"map_GuestRoom"
             },{
                 item_id:"item_tool19",
                 item_name:"가죽 허리띠",
-                item_featrue:"asphyxia",
+                item_feature:"asphyxia",
                 item_location:"map_GuestRoom"
             },{
                 item_id:"item_tool20",
                 item_name:"전기 연장 코드",
-                item_featrue:"asphyxia",
+                item_feature:"asphyxia",
                 item_location:"map_Hallway"
             },
         ]
