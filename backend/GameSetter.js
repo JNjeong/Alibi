@@ -23,28 +23,101 @@ export function setGame(users, mapinfo){
     // 유저별 동행/목격 정보
     const witnessesMap = createWitnessesMap(preparedPlayerTimelineMap)
 
-    return {crimeInfo, preparedPlayerTimelineMap, playersRoles, inGamePlayerTimelineMap, hintsPerRound, witnessesMap}
+    // 빈 동행/목격 정보 생성
+    const inGameWitnessesMap = createInGameWitnessesMap(preparedPlayerTimelineMap)
+
+    return {crimeInfo, preparedPlayerTimelineMap, playersRoles, inGamePlayerTimelineMap, hintsPerRound, witnessesMap, inGameWitnessesMap}
 }
 // 인게임 모순검사 함수
-export function inGameCheckValidation(inGamePlayerTimelineMap,inGameWitnessesMap, playerObj, timeKeyA, sectionKeyA, timeKeyB, sectionKeyB, alibi=null, qa=null){
-    if(alibi){ // 알리바이 모순
-        // 시간:section 내의 장소 2인이상 모순 검사
-        const placeCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.place === alibi.place) 
+export function inGameCheckValidation(inGamePlayerTimelineMap,inGameWitnessesMap, playerObj, timeKey, sectionKey, alibi, qanda){
+    // 알리바이 모순
+    // 시간:section 내의 장소 2인이상 모순 검사
+    const placeCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.place === alibi.place) 
+    if (placeCheck.length >= 2) {
+        return {valid:false, conflicts: placeCheck}
+    };
 
-        if (placeCheck.length >= 2) {
-            return {valid:false, conflicts: placeCheck}
-        };
+    // 시간:section 내의 동일 도구 중복 소유 검사
+    const itemCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.item && ali?.item.item_id === alibi.item?.item_id)
+    if (itemCheck.length >= 1) return {valid:false, conflicts: itemCheck}
+    
+    // 알리바이 시 상호 목격정보 불일치 모순
+    const witnessCheck = checkPlayerWitnessAtSlot(inGameWitnessesMap,playerObj.player._id,timeKey, sectionKey, alibi.place)
+    if(!witnessCheck.valid) return {valid: false, conflicts: witnessCheck.conflicts}
 
-        // 시간:section 내의 동일 도구 중복 소유 검사
-        const itemCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.item && ali?.item.item_id === alibi.item?.item_id)
-        if (itemCheck.length >= 1) return {valid:false, conflicts: itemCheck}
-        
-    } else if(qa){ // 목격 관련 모순
-        
+    // 질의응답 모순여부 검사
+    /*
+    [
+        {
+            player_from: plyer_id,
+            player_to: player_id,
+            time: timeKey,
+            section: sectionKey,
+            alibi: alibi{place,time,action},
+            answer: answer(true/false)
+        }, ...
+    ]
+    */
+    // 같은시각 다른장소 알리바이 모순
+    // 장소가 null이 아닌데, 값이 다르면 모순
+    
 
-    } else { // 모순없음
-        return {}
-    }
+    // 같은시각 다른 도구 소지 모순
+    // 도구가 null이 아닌데, 값이 다르면 모순
+
+    // TODO : 모순이 누구 알리바이인지 알려줘야하지 않나?
+
+     // 모순없음
+    return {valid: true , conflicts: []}
+}
+
+
+function findPlayerWitnessEntry(witnessesMap, playerId){
+    return witnessesMap.find(entry=>entry.player === playerId)
+}
+
+function hasReciprocalWitness(witnessesMap, playerA, playerB, time, section, place){
+    const otherEntry = findPlayerWitnessEntry(witnessesMap, playerB)
+    if(!otherEntry) return false
+
+    return otherEntry.witnesses.some(w=>
+        w.time === time &&
+        w.section === section &&
+        w.place === place &&
+        w.witness === playerA
+    )
+}
+
+// 특정 플레이어의 한 시각·섹션·장소 목격정보 상호 일치 검사
+export function checkPlayerWitnessAtSlot(witnessesMap, playerId, time, section, place){
+    const placeId = place?.place_id ?? place
+    const playerEntry = findPlayerWitnessEntry(witnessesMap, playerId)
+    if(!playerEntry || !placeId) return {valid: true, conflicts: []}
+
+    const slotWitnesses = playerEntry.witnesses.filter(w=>
+        w.time === time && w.section === section && w.place === placeId
+    )
+    if(slotWitnesses.length === 0) return {valid: true, conflicts: []}
+
+    const conflicts = slotWitnesses.filter(w=>
+        !hasReciprocalWitness(witnessesMap, playerId, w.witness, time, section, placeId)
+    )
+
+    return {valid: conflicts.length === 0, conflicts}
+}
+
+// witnessesMap 전체 상호 목격정보 일치 검사
+export function checkWitnessMapValidation(witnessesMap){
+    const conflicts = []
+
+    witnessesMap.forEach(entry=>{
+        entry.witnesses.forEach(w=>{
+            if(hasReciprocalWitness(witnessesMap, entry.player, w.witness, w.time, w.section, w.place)) return
+            conflicts.push(w)
+        })
+    })
+
+    return {valid: conflicts.length === 0, conflicts}
 }
 
 // 범행생성 함수
@@ -355,6 +428,16 @@ function pickToolsByFeature(items, crimeInfo){
     return selectedItems.slice(0,8)
 }
 
+// place_id 기준 중복 제거
+function dedupePlacesById(places){
+    const seen = new Set()
+    return places.filter(place=>{
+        if(seen.has(place.place_id)) return false
+        seen.add(place.place_id)
+        return true
+    })
+}
+
 // 라운드별 힌트 생성 함수
 function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
     const hints= {}
@@ -369,10 +452,14 @@ function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
             }
         })
     })
-    const sortedPlaces= Object.entries(placeCount).sort((a,b)=>b[1]-a[1]).map(([place])=>place)
-    let round1Places = [crimeInfo.crimePlace, ...sortedPlaces.slice(0,5)]
+    const sortedPlaces = Object.entries(placeCount)
+        .sort((a,b)=>b[1]-a[1])
+        .map(([placeId])=> map_places.find(p=>p.place_id === placeId))
+        .filter(Boolean)
+    let round1Places = dedupePlacesById([crimeInfo.crimePlace, ...sortedPlaces.slice(0,5)])
     if(round1Places.length<6){
-        const randomFill = map_places.filter(m=>!round1Places.includes(m)).sort(()=>0.5-Math.random())
+        const selectedIds = new Set(round1Places.map(p=>p.place_id))
+        const randomFill = map_places.filter(m=>!selectedIds.has(m.place_id)).sort(()=>0.5-Math.random())
         round1Places.push(...randomFill.slice(0,6-round1Places.length))
     }
     hints.round1= round1Places
@@ -393,9 +480,10 @@ function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
         {"asphyxia":"기도 압박에 의한 질식"}])
 
     // 4라운드: 1라운드에서 선정된 6개의 장소중, 범행장소 포함하여, 범행시각 내 최다빈도 장소 2개 추가선정, 부족분 랜덤지정
-    const round4Places = [crimeInfo.crimePlace, ...sortedPlaces.slice(0,2)]
+    const round4Places = dedupePlacesById([crimeInfo.crimePlace, ...sortedPlaces.slice(0,2)])
     if(round4Places.length<3){
-        const randomFill = round1Places.filter(p=>!round4Places.includes(p)).sort(()=>0.5-Math.random())
+        const selectedIds = new Set(round4Places.map(p=>p.place_id))
+        const randomFill = round1Places.filter(p=>!selectedIds.has(p.place_id)).sort(()=>0.5-Math.random())
         round4Places.push(...randomFill.slice(0,3-round4Places.length))
     }
     hints.round4=round4Places
@@ -404,15 +492,15 @@ function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
     // 범행시각 이전시각과 이후시각이 있다면, 이전시각의 마지막 section 1개, 이후시각의 첫 section 1개 추출
     // 범행시각 이후 시각이 없다면, 이전시각의 마지막 두 section 추출
     const round5Sections = ["section02","section24","section46"].map(sec=>({time:crimeInfo.crimeTime, section:sec}))
-    if(idx>0){
+    if(idx>0 && idx<times.length-1){
         round5Sections.push({time:times[idx-1], section:"section46"})
-    }
-    if(idx<times.length-1){
         round5Sections.push({time:times[idx+1], section:"section02"})
     } else if(idx>0){
         //이후 시작 없을 경우 이전시각의 마지막 두 section
         round5Sections.push({time: times[idx-1], section:"section24"})
         round5Sections.push({time:times[idx-1], section:"section46"})
+    } else if(idx<times.length-1){
+        round5Sections.push({time:times[idx+1], section:"section02"})
     }
     hints.round5 = round5Sections
     
@@ -462,4 +550,15 @@ function createWitnessesMap(preparedPlayerTimelineMap){
         }
     })
     return witnessesMap
+}
+
+function createInGameWitnessesMap(preparedPlayerTimelineMap){
+    const inGameWitnessesMap = []
+    preparedPlayerTimelineMap.forEach(player=>{
+        inGameWitnessesMap.push({
+            player: player.player._id,
+            witnesses: []
+        })
+    })
+    return inGameWitnessesMap
 }
