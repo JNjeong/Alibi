@@ -4,33 +4,23 @@
 }
 
 /* 전체 회원 / 친구 목록 / 채팅창 */
+
 .section {
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
-  /* 세 영역을 각각 독립된 행으로 분리 */
-  grid-template-rows:
-    minmax(190px, 0.9fr)
-    minmax(190px, 0.9fr)
-    minmax(320px, 1.2fr);
-
-  gap: 14px;
+  gap: 16px;
 
   width: 100%;
-  height: calc(100vh - 128px);
-  min-height: 720px;
+  min-width: 0;
+  min-height: 0;
+
+  padding-bottom: 24px;
 }
 
-/* 채팅창을 접은 경우 */
-.sectionChatCollapsed {
-  grid-template-rows:
-    minmax(190px, 1fr)
-    minmax(190px, 1fr)
-    auto;
-}
-
-.sectionChatCollapsed .chatPanel {
+/* .sectionChatCollapsed .chatPanel {
   grid-template-rows: auto;
-}
+} */
 
 /* ========================================
    전체 회원 영역 / 친구 목록 영역
@@ -38,27 +28,23 @@
 
 .userArea,
 .friendArea {
+  flex: 0 0 auto;
+
+  width: 100%;
   min-width: 0;
   min-height: 0;
 
-  padding-right: 5px;
+  padding: 0;
 
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-
-  scrollbar-width: thin;
-  scrollbar-color: #303342 transparent;
+  overflow: visible;
 }
 
 /* Chrome, Safari 스크롤바 */
 
-.userArea::-webkit-scrollbar,
+/* .userArea::-webkit-scrollbar,
 .friendArea::-webkit-scrollbar {
   width: 6px;
-}
+} */
 
 .userArea::-webkit-scrollbar-track,
 .friendArea::-webkit-scrollbar-track {
@@ -82,11 +68,9 @@
 
 .chatPanel {
   display: grid;
-  grid-template-rows:
-    auto
-    minmax(0, 1fr)
-    auto;
+  grid-template-rows: auto;
 
+  width: 100%;
   min-width: 0;
   min-height: 0;
 
@@ -103,6 +87,27 @@
     );
 
   color: #f4f4f7;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.chatPanelOpen {
+  grid-template-rows:
+    auto
+    minmax(220px, 420px)
+    auto;
+
+  border-color: #303344;
+
+  box-shadow:
+    0 16px 40px
+    rgba(0, 0, 0, 0.2);
+}
+
+.chatPanelCollapsed {
+  grid-template-rows: auto;
 }
 
 /* ========================================
@@ -325,7 +330,7 @@
   min-width: 0;
   min-height: 0;
 
-  padding: 16px 13px;
+  padding: 20px 18px;
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -404,7 +409,16 @@
   display: flex;
 
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  width: fit-content;
+  max-width: 82%;
 }
 
 .myMessageRow {
@@ -415,58 +429,71 @@
   justify-content: flex-start;
 }
 
-.messageBubble {
-  width: fit-content;
-  max-width: min(230px, 80%);
-
-  padding: 9px 12px;
-
-  border-radius: 13px;
-
-  font-size: 13px;
-  line-height: 1.45;
-
-  overflow-wrap: anywhere;
-  word-break: break-word;
+.myMessageRow .messageContent {
+  align-items: flex-end;
+  margin-left: auto;
 }
 
-/* 내가 보낸 메시지 */
+.friendMessageRow .messageContent {
+  align-items: flex-start;
+  margin-right: auto;
+}
+
+.messageBubble {
+  width: auto;
+  max-width: 100%;
+
+  padding: 10px 14px;
+
+  border-radius: 15px;
+
+  font-size: 14px;
+  line-height: 1.55;
+
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
 
 .myBubble {
-  margin-left: auto;
-
-  border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 5px;
 
   background:
     linear-gradient(
       135deg,
-      #ce2f40,
-      #a92331
+      #d52e40,
+      #a82030
     );
 
   color: #ffffff;
 }
 
-/* 상대방 메시지 */
-
 .friendBubble {
-  border: 1px solid #303344;
-  border-bottom-left-radius: 4px;
+  border: 1px solid #323545;
+  border-bottom-left-radius: 5px;
 
   background: #1b1d29;
-  color: #e7e7ed;
+  color: #f0f0f4;
 }
-
-/* 메시지 시간 */
 
 .messageTime {
   display: block;
 
-  margin-top: 4px;
+  margin-top: 5px;
+  padding: 0 2px;
 
-  color: #626576;
+  color: #737687;
 
-  font-size: 9px;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.myMessageRow .messageTime {
+  text-align: right;
+}
+
+.friendMessageRow .messageTime {
+  text-align: left;
 }
 
 .myMessageRow .messageTime {
@@ -665,4 +692,153 @@
   .sendButton {
     width: 40px;
   }
+}
+
+/* ========================================
+   게임방 초대 메시지
+======================================== */
+
+.roomInviteCard {
+  width: 320px;
+  max-width: 100%;
+  padding: 16px;
+
+  border: 1px solid rgba(255, 74, 92, 0.38);
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(37, 24, 31, 0.98),
+      rgba(18, 19, 28, 0.98)
+    );
+
+  box-shadow:
+    0 10px 28px
+    rgba(0, 0, 0, 0.22);
+}
+
+.inviteBadge {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 24px;
+  padding: 0 9px;
+
+  border: 1px solid
+    rgba(255, 79, 97, 0.3);
+  border-radius: 999px;
+
+  background:
+    rgba(213, 46, 64, 0.12);
+
+  color: #ff5869;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.inviteTitle {
+  display: block;
+
+  margin-top: 13px;
+
+  color: #ffffff;
+
+  font-size: 16px;
+  line-height: 1.4;
+
+  word-break: keep-all;
+}
+
+.inviteDescription {
+  margin: 5px 0 0;
+
+  color: #a7a9b7;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.inviteCodeBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 14px;
+  padding: 11px 12px;
+
+  border: 1px solid #303342;
+  border-radius: 11px;
+
+  background: rgba(8, 9, 15, 0.75);
+}
+
+.inviteCodeBox span {
+  flex-shrink: 0;
+
+  color: #777a8b;
+
+  font-size: 11px;
+}
+
+.inviteCodeBox code {
+  overflow: hidden;
+
+  color: #ffffff;
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roomJoinButton {
+  width: 100%;
+  height: 40px;
+  margin-top: 12px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d72e41,
+      #ad2333
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    filter 0.2s ease;
+}
+
+.roomJoinButton:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.roomJoinButton:active {
+  transform: translateY(0);
 }

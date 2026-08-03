@@ -48,3 +48,18 @@ export const sendChatMessage = async (
 
   return response.data
 }
+
+// 게임방 초대 메시지 보내기
+export const sendRoomInvite = async (
+  chatRoomId,
+  roomId
+) => {
+  const response = await api.post(
+    `/chat-rooms/${chatRoomId}/room-invite`,
+    {
+      roomId,
+    }
+  )
+
+  return response.data
+}

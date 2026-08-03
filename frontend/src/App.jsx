@@ -27,13 +27,70 @@ import AdminPage from "./pages/Admin/AdminPage"
 
 import useAuthStore from "./store/authStore"
 
+import socket from "./socket/socket"
+
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth)
   const loading = useAuthStore((state) => state.loading)
 
+  // 소켓 연결 
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
+
   useEffect(() => {
     checkAuth()
   }, [checkAuth])
+
+  useEffect(()=>{
+    const handleConnect = () =>{
+      console.log("프론트 소켓 연결 성공!")
+    }
+    
+    const handleDisconnect =()=>{
+      console.log("프론트 소켓 연결 해제")
+    }
+
+    const handleConnectError = (error) => {
+      console.error("프론트 소켓 연결 에러:", error)
+    }
+
+    socket.on("connect", handleConnect)
+    socket.on("disconnect", handleDisconnect)
+    socket.on("connect_error", handleConnectError)
+
+    return () =>{
+      socket.off("connect" , handleConnect)
+      socket.off("disconnect",handleDisconnect)
+      socket.off("connect_error",handleConnectError)
+    }
+  },[])
+
+  // 로그인된 사용자만 Socket.IO 연결
+useEffect(() => {
+  // 인증 확인이 끝나기 전에는 기다림
+  if (loading) {
+    return
+  }
+
+  if (isAuthenticated) {
+    const token = localStorage.getItem("token")
+
+    // 소켓 연결 시 백엔드로 보낼 JWT
+    socket.auth = {
+      token,
+    }
+
+    if (!socket.connected) {
+      socket.connect()
+    }
+
+    return
+  }
+
+  // 로그아웃 상태라면 소켓 연결 해제
+  if (socket.connected) {
+    socket.disconnect()
+  }
+}, [loading, isAuthenticated])
 
   if (loading) {
     return <div>~ 로딩 중 ~</div>

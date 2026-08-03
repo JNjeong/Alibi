@@ -14,8 +14,9 @@ await connectDB();
 
 const server = http.createServer(app);
 
+// Socket.IO 초기화
 initSocket(server, app);
 
 server.listen(PORT, () => {
-    console.log(`🚀 Server Running : http://localhost:${PORT}`);
+  console.log(`🚀 Server Running : http://localhost:${PORT}`);
 });

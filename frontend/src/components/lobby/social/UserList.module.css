@@ -350,9 +350,20 @@
 /* 전체 크기 축소 */
 
 .member-panel {
-  max-width: 480px;
+  width: 100%;
+  max-width: none;
+
   padding: 22px 24px;
+
+  border: 1px solid #252836;
   border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 24, 34, 0.98),
+      rgba(11, 12, 19, 0.98)
+    );
 }
 
 /* 제목 영역 */
@@ -530,10 +541,16 @@
 /* 회원 목록 스크롤 영역 */
 
 .member-scroll-area {
-  max-height: 350px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  max-height: 280px;
   padding-right: 8px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  scrollbar-width: thin;
+  scrollbar-color: #303342 transparent;
 }
 
 /* 스크롤바 */
