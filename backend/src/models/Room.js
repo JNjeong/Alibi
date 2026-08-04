@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { act } from "react"
 
 const roomSchema = new mongoose.Schema(
   {
@@ -32,8 +33,14 @@ const roomSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["waiting", "playing", "finished"],
+      enum: ["waiting", "generating", "playing", "finished"],
       default: "waiting"
+    },
+
+    activeGame: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+      default: null
     }
   },
   {

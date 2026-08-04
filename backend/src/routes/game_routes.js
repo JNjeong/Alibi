@@ -1,10 +1,20 @@
 // 게임 관련 라우트 정의
-const express = require('express')
-const router = express.Router();
-const gameController = require('../controllers/game_controller')
+import express from 'express'
+import authMiddleware from '../middlewares/auth_middleware.js'
+import { getActiveGame, getGameBootstrap, getGameResult } from '../controllers/game_controller.js'
 
-router.get('/bootstrap', gameController.bootstrap)
-router.get('/active', gameController.activeGame)
-router.get('/result', gameController.result)
+const router = express.Router()
 
-module.exports = router
+// 모든 게임에 authMiddleware 적용
+router.use(authMiddleware)
+
+// 활성화된 게임 조회
+router.get('/active/:roomId/active', getActiveGame)
+
+// 게임 부트스트랩 조회
+router.get('/:gameId/bootstrap', getGameBootstrap)
+
+// 게임 결과 조회
+router.get('/:gameId/result', getGameResult)
+
+export default router
