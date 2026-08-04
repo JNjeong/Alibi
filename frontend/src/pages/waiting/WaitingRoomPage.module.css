@@ -54,6 +54,26 @@
   color: #ff9d8f;
 }
 
+.statusReconnecting {
+  background: rgba(230, 199, 122, 0.14);
+  color: #e6c77a;
+}
+
+.errorBanner {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 157, 143, 0.24);
+  border-radius: 12px;
+  background: rgba(255, 157, 143, 0.08);
+}
+
+.errorActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
 .layout {
   display: grid;
   grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);

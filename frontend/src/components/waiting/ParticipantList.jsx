@@ -5,6 +5,7 @@ function ParticipantList({
   currentPlayers = 0,
   maxPlayers = 10,
   hostId,
+  readyCount = 0,
 }) {
   return (
     <section className={styles.section}>
@@ -14,9 +15,14 @@ function ParticipantList({
           <h2 className={styles.title}>참가자 목록</h2>
         </div>
 
-        <span className={styles.count}>
-          {currentPlayers}/{maxPlayers}
-        </span>
+        <div className={styles.badges}>
+          <span className={styles.count}>
+            {currentPlayers}/{maxPlayers}
+          </span>
+          <span className={styles.readyCount}>
+            준비 {readyCount}/{currentPlayers}
+          </span>
+        </div>
       </header>
 
       <ul className={styles.list}>
@@ -41,9 +47,33 @@ function ParticipantList({
                 </span>
               </div>
 
-              {isHost && (
-                <span className={styles.hostBadge}>방장</span>
-              )}
+              <div className={styles.statusGroup}>
+                <span
+                  className={[
+                    styles.onlineBadge,
+                    participant.isOnline
+                      ? styles.online
+                      : styles.offline,
+                  ].join(" ")}
+                >
+                  {participant.isOnline ? "접속" : "오프라인"}
+                </span>
+
+                {isHost ? (
+                  <span className={styles.hostBadge}>방장</span>
+                ) : (
+                  <span
+                    className={[
+                      styles.readyBadge,
+                      participant.isReady
+                        ? styles.ready
+                        : styles.notReady,
+                    ].join(" ")}
+                  >
+                    {participant.isReady ? "준비" : "대기"}
+                  </span>
+                )}
+              </div>
             </li>
           )
         })}

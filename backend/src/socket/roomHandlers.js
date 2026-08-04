@@ -2,27 +2,115 @@ import mongoose from "mongoose"
 import jwt from "jsonwebtoken"
 
 import Room from "../models/Room.js"
+import RoomMessage from "../models/RoomMessage.js"
 
-const roomChats = new Map()
+const MIN_PLAYERS_TO_START = 2
+const MAX_CHAT_HISTORY = 200
+const LOG_PREFIX = "[room:socket]"
+
+const roomReadyUsers = new Map()
+
+const logRoomError = (event, error) => {
+  const detail = error instanceof Error ? error.message : error
+
+  console.error(`${LOG_PREFIX} ${event} failed:`, detail)
+}
+
+const logRoomDebug = (event, meta = {}) => {
+  if (process.env.ROOM_SOCKET_DEBUG === "true") {
+    console.log(`${LOG_PREFIX} ${event}`, meta)
+  }
+}
 
 const populateRoom = (query) =>
   query
     .populate("host", "username nickname")
     .populate("participants", "username nickname")
 
-const formatParticipant = (participant, hostId) => ({
-  _id: participant._id,
-  username: participant.username,
-  nickname: participant.nickname,
-  isHost: String(participant._id) === String(hostId),
-})
+const getReadySet = (roomId) => {
+  const key = String(roomId)
 
-const getRoomChatMessages = (roomId) => {
-  if (!roomChats.has(roomId)) {
-    roomChats.set(roomId, [])
+  if (!roomReadyUsers.has(key)) {
+    roomReadyUsers.set(key, new Set())
   }
 
-  return roomChats.get(roomId)
+  return roomReadyUsers.get(key)
+}
+
+const getOnlineUserIds = (io, roomId) => {
+  const socketRoom = io.sockets.adapter.rooms.get(`room:${roomId}`)
+
+  if (!socketRoom) {
+    return new Set()
+  }
+
+  const onlineIds = new Set()
+
+  for (const socketId of socketRoom) {
+    const connectedSocket = io.sockets.sockets.get(socketId)
+
+    if (connectedSocket?.userId) {
+      onlineIds.add(String(connectedSocket.userId))
+    }
+  }
+
+  return onlineIds
+}
+
+const formatParticipant = (
+  participant,
+  hostId,
+  onlineIds,
+  readySet
+) => {
+  const participantId = String(participant._id)
+  const isHost = participantId === String(hostId)
+
+  return {
+    _id: participant._id,
+    username: participant.username,
+    nickname: participant.nickname,
+    isHost,
+    isOnline: onlineIds.has(participantId),
+    isReady: isHost || readySet.has(participantId),
+  }
+}
+
+const buildRoomPayload = (room, onlineIds, readySet) => {
+  const hostId = room.host._id || room.host
+  const participants = room.participants.map((participant) =>
+    formatParticipant(participant, hostId, onlineIds, readySet)
+  )
+
+  const nonHostParticipants = participants.filter(
+    (participant) => !participant.isHost
+  )
+
+  const readyCount = participants.filter(
+    (participant) => participant.isReady
+  ).length
+
+  const allNonHostReady =
+    nonHostParticipants.length === 0 ||
+    nonHostParticipants.every((participant) => participant.isReady)
+
+  const hostOnline = onlineIds.has(String(hostId))
+
+  return {
+    roomId: room._id,
+    title: room.title,
+    inviteCode: room.inviteCode,
+    host: room.host,
+    participants,
+    currentPlayers: room.participants.length,
+    maxPlayers: room.maxPlayers,
+    status: room.status,
+    readyCount,
+    canStart:
+      hostOnline &&
+      participants.length >= MIN_PLAYERS_TO_START &&
+      allNonHostReady,
+  }
 }
 
 const emitParticipantsUpdated = async (io, roomId) => {
@@ -32,22 +120,35 @@ const emitParticipantsUpdated = async (io, roomId) => {
     return null
   }
 
-  const payload = {
-    roomId: room._id,
-    title: room.title,
-    inviteCode: room.inviteCode,
-    host: room.host,
-    participants: room.participants.map((participant) =>
-      formatParticipant(participant, room.host._id)
-    ),
-    currentPlayers: room.participants.length,
-    maxPlayers: room.maxPlayers,
-    status: room.status,
-  }
+  const onlineIds = getOnlineUserIds(io, roomId)
+  const readySet = getReadySet(roomId)
+  const payload = buildRoomPayload(room, onlineIds, readySet)
 
   io.to(`room:${roomId}`).emit("room:participantsUpdated", payload)
 
   return payload
+}
+
+const formatRoomMessage = (messageDoc) => ({
+  id: String(messageDoc._id),
+  roomId: String(messageDoc.room),
+  senderId: String(messageDoc.sender._id),
+  sender: {
+    _id: messageDoc.sender._id,
+    username: messageDoc.sender.username,
+    nickname: messageDoc.sender.nickname,
+  },
+  content: messageDoc.content,
+  createdAt: messageDoc.createdAt.toISOString(),
+})
+
+const loadRoomChatMessages = async (roomId) => {
+  const messages = await RoomMessage.find({ room: roomId })
+    .populate("sender", "username nickname")
+    .sort({ createdAt: 1 })
+    .limit(MAX_CHAT_HISTORY)
+
+  return messages.map(formatRoomMessage)
 }
 
 const verifyRoomParticipant = async (roomId, userId) => {
@@ -62,8 +163,7 @@ const verifyRoomParticipant = async (roomId, userId) => {
   }
 
   const isParticipant = room.participants.some(
-    (participantId) =>
-      String(participantId) === String(userId)
+    (participantId) => String(participantId) === String(userId)
   )
 
   if (!isParticipant) {
@@ -71,6 +171,33 @@ const verifyRoomParticipant = async (roomId, userId) => {
   }
 
   return { room }
+}
+
+const cleanupFinishedRoomIfEmpty = async (io, roomId) => {
+  const room = await Room.findById(roomId)
+
+  if (!room || room.status !== "finished") {
+    return false
+  }
+
+  const onlineIds = getOnlineUserIds(io, roomId)
+
+  if (onlineIds.size > 0) {
+    return false
+  }
+
+  await RoomMessage.deleteMany({ room: roomId })
+  await Room.findByIdAndDelete(roomId)
+  roomReadyUsers.delete(String(roomId))
+
+  logRoomDebug("room:cleanup", { roomId: String(roomId) })
+
+  io.to(`room:${roomId}`).emit("room:closed", {
+    roomId,
+    message: "종료된 방이 정리되었습니다.",
+  })
+
+  return true
 }
 
 export const registerRoomHandlers = (io) => {
@@ -113,14 +240,19 @@ export const registerRoomHandlers = (io) => {
           return
         }
 
-        socket.join(`room:${roomId}`)
-        socket.data.roomId = roomId
+        if (socket.data.roomId && socket.data.roomId !== String(roomId)) {
+          socket.leave(`room:${socket.data.roomId}`)
+        }
 
+        socket.join(`room:${roomId}`)
+        socket.data.roomId = String(roomId)
+
+        const chatMessages = await loadRoomChatMessages(roomId)
         const roomPayload = await emitParticipantsUpdated(io, roomId)
 
         socket.emit("room:joined", {
           room: roomPayload,
-          chatMessages: getRoomChatMessages(String(roomId)),
+          chatMessages,
         })
 
         if (room.status === "playing") {
@@ -130,8 +262,13 @@ export const registerRoomHandlers = (io) => {
             title: room.title,
           })
         }
+
+        logRoomDebug("room:join", {
+          roomId: String(roomId),
+          userId: String(socket.userId),
+        })
       } catch (error) {
-        console.error("room:join 오류:", error)
+        logRoomError("room:join", error)
         socket.emit("room:error", {
           message: "방 입장 중 오류가 발생했습니다.",
         })
@@ -162,15 +299,67 @@ export const registerRoomHandlers = (io) => {
           },
         })
 
+        getReadySet(roomId).delete(String(socket.userId))
+
         socket.leave(`room:${roomId}`)
         socket.data.roomId = null
 
         await emitParticipantsUpdated(io, roomId)
         socket.emit("room:left", { roomId })
+
+        logRoomDebug("room:leave", {
+          roomId: String(roomId),
+          userId: String(socket.userId),
+        })
+
+        await cleanupFinishedRoomIfEmpty(io, roomId)
       } catch (error) {
-        console.error("room:leave 오류:", error)
+        logRoomError("room:leave", error)
         socket.emit("room:error", {
           message: "방 퇴장 중 오류가 발생했습니다.",
+        })
+      }
+    })
+
+    socket.on("room:ready", async ({ roomId, ready = true }) => {
+      try {
+        const result = await verifyRoomParticipant(roomId, socket.userId)
+
+        if (result.error) {
+          socket.emit("room:error", { message: result.error })
+          return
+        }
+
+        const { room } = result
+
+        if (String(room.host) === String(socket.userId)) {
+          socket.emit("room:error", {
+            message: "방장은 준비 상태를 변경할 수 없습니다.",
+          })
+          return
+        }
+
+        if (room.status !== "waiting") {
+          socket.emit("room:error", {
+            message: "대기 중인 방에서만 준비할 수 있습니다.",
+          })
+          return
+        }
+
+        const readySet = getReadySet(roomId)
+        const userId = String(socket.userId)
+
+        if (ready) {
+          readySet.add(userId)
+        } else {
+          readySet.delete(userId)
+        }
+
+        await emitParticipantsUpdated(io, roomId)
+      } catch (error) {
+        logRoomError("room:ready", error)
+        socket.emit("room:error", {
+          message: "준비 상태 변경 중 오류가 발생했습니다.",
         })
       }
     })
@@ -200,25 +389,19 @@ export const registerRoomHandlers = (io) => {
           return
         }
 
-        const message = {
-          id: `room_chat_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-          roomId: String(roomId),
-          senderId: String(socket.userId),
-          sender: {
-            _id: socket.userId,
-            username: socket.username,
-            nickname: socket.nickname,
-          },
+        const savedMessage = await RoomMessage.create({
+          room: roomId,
+          sender: socket.userId,
           content: trimmedContent,
-          createdAt: new Date().toISOString(),
-        }
+        })
 
-        const messages = getRoomChatMessages(String(roomId))
-        messages.push(message)
+        await savedMessage.populate("sender", "username nickname")
+
+        const message = formatRoomMessage(savedMessage)
 
         io.to(`room:${roomId}`).emit("room:chat", { message })
       } catch (error) {
-        console.error("room:chat 오류:", error)
+        logRoomError("room:chat", error)
         socket.emit("room:error", {
           message: "메시지 전송 중 오류가 발생했습니다.",
         })
@@ -250,15 +433,40 @@ export const registerRoomHandlers = (io) => {
           return
         }
 
-        if (room.participants.length < 2) {
+        const populatedRoom = await populateRoom(Room.findById(roomId))
+        const onlineIds = getOnlineUserIds(io, roomId)
+        const readySet = getReadySet(roomId)
+        const roomPayload = buildRoomPayload(
+          populatedRoom,
+          onlineIds,
+          readySet
+        )
+
+        if (roomPayload.currentPlayers < MIN_PLAYERS_TO_START) {
           socket.emit("room:error", {
-            message: "게임 시작에는 최소 2명의 참가자가 필요합니다.",
+            message: `게임 시작에는 최소 ${MIN_PLAYERS_TO_START}명의 참가자가 필요합니다.`,
+          })
+          return
+        }
+
+        if (!onlineIds.has(String(room.host))) {
+          socket.emit("room:error", {
+            message: "방장이 대기실에 연결되어 있어야 합니다.",
+          })
+          return
+        }
+
+        if (!roomPayload.canStart) {
+          socket.emit("room:error", {
+            message: "모든 참가자가 준비 완료해야 게임을 시작할 수 있습니다.",
           })
           return
         }
 
         room.status = "playing"
         await room.save()
+
+        roomReadyUsers.delete(String(roomId))
 
         io.to(`room:${roomId}`).emit("room:start", {
           roomId: room._id,
@@ -267,16 +475,28 @@ export const registerRoomHandlers = (io) => {
         })
 
         await emitParticipantsUpdated(io, roomId)
+
+        logRoomDebug("room:start", {
+          roomId: String(roomId),
+          userId: String(socket.userId),
+        })
       } catch (error) {
-        console.error("room:start 오류:", error)
+        logRoomError("room:start", error)
         socket.emit("room:error", {
           message: "게임 시작 중 오류가 발생했습니다.",
         })
       }
     })
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", async () => {
+      const roomId = socket.data.roomId
+
       socket.data.roomId = null
+
+      if (roomId) {
+        await emitParticipantsUpdated(io, roomId)
+        await cleanupFinishedRoomIfEmpty(io, roomId)
+      }
     })
   })
 }

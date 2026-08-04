@@ -20,12 +20,16 @@ function WaitingRoomPage() {
 
   const {
     connected,
+    reconnecting,
     roomState,
     chatMessages,
     socketError,
     leaveRoom,
     sendChat,
+    setReady,
     startGame,
+    retryConnection,
+    clearSocketError,
   } = useRoomSocket(roomId)
 
   useEffect(() => {
@@ -65,13 +69,40 @@ function WaitingRoomPage() {
   const hostId = roomState?.host?._id || roomState?.host
   const isHost = String(hostId) === String(currentUserId)
 
+  const currentParticipant = roomState?.participants?.find(
+    (participant) => String(participant._id) === String(currentUserId)
+  )
+
+  const isReady = currentParticipant?.isReady ?? false
+  const canStart = roomState?.canStart ?? false
+
   const handleLeave = () => {
     leaveRoom()
     navigate("/lobby")
   }
 
+  const handleRetryFetch = () => {
+    setError("")
+    setLoading(true)
+
+    getRoom(roomId)
+      .catch((fetchError) => {
+        setError(
+          fetchError.response?.data?.message ||
+            "방 정보를 불러오지 못했습니다."
+        )
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+
   const handleStart = () => {
     startGame()
+  }
+
+  const handleToggleReady = () => {
+    setReady(!isReady)
   }
 
   if (loading) {
@@ -86,16 +117,33 @@ function WaitingRoomPage() {
     return (
       <div className={styles.page}>
         <p className={styles.error}>{error}</p>
-        <button
-          type="button"
-          className={styles.secondaryButton}
-          onClick={() => navigate("/lobby")}
-        >
-          로비로 돌아가기
-        </button>
+        <div className={styles.headerActions}>
+          <button
+            type="button"
+            className={styles.primaryButton}
+            onClick={handleRetryFetch}
+          >
+            다시 시도
+          </button>
+          <button
+            type="button"
+            className={styles.secondaryButton}
+            onClick={() => navigate("/lobby")}
+          >
+            로비로 돌아가기
+          </button>
+        </div>
       </div>
     )
   }
+
+  const connectionLabel = connected
+    ? "실시간 연결됨"
+    : reconnecting
+      ? "재연결 중..."
+      : "연결 끊김"
+
+  const showRoomSync = connected && !roomState
 
   return (
     <div className={styles.page}>
@@ -114,20 +162,39 @@ function WaitingRoomPage() {
           <span
             className={[
               styles.statusBadge,
-              connected ? styles.statusOnline : styles.statusOffline,
+              connected
+                ? styles.statusOnline
+                : reconnecting
+                  ? styles.statusReconnecting
+                  : styles.statusOffline,
             ].join(" ")}
           >
-            {connected ? "실시간 연결됨" : "연결 중..."}
+            {connectionLabel}
           </span>
 
           {!isHost && (
-            <button
-              type="button"
-              className={styles.secondaryButton}
-              onClick={handleLeave}
-            >
-              나가기
-            </button>
+            <>
+              <button
+                type="button"
+                className={
+                  isReady
+                    ? styles.secondaryButton
+                    : styles.primaryButton
+                }
+                onClick={handleToggleReady}
+                disabled={!connected}
+              >
+                {isReady ? "준비 취소" : "준비"}
+              </button>
+
+              <button
+                type="button"
+                className={styles.secondaryButton}
+                onClick={handleLeave}
+              >
+                나가기
+              </button>
+            </>
           )}
 
           {isHost && (
@@ -135,10 +202,7 @@ function WaitingRoomPage() {
               type="button"
               className={styles.primaryButton}
               onClick={handleStart}
-              disabled={
-                !connected ||
-                (roomState?.currentPlayers ?? 0) < 2
-              }
+              disabled={!connected || !canStart}
             >
               게임 시작
             </button>
@@ -146,8 +210,41 @@ function WaitingRoomPage() {
         </div>
       </header>
 
-      {(socketError) && (
-        <p className={styles.error}>{socketError}</p>
+      {showRoomSync && (
+        <p className={styles.message}>대기실 정보를 동기화하는 중...</p>
+      )}
+
+      {socketError && (
+        <div className={styles.errorBanner}>
+          <p className={styles.error}>{socketError}</p>
+          <div className={styles.errorActions}>
+            {!connected && (
+              <button
+                type="button"
+                className={styles.primaryButton}
+                onClick={retryConnection}
+              >
+                다시 연결
+              </button>
+            )}
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={clearSocketError}
+            >
+              닫기
+            </button>
+            {socketError.includes("정리") && (
+              <button
+                type="button"
+                className={styles.secondaryButton}
+                onClick={() => navigate("/lobby")}
+              >
+                로비로 돌아가기
+              </button>
+            )}
+          </div>
+        </div>
       )}
 
       <main className={styles.layout}>
@@ -156,6 +253,7 @@ function WaitingRoomPage() {
           currentPlayers={roomState?.currentPlayers ?? 0}
           maxPlayers={roomState?.maxPlayers ?? 10}
           hostId={hostId}
+          readyCount={roomState?.readyCount ?? 0}
         />
 
         <ChatPanel
