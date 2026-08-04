@@ -21,9 +21,11 @@ function TargetList({
                             }`}
                         onClick={() => setSelectedPlayer(player)}
                     >
-                        <div className="avatar">{player.name[0]}</div>
-                        <p className="player-name">{player.name}</p>
-                        <span className="player-status">{player.status}</span>
+                        <div className="avatar">{player.character.name[0]}</div>
+                        <p className="player-name">{player.character.name}</p>
+                        <span className="player-status">
+                            {player.statementSubmitted ? "제출 완료" : "질문 가능"}
+                        </span>
                     </button>
                 ))}
             </div>

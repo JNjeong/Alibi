@@ -1,3 +1,10 @@
+import mockGame from "../../../data/mockgame"
+
+const times = mockGame.timeSlots.map(t => t.label)
+const places = mockGame.places.map(p => p.name)
+const players = mockGame.characterPool.map(c => c.name)
+const items = mockGame.toolPool.map(t => t.name)
+
 export const questionTemplates = {
     place: {
         id: "place",
@@ -5,11 +12,11 @@ export const questionTemplates = {
         fields: [
             {
                 type: "time",
-                options: ["17:00", "17:20", "17:40", "18:00", "18:20", "18:40"]
+                options: times
             },
             {
                 type: "place",
-                options: ["거실", "주방", "서재", "현관", "복도", "정원"]
+                options: places
             }
         ],
         template: "당신은 {0}에 {1}에 있었습니까?"
@@ -21,42 +28,14 @@ export const questionTemplates = {
         fields: [
             {
                 type: "time",
-                options: ["17:00", "17:20", "17:40", "18:00", "18:20", "18:40"]
+                options: times
             },
             {
                 type: "player",
-                options: ["한도윤", "박정민", "최유진", "김태현"]
+                options: players
             }
         ],
         template: "당신은 {0}에 {1}와 함께 있었습니까?"
-    },
-
-    admit: {
-        id: "admit",
-        title: "동행 인정 여부",
-        fields: [
-            {
-                type: "player",
-                options: ["한도윤", "박정민", "최유진"]
-            }
-        ],
-        template: "당신은 {0}와 동행한 사실을 인정합니까?"
-    },
-
-    witness: {
-        id: "witness",
-        title: "도구 목격 여부",
-        fields: [
-            {
-                type: "time",
-                options: ["17:00", "17:20", "17:40", "18:00", "18:20", "18:40"]
-            },
-            {
-                type: "item",
-                options: ["칼", "휴대폰", "열쇠", "망치"]
-            }
-        ],
-        template: "당신은 {0}에 {1}을(를) 목격했습니까?"
     },
 
     possess: {
@@ -64,17 +43,14 @@ export const questionTemplates = {
         title: "도구 직접 소지",
         fields: [
             {
+                type: "time",
+                options: times
+            },
+            {
                 type: "item",
-                options: ["칼", "휴대폰", "열쇠", "망치"]
+                options: items
             }
         ],
-        template: "당신은 {0}을(를) 직접 소지하고 있었습니까?"
-    },
-
-    keep: {
-        id: "keep",
-        title: "이전 주장 유지",
-        fields: [],
-        template: "당신은 이전 공식 주장을 유지합니까?"
+        template: "당신은 {0}에 {1}을(를) 직접 소지하고 있었습니까?"
     }
-};
+}

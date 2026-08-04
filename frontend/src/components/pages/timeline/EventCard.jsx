@@ -14,7 +14,7 @@ function EventCard({ event }) {
 
             <p>{event.text}</p>
         </div>
-    );
+    )
 }
 
-export default EventCard;
+export default EventCard

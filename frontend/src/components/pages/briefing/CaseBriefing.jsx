@@ -18,7 +18,7 @@ function CaseBriefing() {
                 </div>
             </div>
         </div >
-    );
+    )
 }
 
-export default CaseBriefing;
+export default CaseBriefing

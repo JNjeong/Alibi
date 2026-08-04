@@ -3,7 +3,8 @@ function DeductionSelect({
     title,
     value,
     options,
-    onChange
+    onChange,
+    disabled
 }) {
     return (
         <div className="deduction-select">
@@ -18,6 +19,7 @@ function DeductionSelect({
 
             <select
                 value={value}
+                disabled={disabled}
                 onChange={(e) => onChange(e.target.value)}
                 className="deduction-dropdown"
             >
@@ -34,7 +36,7 @@ function DeductionSelect({
                 ))}
             </select>
         </div>
-    );
+    )
 }
 
 export default DeductionSelect;

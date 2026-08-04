@@ -4,38 +4,37 @@ import "./question.css";
 import { questionTemplates } from "./questionTemplates";
 
 function QuestionForm({
-    players,
-    setPlayers,
     selectedPlayer,
     setAnswer,
     history,
     setHistory
 }) {
+    const questionCount = history.filter(item => item.question).length
 
-    const [selectedType, setSelectedType] = useState("place");
-    const current = questionTemplates[selectedType];
-    const [selectedValues, setSelectedValues] = useState([]);
+    const [selectedType, setSelectedType] = useState("place")
+    const current = questionTemplates[selectedType]
+    const [selectedValues, setSelectedValues] = useState([])
 
     useEffect(() => {
         setSelectedValues(
             current.fields.map(field => field.options[0])
         );
-    }, [selectedType]);
+    }, [selectedType])
 
     const question = current.template.replace(
         /\{(\d+)\}/g,
         (_, i) => selectedValues[i] ?? ""
-    );
+    )
 
     const handleTypeChange = (type) => {
         setSelectedType(type);
-    };
+    }
 
     const handleSelectChange = (index, value) => {
         const values = [...selectedValues];
         values[index] = value;
-        setSelectedValues(values);
-    };
+        setSelectedValues(values)
+    }
 
     const renderPreview = () => {
         const parts = current.template.split(/(\{\d+\})/g);
@@ -64,23 +63,31 @@ function QuestionForm({
                         </option>
                     ))}
                 </select>
-            );
-        });
-    };
+            )
+        })
+    }
 
     const handleSubmit = () => {
-        if (history.length >= 3) {
+        if (questionCount >= 3) {
             alert("공식 질문은 최대 3번까지 가능합니다.");
             return;
         }
 
-        alert(`${selectedPlayer.name}에게\n\n${question}`);
+        const newQuestion = {
+            id: Date.now(),
+            player: selectedPlayer.character.name,
+            question,
+            answer: null
+        }
 
-        setAnswer({
-            player: selectedPlayer.name,
-            question
-        });
-    };
+        setHistory([...history, newQuestion])
+
+        setAnswer(newQuestion)
+        // setAnswer({
+        //     player: selectedPlayer.character.name,
+        //     question
+        // })
+    }
 
     return (
         <section className="question-form">
@@ -89,16 +96,15 @@ function QuestionForm({
             <h2 className="question-title">공식 질문 작성</h2>
 
             <div className="question-card">
-
                 <div className="form-group">
                     <label>질문 대상</label>
 
                     <div className="selected-player">
                         <div className="player-avatar">
-                            {selectedPlayer.name[0]}
+                            {selectedPlayer.character.name[0]}
                         </div>
 
-                        <span>{selectedPlayer.name}</span>
+                        <span>{selectedPlayer.character.name}</span>
                     </div>
                 </div>
 
@@ -130,14 +136,16 @@ function QuestionForm({
                 <button
                     className="submit-question"
                     onClick={handleSubmit}
-                    disabled={history.length >= 3}
+                    disabled={
+                        !selectedPlayer ||
+                        questionCount >= 3
+                    }
                 >
-                    {history.length >= 3 ? "질문 종료" : "질문 보내기"}
+                    {questionCount >= 3 ? "질문 종료" : "질문 보내기"}
                 </button>
-
             </div>
         </section>
-    );
+    )
 }
 
-export default QuestionForm;
+export default QuestionForm

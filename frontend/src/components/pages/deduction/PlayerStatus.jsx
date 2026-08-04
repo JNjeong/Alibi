@@ -6,20 +6,15 @@ function PlayerStatus({
 }) {
     return (
         <div className={`player-status ${isMe ? "me" : ""}`}>
-
             <div className="player-left">
-
                 <div className="player-avatar">
                     {name[0]}
                 </div>
-
                 <div className="player-info">
-
                     <h4>
                         {name}
                         {isMe && " (나)"}
                     </h4>
-
                     {isMe ? (
                         <p>모두 제출하면 공개</p>
                     ) : (
@@ -27,19 +22,15 @@ function PlayerStatus({
                             {status}
                         </p>
                     )}
-
                 </div>
-
             </div>
-
-            {isMe && (
+            {isMe && progress && (
                 <div className="player-progress">
                     {progress}
                 </div>
             )}
-
         </div>
-    );
+    )
 }
 
-export default PlayerStatus;
+export default PlayerStatus
