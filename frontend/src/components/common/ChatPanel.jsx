@@ -36,7 +36,7 @@ function ChatPanel({
           <h3>자유 채팅</h3>
           <span className="online-count">
             <i />
-            10명 접속
+            {game.players.length}명 접속
           </span>
         </div>
         <span>실시간</span>
