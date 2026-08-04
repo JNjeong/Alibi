@@ -27,14 +27,19 @@ const LoginPage = () => {
         try {
             const result = await login(form)
 
-            setToken(result.token)      // 1.토큰 저장
+            // 1. 토큰 저장
+            setToken(result.token)
 
-            const user = await getMe()  // 2.사용자 정보 조회
+            // 2. 사용자 정보 조회
+            const user = await getMe()
 
-            setUser(user)               // 3.Store에 사용자 저장
+            // 3. Store에 사용자 저장
+            setUser(user)
 
             alert("로그인 성공!")
-            
+
+            // 4. 로비 페이지로 이동
+            navigate("/lobby")
 
         } catch (error) {
             alert(
@@ -45,70 +50,63 @@ const LoginPage = () => {
     }
 
     return (
-    <div className={styles.page}>
+        <div className={styles.page}>
+            <h1 className={styles.logo}>
+                ALIBI
+            </h1>
 
-        <h1 className={styles.logo}>
-            ALIBI
-        </h1>
+            <p className={styles.subtitle}>
+                언제나 진실은 하나
+            </p>
 
-        <p className={styles.subtitle}>
-            언제나 진실은 하나
-        </p>
-
-        <div className={styles.card}>
-
-            <h2 className={styles.title}>
-                로그인
-            </h2>
-
-            <form
-                className={styles.form}
-                onSubmit={handleSubmit}
-            >
-
-                <input
-                    className={styles.input}
-                    name="username"
-                    placeholder="아이디"
-                    value={form.username}
-                    onChange={handleChange}
-                />
-
-                <input
-                    className={styles.input}
-                    type="password"
-                    name="password"
-                    placeholder="비밀번호"
-                    value={form.password}
-                    onChange={handleChange}
-                />
-
-                <button
-                    className={styles.loginButton}
-                    type="submit"
-                >
+            <div className={styles.card}>
+                <h2 className={styles.title}>
                     로그인
-                </button>
+                </h2>
 
-            </form>
-
-            <div className={styles.signupArea}>
-
-                계정이 없으신가요?
-
-                <button
-                    className={styles.signupButton}
-                    onClick={() => navigate("/signup")}
+                <form
+                    className={styles.form}
+                    onSubmit={handleSubmit}
                 >
-                    회원가입
-                </button>
+                    <input
+                        className={styles.input}
+                        name="username"
+                        placeholder="아이디"
+                        value={form.username}
+                        onChange={handleChange}
+                    />
 
+                    <input
+                        className={styles.input}
+                        type="password"
+                        name="password"
+                        placeholder="비밀번호"
+                        value={form.password}
+                        onChange={handleChange}
+                    />
+
+                    <button
+                        className={styles.loginButton}
+                        type="submit"
+                    >
+                        로그인
+                    </button>
+                </form>
+
+                <div className={styles.signupArea}>
+                    계정이 없으신가요?
+
+                    <button
+                        className={styles.signupButton}
+                        type="button"
+                        onClick={() => navigate("/signup")}
+                    >
+                        회원가입
+                    </button>
+                </div>
             </div>
-
         </div>
-
-    </div>
-);
+    )
 }
 
 export default LoginPage;

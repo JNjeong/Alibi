@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../../../api/axios"
+import { sendFriendRequest,getSentFriendRequests } from "../../../api/friend_api"
 import styles from "./UserList.module.css"
 
 function UserList() {
@@ -10,6 +11,14 @@ function UserList() {
   const [isSearchResult, setIsSearchResult] = useState(false)
 
   const [isOpen, setIsOpen] = useState(true)
+  // 친구 요청을 보내는 중인 사용자 아이디
+  const [sendingUsername, setSendingUsername] = useState("")
+
+  // 친구 요청을 하면 친구 요청 버튼이 비활성화되도록 상태를 관리
+  const [requestedUsernames, setRequestedUsernames] = useState([])
+
+  
+
 
   // 백엔드 응답이 배열이거나 { users: [] }인 경우 모두 처리
   const getUserArray = (data) => {
@@ -38,8 +47,24 @@ function UserList() {
     }
   }
 
+  // 내가 이미 보낸 친구 요청 목록 조회
+const fetchSentFriendRequests = async () => {
+  try {
+    const data = await getSentFriendRequests()
+
+    const usernames = (data.sentRequests || [])
+      .map((request) => request.receiver?.username)
+      .filter(Boolean)
+
+    setRequestedUsernames(usernames)
+  } catch (error) {
+    console.error("보낸 친구 요청 목록 조회 실패:", error)
+  }
+}
+
   useEffect(() => {
     fetchAllUsers()
+    fetchSentFriendRequests()
   }, [])
 
   // 사용자 검색
@@ -77,6 +102,40 @@ function UserList() {
       setLoading(false)
     }
   }
+
+  // 친구 요청 보내기
+const handleSendFriendRequest = async (username) => {
+  if (!username) {
+    alert("친구 요청 대상의 ID가 없습니다.")
+    return
+  }
+
+  try {
+    setSendingUsername(username)
+
+    const data = await sendFriendRequest(username)
+
+    setRequestedUsernames((prev) => {
+      if (prev.includes(username)) {
+        return prev
+      }
+
+      return [...prev, username]
+    })
+
+    alert(data.message || "친구 요청을 보냈습니다.")
+  } catch (error) {
+    console.error("친구 요청 보내기 실패:", error)
+
+    alert(
+      error.response?.data?.message ||
+        "친구 요청을 보내지 못했습니다."
+    )
+  } finally {
+    setSendingUsername("")
+  }
+}
+
 
   // 검색 초기화
   const handleReset = () => {
@@ -187,6 +246,8 @@ function UserList() {
                   user.username?.trim().charAt(0) ||
                   "?"
 
+                const isRequested = requestedUsernames.includes(user.username)
+
                 return (
                   <article
                     className={styles["member-card"]}
@@ -220,20 +281,21 @@ function UserList() {
                       </span>
                     </div>
 
-                    <button
-                      type="button"
-                      className={
-                        styles["member-friend-button"]
-                      }
-                      onClick={() => {
-                        console.log(
-                          "친구 추가 대상:",
-                          user._id
-                        )
-                      }}
-                    >
-                      + 친구 추가
-                    </button>
+                <button
+                  type="button"
+                  className={styles["member-friend-button"]}
+                  onClick={() => handleSendFriendRequest(user.username)}
+                  disabled={
+                    sendingUsername === user.username ||
+                    isRequested
+                  }
+                >
+                  {sendingUsername === user.username
+                    ? "요청 중..."
+                    : isRequested
+                      ? "요청 보냄"
+                      : "+ 친구 추가"}
+                </button>
                   </article>
                 )
               })}

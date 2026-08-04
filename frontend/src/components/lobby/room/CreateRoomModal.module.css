@@ -404,3 +404,147 @@
     width: 100%;
   }
 }
+
+
+.friendSection {
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #303043;
+  border-radius: 16px;
+  background: #171722;
+}
+
+.friendSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.friendSectionTitle {
+  color: #f4f4f8;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.friendCount {
+  color: #8b8b9c;
+  font-size: 13px;
+}
+
+.friendList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.friendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid #2b2b3c;
+  border-radius: 12px;
+  background: #1d1d29;
+}
+
+.friendProfile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.friendAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(33, 230, 168, 0.35);
+  border-radius: 50%;
+  color: #21e6a8;
+  font-size: 14px;
+  font-weight: 700;
+  background: rgba(33, 230, 168, 0.1);
+}
+
+.friendText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.friendName {
+  overflow: hidden;
+  color: #f5f5f8;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friendIntro {
+  max-width: 260px;
+  overflow: hidden;
+  color: #858596;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inviteLabel {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #f3c451;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(243, 196, 81, 0.1);
+}
+
+.friendMessage {
+  margin: 0;
+  padding: 16px 0;
+  color: #89899a;
+  font-size: 13px;
+  text-align: center;
+}
+
+.friendError {
+  margin: 0;
+  padding: 16px 0;
+  color: #ff6b72;
+  font-size: 13px;
+  text-align: center;
+}
+
+.inviteLabel {
+  flex-shrink: 0;
+  padding: 6px 10px;
+
+  color: #f3c451;
+  background: rgba(243, 196, 81, 0.1);
+
+  border: none;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.inviteLabel:disabled {
+  cursor: default;
+  opacity: 1;
+}

@@ -1,5 +1,58 @@
 import { useEffect, useState } from "react"
 import styles from "./CreateRoomModal.module.css"
+import api from "../../../api/axios"
+
+const getCurrentUserKeys = () => {
+  const keys = new Set()
+
+  // localStorage에 저장된 사용자 정보
+  const localStorageKeys = [
+    localStorage.getItem("userId"),
+    localStorage.getItem("_id"),
+    localStorage.getItem("username"),
+    localStorage.getItem("id")
+  ]
+
+  localStorageKeys
+    .filter(Boolean)
+    .forEach((value) => keys.add(String(value)))
+
+  // JWT 안에 들어 있는 사용자 정보
+  const token = localStorage.getItem("token")
+
+  if (token) {
+    try {
+      const payloadPart = token.split(".")[1]
+
+      const base64 = payloadPart
+        .replace(/-/g, "+")
+        .replace(/_/g, "/")
+
+      const paddedBase64 = base64.padEnd(
+        Math.ceil(base64.length / 4) * 4,
+        "="
+      )
+
+      const payload = JSON.parse(atob(paddedBase64))
+
+      const tokenKeys = [
+        payload.userId,
+        payload._id,
+        payload.username,
+        payload.id,
+        payload.sub
+      ]
+
+      tokenKeys
+        .filter(Boolean)
+        .forEach((value) => keys.add(String(value)))
+    } catch (error) {
+      console.warn("JWT 사용자 정보 확인 실패:", error)
+    }
+  }
+
+  return keys
+}
 
 function CreateRoomModal({
   open,
@@ -12,6 +65,10 @@ function CreateRoomModal({
 }) {
   const [title, setTitle] = useState("")
   const [localError, setLocalError] = useState("")
+  const [friends, setFriends] = useState([])
+  const [friendsLoading, setFriendsLoading] = useState(false)
+  const [friendsError,setFriendsError] = useState("")
+
 
   useEffect(() => {
     if (open) {
@@ -19,6 +76,116 @@ function CreateRoomModal({
       setLocalError("")
     }
   }, [open])
+
+ useEffect(() => {
+  if (!open || !room) {
+    return
+  }
+
+  const fetchFriends = async () => {
+    try {
+      setFriendsLoading(true)
+      setFriendsError("")
+
+      const response = await api.get("/friends")
+
+      const friendships =
+        response.data?.friends ??
+        response.data ??
+        []
+
+      if (!Array.isArray(friendships)) {
+        setFriends([])
+        setFriendsError(
+          "친구 목록 응답 형식이 올바르지 않습니다."
+        )
+        return
+      }
+
+      const currentUserKeys = getCurrentUserKeys()
+
+      console.log(
+        "현재 로그인 사용자 식별값:",
+        [...currentUserKeys]
+      )
+
+      const normalizedFriends = friendships
+        .filter(
+          (friendship) =>
+            friendship.status === "accepted"
+        )
+        .map((friendship) => {
+          const requester = friendship.requester
+          const receiver = friendship.receiver
+
+          const requesterIsMe = [
+            requester?._id,
+            requester?.username
+          ]
+            .filter(Boolean)
+            .some((value) =>
+              currentUserKeys.has(String(value))
+            )
+
+          const receiverIsMe = [
+            receiver?._id,
+            receiver?.username
+          ]
+            .filter(Boolean)
+            .some((value) =>
+              currentUserKeys.has(String(value))
+            )
+
+          let friendUser = null
+
+          if (requesterIsMe) {
+            friendUser = receiver
+          } else if (receiverIsMe) {
+            friendUser = requester
+          } else {
+            console.warn(
+              "현재 사용자와 일치하지 않는 친구 관계:",
+              friendship
+            )
+
+            return null
+          }
+
+          return {
+            friendshipId: friendship._id,
+            userId: friendUser?._id,
+            username: friendUser?.username,
+            nickname: friendUser?.nickname
+          }
+        })
+        .filter(
+          (friend) =>
+            friend !== null && friend.userId
+        )
+
+      console.log(
+        "화면 출력용 친구 목록:",
+        normalizedFriends
+      )
+
+      setFriends(normalizedFriends)
+    } catch (error) {
+      console.error("친구 목록 조회 실패:", error)
+      console.log("상태 코드:", error.response?.status)
+      console.log("서버 응답:", error.response?.data)
+
+      setFriends([])
+      setFriendsError(
+        error.response?.data?.message ||
+          "친구 목록을 불러오지 못했습니다."
+      )
+    } finally {
+      setFriendsLoading(false)
+    }
+  }
+
+  fetchFriends()
+}, [open, room]) 
 
   if (!open) {
     return null
@@ -108,7 +275,89 @@ function CreateRoomModal({
                 {room.inviteCode}
               </div>
             </div>
+              <div className={styles.friendSection}>
+  <div className={styles.friendSectionHeader}>
+    <span className={styles.friendSectionTitle}>
+      친구 초대
+    </span>
 
+    {!friendsLoading && (
+      <span className={styles.friendCount}>
+        {friends.length}명
+      </span>
+    )}
+  </div>
+
+  {friendsLoading && (
+    <p className={styles.friendMessage}>
+      친구 목록을 불러오는 중입니다.
+    </p>
+  )}
+
+  {!friendsLoading && friendsError && (
+    <p className={styles.friendError}>
+      {friendsError}
+    </p>
+  )}
+
+  {!friendsLoading &&
+    !friendsError &&
+    friends.length === 0 && (
+      <p className={styles.friendMessage}>
+        초대할 수 있는 친구가 없습니다.
+      </p>
+    )}
+
+  {!friendsLoading &&
+    !friendsError &&
+    friends.length > 0 && (
+      <div className={styles.friendList}>
+        <div className={styles.friendList}>
+  {friends.map((friend) => {
+    const displayName =
+      friend.nickname ||
+      friend.username
+
+    return (
+      <div
+        key={friend.friendshipId}
+        className={styles.friendItem}
+      >
+        <div className={styles.friendProfile}>
+          <div className={styles.friendAvatar}>
+            {displayName
+              ?.slice(0, 1)
+              .toUpperCase()}
+          </div>
+
+          <div className={styles.friendText}>
+            <strong className={styles.friendName}>
+              {displayName}
+            </strong>
+
+            {friend.username && (
+              <span className={styles.friendIntro}>
+                @{friend.username}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className={styles.inviteLabel}
+          disabled
+          title="초대 기능은 추후 연결 예정입니다."
+        >
+          초대
+        </button>
+      </div>
+    )
+  })}
+</div>
+      </div>
+    )}
+</div>
             <button
               type="button"
               className={styles.moveButton}

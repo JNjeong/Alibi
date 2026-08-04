@@ -63,7 +63,7 @@
   font-weight: 700;
 }
 
-.avatar {
+/* .avatar {
   width: 38px;
   height: 38px;
   flex-shrink: 0;
@@ -88,7 +88,7 @@
   box-shadow:
     0 8px 20px rgb(201 31 41 / 20%),
     inset 0 1px 0 rgb(255 255 255 / 18%);
-}
+} */
 
 .userButton {
   height: 40px;
@@ -133,7 +133,7 @@
   margin: 0 5px;
 }
 
-.logoutButton {
+/* .logoutButton {
   width: 40px;
   height: 40px;
   padding: 0;
@@ -170,7 +170,7 @@
 .userButton:focus-visible {
   outline: 3px solid rgb(209 38 47 / 20%);
   outline-offset: 2px;
-}
+} */
 
 @media (max-width: 700px) {
   .header {
@@ -214,4 +214,53 @@
     width: 35px;
     height: 35px;
   }
+}
+
+
+/* 마이페이지 CSS */
+.profileMenu {
+  position: relative;
+}
+
+.dropdown{
+  position: absolute;
+
+  top: calc(100% + 8px);
+  right: 0;
+
+  width: 220px;
+
+  padding: 16px;
+  background-color: #141420;
+
+  border: 1px solid #262638;
+  border-radius: 12px;
+}
+
+.dropdownItem {
+  width: 100%;
+
+    padding: 12px;
+
+    display: flex;
+    align-items: center;
+
+    background: transparent;
+
+    border: none;
+    border-radius: 8px;
+
+    color: #d4d4dd;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.dropdownItem:hover {
+    background: #1b1b2b;
+    color: white;
 }

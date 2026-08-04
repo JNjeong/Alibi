@@ -9,9 +9,10 @@ const PublicRoute = ({ children }) => {
     const user = useAuthStore((state) => state.user)
 
     if (isAuthenticated) {
-        if(user?.role === "admin") {
-        return <Navigate to="/admin" replace />
-    }
+        if (user?.role === "admin") {
+            return <Navigate to="/admin" replace />
+        }
+
         return <Navigate to="/lobby" replace />
     }
 

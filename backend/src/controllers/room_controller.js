@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 import Room from "../models/Room.js"
-import User from "../user/User.js"
+import User from "../models/User.js"
 
 const generateInviteCode = () => { // 무작위 코드 생성하기 
   const characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"

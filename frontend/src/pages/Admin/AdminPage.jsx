@@ -4,14 +4,27 @@ import AdminSidebar from "../../components/admin/AdminSidebar"
 import Dashboard from "../../components/admin/Dashboard"
 import UserManagement from "../../components/admin/UserManagement"
 import GameManagement from "../../components/admin/GameManagement"
-import LogManagement from "../../components/admin/LogManagement"
-import styles from "./AdminPage.module.css";
+import LogManagement from "../../components/admin/LogPage"
+import styles from "./AdminPage.module.css"
+
+import {
+    PanelGroup,
+    Panel,
+    PanelResizeHandle,
+} from "react-resizable-panels";
 
 const AdminPage = () => {
     const user = useAuthStore((state) => state.user)
 
     const [menu, setMenu] = useState("dashboard")
+    // const [search, setSearch] = useState("")    // 회원 조회
 
+    const logout = useAuthStore((state) => state.logout)
+    const handleLogout = () => {
+    logout()
+    navigate("/", { replace: true })
+    }
+    
     return (
         <>
             <div className={styles.page}>
@@ -22,23 +35,51 @@ const AdminPage = () => {
                     ALIBI Administration
                 </p>
 
-                <div className={styles.container}>
+                <button
+                    type="button"
+                    className={styles.logoutButton}
+                    onClick={handleLogout}
+                    aria-label="로그아웃"
+                    title="로그아웃"
+                    >
+                    ↪
+                </button>
 
-                    <aside className={styles.sidebar}>
-                        <AdminSidebar
-                            menu={menu}
-                            setMenu={setMenu}
-                        />
-                    </aside>
+                <PanelGroup
+                    direction="horizontal"
+                    autoSaveId="admin-layout"
+                    className={styles.container}
+                >
 
-                    <main className={styles.content}>
-                        {menu === "dashboard" && <Dashboard />}
-                        {menu === "users" && <UserManagement />}
-                        {menu === "games" && <GameManagement />}
-                        {menu === "logs" && <LogManagement />}
-                    </main>
+                    <Panel
+                        defaultSize={18}
+                        minSize={15}
+                        maxSize={28}
+                    >
 
-                </div>
+                        <aside className={styles.sidebar}>
+                            <AdminSidebar
+                                menu={menu}
+                                setMenu={setMenu}
+                            />
+                        </aside>
+
+                    </Panel>
+
+                    <PanelResizeHandle className={styles.resizeHandle} />
+
+                    <Panel>
+
+                        <main className={styles.content}>
+                            {menu === "dashboard" && <Dashboard />}
+                            {menu === "users" && <UserManagement />}
+                            {menu === "games" && <GameManagement />}
+                            {menu === "logs" && <LogManagement />}
+                        </main>
+
+                    </Panel>
+
+                </PanelGroup>
 
             </div>
         </>

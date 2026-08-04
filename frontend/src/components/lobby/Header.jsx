@@ -1,9 +1,14 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuthStore from "../../store/authStore"
 import styles from "./Header.module.css"
+import Avatar from "../common/Avatar/Avatar"
 
 function Header() {
   const navigate = useNavigate()
+
+  // 마이페이지 프로필 드롭다운 설정
+  const [isOpen, setIsOpen] = useState(false)
 
   const user = useAuthStore((state) => state.user)
   const logout = useAuthStore((state) => state.logout)
@@ -41,34 +46,63 @@ function Header() {
         </span>
       </div>
 
+      
+
       <div className={styles.right}>
-        <div
+
+        <Avatar
+          user={user}
+          size={42}
+        />
+        {/* <div
           className={styles.avatar}
           aria-hidden="true"
         >
           {avatarText}
+        </div> */}
+
+        <div className={styles.profileMenu}>
+
+            <button
+              type="button"
+              className={styles.userButton}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+            <span>{displayName}</span>
+
+            <span
+              className={styles.chevron}
+              aria-hidden="true"
+            >
+              ⌄
+            </span>
+          </button>
+
+          {isOpen && (
+              <div className={styles.dropdown}>
+
+                <button
+                  className={styles.dropdownItem}
+                  onClick={() => navigate("/mypage")}>
+                    👤 마이페이지
+                </button>
+
+                <button
+                  className={styles.dropdownItem}
+                  onClick={handleLogout}>
+                    🚪 로그아웃
+                </button>
+                
+              </div>
+            )}
         </div>
-
-        <button
-          type="button"
-          className={styles.userButton}
-        >
-          <span>{displayName}</span>
-
-          <span
-            className={styles.chevron}
-            aria-hidden="true"
-          >
-            ⌄
-          </span>
-        </button>
 
         <span
           className={`${styles.divider} ${styles.rightDivider}`}
           aria-hidden="true"
         />
 
-        <button
+        {/* <button
           type="button"
           className={styles.logoutButton}
           onClick={handleLogout}
@@ -76,7 +110,7 @@ function Header() {
           title="로그아웃"
         >
           ↪
-        </button>
+        </button> */}
       </div>
     </header>
   )

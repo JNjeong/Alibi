@@ -13,7 +13,7 @@ const authMiddleware = (req, res, next) => {
 
         // Bearer 제거 후 토큰만 추출
         const token = authHeader.split(" ")[1]
-        
+
         // JWT 검증
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
@@ -24,6 +24,7 @@ const authMiddleware = (req, res, next) => {
     } catch (error) {
         return res.status(401).json({
             message: "유효하지 않은 토큰입니다.",
+            message: error.message,
         });
     }
 };
