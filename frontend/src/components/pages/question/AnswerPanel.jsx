@@ -1,5 +1,4 @@
 // 공식 답변 출력
-
 import "./question.css";
 
 function AnswerPanel({
@@ -22,16 +21,14 @@ function AnswerPanel({
     }
 
     const handleAnswer = (result) => {
-        setHistory([
-            ...history,
-            {
-                id: Date.now(),
-                player: answer.player,
-                question: answer.question,
-                answer: result
-            }
-        ]);
-        setAnswer(null);
+        setHistory(
+            history.map(item =>
+                item.id === answer.id
+                    ? { ...item, answer: result }
+                    : item
+            )
+        )
+        setAnswer(null)
     }
 
     return (
@@ -65,7 +62,7 @@ function AnswerPanel({
                 </div>
             </div>
         </aside>
-    );
+    )
 }
 
-export default AnswerPanel;
+export default AnswerPanel

@@ -1,32 +1,23 @@
-function StatementBlock({ statement, onChange, onDelete }) {
+import mockGame from "../../../data/mockgame"
 
-    const players = [
-        "에드워드",
-        "에밀리",
-        "제임스",
-        "빅토리아",
-        "헨리",
-        "소피아",
-        "루카스",
-        "샬럿"
-    ];
+function StatementBlock({ statement, index, onChange, onDelete }) {
+    const players = mockGame.characterPool.map(
+        (character) => character.name
+    )
+    const tools = mockGame.toolPool.map(
+        (tool) => tool.name
+    )
+    const places = mockGame.places.map(
+        (place) => place.name
+    )
+    const times = mockGame.timeSlots.map(
+        (time) => time.label
+    )
 
-    const tools = [
-        "열쇠",
-        "촛대",
-        "손전등",
-        "편지",
-        "유언장",
-        "독약",
-        "권총",
-        "단검"
-    ];
     return (
         <div className="statement-block">
-
             <div className="block-header">
-                <h3>행적 #{statement.id}</h3>
-
+                <h3>행적 #{index + 1}</h3>
                 <button
                     className="delete-btn"
                     onClick={() => onDelete(statement.id)}
@@ -36,27 +27,38 @@ function StatementBlock({ statement, onChange, onDelete }) {
             </div>
 
             <div className="statement-grid">
-
                 <div className="input-group">
                     <label>시작 시간</label>
-                    <input
-                        type="time"
+                    <select
                         value={statement.start}
                         onChange={(e) =>
                             onChange(statement.id, "start", e.target.value)
                         }
-                    />
+                    >
+                        <option value="">선택</option>
+                        {times.map((time) => (
+                            <option key={time} value={time}>
+                                {time}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 <div className="input-group">
                     <label>종료 시간</label>
-                    <input
-                        type="time"
+                    <select
                         value={statement.end}
                         onChange={(e) =>
                             onChange(statement.id, "end", e.target.value)
                         }
-                    />
+                    >
+                        <option value="">선택</option>
+                        {times.map((time) => (
+                            <option key={time} value={time}>
+                                {time}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 <div className="input-group">
@@ -68,13 +70,12 @@ function StatementBlock({ statement, onChange, onDelete }) {
                         }
                     >
                         <option value="">선택</option>
-                        <option>응접실</option>
-                        <option>서재</option>
-                        <option>식당</option>
-                        <option>주방</option>
-                        <option>온실</option>
-                        <option>복도</option>
-                        <option>창고</option>
+
+                        {places.map((place) => (
+                            <option key={place} value={place}>
+                                {place}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
@@ -124,7 +125,6 @@ function StatementBlock({ statement, onChange, onDelete }) {
                     }
                 />
             </div>
-
         </div>
     )
 }

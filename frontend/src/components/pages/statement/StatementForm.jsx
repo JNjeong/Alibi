@@ -6,8 +6,8 @@ function StatementForm() {
     const [statements, setStatements] = useState([
         {
             id: 1,
-            startTime: "",
-            endTime: "",
+            start: "",
+            end: "",
             place: "",
             companion: "",
             tool: "",
@@ -22,14 +22,21 @@ function StatementForm() {
                     ? { ...statement, [field]: value }
                     : statement
             )
-        );
-    };
+        )
+    }
+
+    const handleSubmit = () => {
+        if (!validation.submit) return
+
+        alert("공식 진술이 제출되었습니다.")
+    }
 
     const addStatement = () => {
+        if (statements.length >= 6) return
         setStatements([
             ...statements,
             {
-                id: statements.length + 1,
+                id: Date.now(),
                 start: "",
                 end: "",
                 place: "",
@@ -37,14 +44,14 @@ function StatementForm() {
                 tool: "",
                 memo: ""
             }
-        ]);
-    };
+        ])
+    }
 
     const deleteStatement = (id) => {
         setStatements(
             statements.filter(statement => statement.id !== id)
-        );
-    };
+        )
+    }
 
     // 알리바이 진술 검증
     const validation = {
@@ -67,12 +74,12 @@ function StatementForm() {
         ),
 
         submit: false
-    };
+    }
 
     validation.submit =
         validation.required &&
         validation.timeOrder &&
-        validation.overlap;
+        validation.overlap
 
     return (
         <section className="statement-form">
@@ -92,8 +99,13 @@ function StatementForm() {
                 </div>
 
                 <div className="statement-status">
-                    <span className="status success">
-                        구간 검증 통과
+                    <span
+                        className={`status ${validation.submit
+                            ? "success" : "error"}`}
+                    >
+                        {validation.submit
+                            ? "구간 검증 통과"
+                            : "입력 확인 필요"}
                     </span>
 
                     <span className="progress">
@@ -103,9 +115,10 @@ function StatementForm() {
             </div>
 
             <div className="statement-list">
-                {statements.map(statement => (
+                {statements.map((statement, index) => (
                     <StatementBlock
                         key={statement.id}
+                        index={index}
                         statement={statement}
                         onChange={handleChange}
                         onDelete={deleteStatement}
@@ -120,19 +133,21 @@ function StatementForm() {
                 + 행적 블록 추가
             </button>
 
-            {/* <div className="statement-actions">
-                <button className="save-btn">
+            <div className="statement-actions">
+                {/* <button className="save-btn">
                     임시 저장
-                </button>
+                </button> */}
 
-                <button className="submit-btn">
+                <button
+                    className="submit-btn"
+                    onClick={handleSubmit}
+                    disabled={!validation.submit}
+                >
                     공식 진술 제출
                 </button>
-            </div> */}
+            </div>
         </section>
-
     )
-
 }
 
 export default StatementForm

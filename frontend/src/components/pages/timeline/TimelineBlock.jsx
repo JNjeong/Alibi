@@ -1,59 +1,153 @@
 import "./timeline.css"
-import EventCard from "./EventCard";
+import EventCard from "./EventCard"
+import mockGame from "../../../data/mockgame"
 
 function TimelineBlock() {
-    const timeline = [ // length: 타임라인바 비율
-        { room: "응접실", color: "gray", length: 1 },
-        { room: "서재", color: "red", length: 2 },
-        { room: "온실", color: "green", length: 1 },
-        { room: "서재", color: "red", length: 2 },
-        { room: "복도", color: "gray", length: 1 },
-        { room: "창고", color: "dark", length: 1 }
-    ];
+    const me = mockGame.players.find(player => player.isMe)
 
-    const events = [
-        {
-            id: 1,
-            time: "15:30 ~ 15:50",
-            place: "서재",
-            color: "red",
-            text: "유언장 초본을 확인하고 문서를 정리했다."
-        },
-        {
-            id: 2,
-            time: "16:10 ~ 16:30",
-            place: "응접실",
-            color: "gray",
-            text: "피해자와 대화를 나누었다."
-        },
-        {
-            id: 3,
-            time: "17:00 ~ 17:20",
-            place: "온실",
-            color: "green",
-            text: "혼자 온실을 둘러보았다."
-        },
-        {
-            id: 4,
-            time: "18:20 ~ 18:40",
-            place: "복도",
-            color: "dark",
-            text: "누군가와 스쳐 지나갔다."
+    const placeColors = {
+        map_ReceptionRoom: "gray",
+        map_Study: "red",
+        map_Greenhouse: "green",
+        map_Hallway: "blue",
+        map_DiningRoom: "orange",
+        map_Kitchen: "green",
+        map_GrandHall: "purple",
+        map_Ballroom: "purple",
+        map_BiliardRoom: "blue",
+        map_MasterBedroom: "red",
+        map_GuestRoom: "gray",
+        map_WineCellar: "brown",
+    }
+
+    const slotData = mockGame.timeSlots.map(slot => {
+        const timeline = me.timeline.find(
+            item => item.timeId === slot.id
+        )
+
+        if (!timeline) {
+            return {
+                time: slot.label,
+                empty: true
+            }
         }
-    ];
+
+        const place = mockGame.places.find(
+            p => p.id === timeline.placeId
+        )
+
+        const tool = mockGame.toolPool.find(
+            t => t.id === timeline.toolId
+        )
+
+        const companion = mockGame.players.find(
+            p => p.character.id === timeline.companionId
+        )
+
+        return {
+            empty: false,
+            time: slot.label,
+            place: place?.shortName,
+            color: placeColors[timeline.placeId],
+            tool: tool?.name ?? "도구 X",
+            companion:
+                companion?.character.name ??
+                "동행인 X",
+        }
+    })
+
+    const timeline = []
+
+
+    me.timeline.forEach(item => {
+        const currentTime = mockGame.timeSlots.find(
+            t => t.id === item.timeId
+        )?.label
+
+        const place = mockGame.places.find(
+            p => p.id === item.placeId
+        )
+
+        const tool = mockGame.toolPool.find(
+            t => t.id === item.toolId
+        )
+
+        const companion = item.companionIds
+            .map(id => {
+                const player = mockGame.players.find(
+                    p => p.id === id
+                )
+                return player?.character.name
+            })
+            .filter(Boolean)
+            .join(", ")
+
+        const last = timeline[timeline.length - 1]
+
+        // 같은 장소면 합치기
+        if (
+            last &&
+            last.room === place?.shortName &&
+            last.tool === (tool?.name ?? "도구 X") &&
+            last.companion === (companion || "동행인 X")
+        ) {
+            last.length += 1
+            last.end = currentTime
+        }
+        else {
+            timeline.push({
+                room: place?.shortName ?? "",
+                color: placeColors[item.placeId] ?? "gray",
+                tool: tool?.name ?? "도구 X",
+                companion: companion || "동행인 X",
+                start: currentTime,
+                end: currentTime,
+                length: 1,
+            })
+        }
+
+        return {
+            room: place?.shortName ?? "",
+            color: placeColors[item.placeId] ?? "gray",
+            length: 1,
+        }
+    })
+
+    const events = me.timeline
+        .filter(item => item.flags.length > 0)
+        .map(item => {
+            const place = mockGame.places.find(
+                p => p.id === item.placeId
+            )
+
+            const time = mockGame.timeSlots.find(
+                t => t.id === item.timeId
+            )
+
+            return {
+                id: item.timeId,
+                time: time?.label ?? "",
+                place: place?.name ?? "",
+                color: item.flags.includes("crime")
+                    ? "red"
+                    : "gray",
+                text: item.activity,
+            }
+        })
+
+    const hourLabels = mockGame.timeSlots.filter(slot =>
+        slot.label.endsWith(":00")
+    )
 
     return (
         <section className="timeline-panel">
-
             <span className="section-label">
                 YOUR TIMELINE
             </span>
-
             <div className="timeline-title-row">
-
                 <div>
                     <h2 className="section-title">
-                        개인 타임라인 : 15:00~21:00
+                        개인 타임라인 :  {mockGame.timeSlots[0].label} ~ {mockGame.timeSlots[mockGame.timeSlots.length - 1].label}
                     </h2>
                     <p className="timeline-desc">
                         서버에 저장된 실제 일정입니다.
@@ -66,13 +160,16 @@ function TimelineBlock() {
 
             <div className="timeline-scale">
                 <div className="time-labels">
-                    <span>15:00</span>
-                    <span>16:00</span>
-                    <span>17:00</span>
-                    <span>18:00</span>
-                    <span>19:00</span>
-                    <span>20:00</span>
-                    <span>21:00</span>
+                    {hourLabels.map(slot => (
+                        <span
+                            key={slot.id}
+                            style={{
+                                gridColumn: `span 3`
+                            }}
+                        >
+                            {slot.label}
+                        </span>
+                    ))}
                 </div>
 
                 <div className="timeline-track">
@@ -80,9 +177,24 @@ function TimelineBlock() {
                         <div
                             key={index}
                             className={`timeline-segment ${item.color}`}
-                            style={{ flex: item.length }}
+                            style={{
+                                gridColumn: `span ${item.length}`
+                            }}
                         >
-                            <span>{item.room}</span>
+                            <div className="timeline-room">
+                                {item.room}
+                            </div>
+                            <div className="timeline-time">
+                                {item.start} ~ {item.end}
+                            </div>
+
+                            <div className="timeline-tool">
+                                {item.tool}
+                            </div>
+
+                            <div className="timeline-companion">
+                                {item.companion}
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -98,7 +210,7 @@ function TimelineBlock() {
                 ))}
             </div>
         </section>
-    );
+    )
 }
 
-export default TimelineBlock;
+export default TimelineBlock

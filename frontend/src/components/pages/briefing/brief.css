@@ -36,7 +36,6 @@
 }
 .objective-title {
   color: #b52a2a;
-  /* font-size: 20px; */
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -64,7 +63,7 @@
 
 .objective ul {
   padding-left: 20px;
-}
+} 
 
 /* ===== LocationMap ===== */
 .location-map {
@@ -86,22 +85,22 @@
   gap: 20px;
 }
 
-.room-card {
-  height: 140px;
-  background: #161a27;
-  border: 1px solid #2c3446;
-  border-radius: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: 0.2s;
+.room-card{
+    height:170px;
+    background:#11131c;
+    border:1px solid #232735;
+    border-radius:18px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:.2s;
 }
 
-.room-card span {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 600;
+.room-card span{
+    color:#fff;
+    font-size:20px;
+    font-weight:700;
 }
 
 .room-card:hover {
@@ -109,6 +108,15 @@
   border-color: #7d9cff;
   background: #20263b;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.crime-room{
+    background:#221216;
+    border:1px solid #8b2323;
+}
+
+.crime-room span{
+    color:#d24747;
 }
 
 /* ===== button ===== */
