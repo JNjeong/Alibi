@@ -3,7 +3,6 @@ import "./statement.css"
 function LiveCheck({ validation }) {
     return (
         <aside className="live-check">
-
             <span className="section-label">
                 LIVE CHECK
             </span>
@@ -43,13 +42,12 @@ function LiveCheck({ validation }) {
                     게임 진행 중 수정할 수 없습니다.
                 </p>
             </div>
-            <button
+            {/* <button
                 className="submit-btn"
                 disabled={!validation.submit}
             >
                 공식 알리바이 진술 제출
-            </button>
-
+            </button> */}
         </aside>
     )
 }
@@ -63,13 +61,12 @@ function CheckItem({
     return (
         <div className={`check-item ${success ? "success" : "danger"}`}>
             <span>{success ? "✔" : "✖"}</span>
-
             <div>
                 <h4>{title}</h4>
                 <p>{success ? successText : failText}</p>
             </div>
         </div>
-    );
+    )
 }
 
 export default LiveCheck

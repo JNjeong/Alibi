@@ -10,14 +10,20 @@ function OfficialStatement() {
         timeOrder: true,
         overlap: true,
         submit: true
-    };
+    }
+    // const validation = {
+    //     required,
+    //     timeOrder,
+    //     overlap,
+    //     submit: required && timeOrder && overlap
+    // }
     return (
         <div className="official-statement">
             <StatementSidebar />
             <StatementForm />
             <LiveCheck validation={validation} />
         </div>
-    );
+    )
 }
 
-export default OfficialStatement;
+export default OfficialStatement

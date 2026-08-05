@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 import ChatRoom from "../models/ChatRoom.js"
 
 import Friendship from "../models/Friendship.js"
-import User from "../user/User.js"
+import User from "../models/User.js"
 
 
 // 두 사용자가 현재 친구 관계인지 확인하는 메서드

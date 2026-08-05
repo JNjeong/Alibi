@@ -133,29 +133,36 @@
 }
 
 .time-labels{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:10px;
+    display:grid;
+    grid-template-columns:repeat(18,1fr);
+    margin-bottom:12px;
+}
+
+.time-labels span{
+    text-align:left;
     color:#7c8499;
     font-size:12px;
 }
 
 .timeline-track{
-    display:flex;
-    height:58px;
-    overflow:hidden;
-    border-radius:12px;
+    display:grid;
+    grid-template-columns:repeat(18,1fr);
     border:1px solid #2d3144;
+    border-radius:12px;
+    overflow:hidden;
 }
 
 .timeline-segment{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    border-right:1px solid rgba(255,255,255,.08);
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    padding:10px 6px;
+
+    border-right:1px solid rgba(255,255,255,.12);
+
     color:#fff;
-    font-size:13px;
-    font-weight:600;
 }
 
 .timeline-segment:last-child{
@@ -171,11 +178,64 @@
 }
 
 .timeline-segment.green{
-    background:#2f6b4f;
+    background:#163527;
 }
 
 .timeline-segment.dark{
     background:#323232;
+}
+
+.timeline-segment.blue{
+    background:#263753;
+}
+
+.timeline-segment.orange{
+    background:#7b5929;
+}
+
+.timeline-segment.purple{
+    background:#3c3159;
+}
+
+.timeline-segment.brown{
+    background:#6c4c30;
+}
+
+.timeline-room{
+    font-size:16px;
+    font-weight:700;
+
+    text-align:center;
+
+    padding-bottom:8px;
+    padding-top:4px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.timeline-tool{
+    margin-top:4px;
+    width:80%;
+    align-self:center;
+}
+
+.timeline-companion{
+    margin-top:4px;
+}
+
+.timeline-tool,
+.timeline-companion{
+    width:100%;
+    text-align:center;
+    font-size:13px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.timeline-time{
+    font-size:11px;
+    color:#d6d6d6;
+    margin-top:4px;
 }
 
 /* ===== EventCard ===== */

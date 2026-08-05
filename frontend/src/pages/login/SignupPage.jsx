@@ -59,6 +59,8 @@ const SignupPage = () => {
                     className={styles.input}
                     name="username"
                     placeholder="아이디"
+                    value={form.username}
+                    onChange={handleChange}
                 />
 
                 <input
@@ -66,6 +68,8 @@ const SignupPage = () => {
                     type="password"
                     name="password"
                     placeholder="비밀번호"
+                    value={form.password}
+                    onChange={handleChange}
                 />
 
                 <input
@@ -73,12 +77,16 @@ const SignupPage = () => {
                     type="password"
                     name="confirmPassword"
                     placeholder="비밀번호 확인"
+                    value={form.confirmPassword}
+                    onChange={handleChange}
                 />
 
                 <input
                     className={styles.input}
                     name="nickname"
                     placeholder="닉네임"
+                    value={form.nickname}
+                    onChange={handleChange}
                 />
 
                 <button

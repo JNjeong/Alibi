@@ -33,7 +33,7 @@ function HistoryPanel({ history }) {
                 </div>
             )}
         </section>
-    );
+    )
 }
 
-export default HistoryPanel;
+export default HistoryPanel

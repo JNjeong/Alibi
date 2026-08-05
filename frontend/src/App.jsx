@@ -21,19 +21,27 @@ import OfficialStatement from "./components/pages/statement/OfficialStatement"
 import OfficialQuestion from "./components/pages/question/OfficialQuestion"
 import FinalDeduction from "./components/pages/deduction/FinalDeduction"
 
+// 메인 게임 페이지
+import MainGamePage from "./pages/game/MainGamePage"
+import { GameProvider } from "./game/GameContext"
+
 // 관리자 페이지
 import AdminRoute from "./components/Route/AdminRoute"
 import AdminPage from "./pages/Admin/AdminPage"
 
 import useAuthStore from "./store/authStore"
 
-import socket from "./socket/socket"
+import { getRoomSocket } from "./api/socket"
+
+// 마이페이지
+import MyPage from "./pages/login/MyPage";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth)
   const loading = useAuthStore((state) => state.loading)
+   const socket = getRoomSocket()
 
-  // 소켓 연결 
+  // 소켓 연결
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 
   useEffect(() => {
@@ -44,7 +52,7 @@ function App() {
     const handleConnect = () =>{
       console.log("프론트 소켓 연결 성공!")
     }
-    
+
     const handleDisconnect =()=>{
       console.log("프론트 소켓 연결 해제")
     }
@@ -52,6 +60,7 @@ function App() {
     const handleConnectError = (error) => {
       console.error("프론트 소켓 연결 에러:", error)
     }
+
 
     socket.on("connect", handleConnect)
     socket.on("disconnect", handleDisconnect)
@@ -139,6 +148,20 @@ useEffect(() => {
           }
         />
 
+        {/* 게임 */}
+        <Route
+          path="/game/:gameId"
+          element={
+            <ProtectedRoute>
+              <GameProvider>
+                <MainGamePage />
+              </GameProvider>
+            </ProtectedRoute>
+          }
+        />
+
+
+
         {/* 게임 결과 */}
         <Route
           path="/result/:roomId"
@@ -157,6 +180,15 @@ useEffect(() => {
               <AdminPage />
             </AdminRoute>
           }
+        />
+
+        {/* 마이 페이지 */}
+        <Route
+          path="/mypage"
+          element={
+            <ProtectedRoute>
+              <MyPage />
+            </ProtectedRoute>}
         />
       </Routes>
     </BrowserRouter>

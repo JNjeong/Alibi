@@ -1,8 +1,13 @@
 // 역할
-
 import "./timeline.css"
+import mockGame from "../../../data/mockgame"
 
 function RolePanel() {
+    // 나 찾기
+    const me = mockGame.players.find(player => player.isMe)
+    const isCriminal =
+        me.id === mockGame.solution.criminalId
+
     return (
         <aside className="role-panel">
             <span className="section-label">
@@ -10,25 +15,26 @@ function RolePanel() {
             </span>
 
             <div className="role-badges">
-                <span className="badge red">일반인</span>
-                <span className="badge">역할 07/20</span>
+                <span className={`badge ${isCriminal ? "danger" : "red"}`}>
+                    {isCriminal ? "범인" : "일반인"}
+                </span>
+                <span className="badge">역할 {me.character.id.slice(-2)}/{mockGame.characterPool.length}</span>
             </div>
 
             <div className="role-profile">
                 <div className="profile-circle">
-                    윤
+                    {me.character.name[0]}
                 </div>
-                <h2>윤서진</h2>
-                <p>유산관리 변호사</p>
+                <h2>{me.character.name}</h2>
+                <p>{me.character.occupation}</p>
             </div>
 
             <div className="info-card danger">
                 <span className="card-title">
-                    그를 알게 된 배경
+                    사건 배경
                 </span>
                 <p>
-                    유언장 위조 의혹이 제기되던 변호사.
-                    사건 당일에도 피해자와 접촉했다.
+                    {me.character.motive}
                 </p>
             </div>
 

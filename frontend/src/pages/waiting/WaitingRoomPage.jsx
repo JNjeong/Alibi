@@ -28,9 +28,18 @@ function WaitingRoomPage() {
     sendChat,
     setReady,
     startGame,
+    onGameStart,
     retryConnection,
     clearSocketError,
   } = useRoomSocket(roomId)
+
+  useEffect(() => {
+    return onGameStart(({ gameId }) => {
+      if (gameId) {
+        navigate(`/game/${gameId}`)
+      }
+    })
+  }, [navigate, onGameStart])
 
   useEffect(() => {
     let cancelled = false

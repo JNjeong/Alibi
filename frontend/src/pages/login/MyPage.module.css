@@ -1,0 +1,455 @@
+.page {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.title {
+    margin-bottom: 30px;
+
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.card {
+    margin-bottom: 24px;
+
+    padding: 24px;
+
+    background: #141420;
+
+    border: 1px solid #262638;
+    border-radius: 16px;
+}
+
+.card h2 {
+    margin-bottom: 20px;
+
+    color: white;
+}
+
+.card p {
+    margin: 10px 0;
+
+    color: #d4d4dd;
+}
+
+.editButton {
+    margin-top: 20px;
+
+    padding: 10px 18px;
+
+    background: #d82731;
+
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+
+    cursor: pointer;
+
+    display: block;
+    margin-left: auto;
+}
+
+.editButton:hover {
+    background: #b51f29;
+}
+
+.profileInfo {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #d82731,
+        #8d1820
+    );
+
+    color: white;
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.userInfo h3 {
+    margin: 0;
+
+    color: white;
+    font-size: 22px;
+}
+
+.userInfo p {
+    margin-top: 6px;
+
+    color: #9fa4b3;
+}
+
+.statsGrid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+.statBox {
+    padding: 20px;
+
+    background: #1b1b2b;
+
+    border: 1px solid #262638;
+    border-radius: 12px;
+
+    text-align: center;
+
+    transition: 0.2s;
+}
+
+.statTitle {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #9fa4b3;
+
+    font-size: 14px;
+}
+
+.statBox strong {
+    color: white;
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/*게임 전적*/
+
+.historyList {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.historyItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 18px;
+
+    background: #1b1b2b;
+
+    border: 1px solid #262638;
+    border-radius: 10px;
+
+    transition: 0.2s;
+}
+
+
+.win {
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+.lose {
+    color: #E53935;
+    font-weight: 700;
+}
+
+.Date {
+    color: #fff
+}
+
+.nicknameInput {
+    width: 260px;
+
+    padding: 12px 16px;
+
+    background: #1b1b2b;
+
+    border: 2px solid #2f3146;
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.cancelButton,
+.saveButton {
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    color: white;
+}
+
+.cancelButton {
+    background: #4b5563;
+}
+
+.saveButton {
+    background: #d82731;
+}
+
+/* ================= 게임 전적 ================= */
+
+.recordTop {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.recordCard {
+    padding: 24px;
+
+    background: #1b1b2b;
+
+    border: 1px solid #2b2d42;
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.recordCard span {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #9fa4b3;
+
+    font-size: 15px;
+}
+
+.recordCard strong {
+    color: white;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.roleRecord {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+.roleCard {
+    padding: 22px;
+
+    background: #1b1b2b;
+
+    border: 1px solid #2b2d42;
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.roleCard h3 {
+    margin-bottom: 18px;
+
+    color: white;
+
+    font-size: 20px;
+}
+
+.roleCard p {
+    margin: 0;
+
+    color: #d4d4dd;
+
+    font-size: 18px;
+}
+
+.roleCard strong {
+    display: block;
+
+    margin-top: 14px;
+
+    color: #d82731;
+
+    font-size: 20px;
+}
+
+.editSection {
+
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.input {
+
+    padding: 12px 16px;
+
+    background: #1b1b2b;
+
+    border: 1px solid #2f3146;
+
+    border-radius: 8px;
+
+    color: white;
+
+    font-size: 15px;
+}
+
+.checkButton {
+
+    width: 100px;
+
+    padding: 10px;
+
+    background: #d82731;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.editSection label {
+
+    color: #d4d4dd;
+
+    font-size: 14px;
+}
+
+.profileEdit {
+    margin-top: 28px;
+}
+
+.profileSection {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.profileSection label {
+    color: #d4d4dd;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.passwordRow {
+    display: flex;
+
+    gap: 12px;
+
+    align-items: center;
+}
+
+.passwordRow .input {
+    flex: 1;
+}
+
+.divider {
+    margin: 24px 0;
+
+    border: none;
+
+    border-top: 1px solid #2f3146;
+}
+
+/* ================= 최근 플레이 기록 ================= */
+
+.historyTable {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #2b2d42;
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+.historyHeader,
+.historyRow {
+    display: grid;
+
+    grid-template-columns:
+        90px
+        60px
+        70px
+        1.7fr
+        120px
+        120px;
+
+    align-items: center;
+
+    padding: 14px 18px;
+}
+
+.historyHeader {
+    background: #1b1b2b;
+
+    color: white;
+
+    font-weight: 700;
+}
+
+.historyRow {
+    border-top: 1px solid #2b2d42;
+
+    color: #d4d4dd;
+}
+
+.historyRow:hover {
+    background: #1a1d29;
+}
+
+.win {
+    color: #4CAF50;
+
+    font-weight: 700;
+}
+
+.lose {
+    color: #E53935;
+
+    font-weight: 700;
+}

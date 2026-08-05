@@ -3,8 +3,10 @@ import jwt from "jsonwebtoken"
 
 import Room from "../models/Room.js"
 import RoomMessage from "../models/RoomMessage.js"
+import { startGame } from "../services/game_service.js"
 
-const MIN_PLAYERS_TO_START = 2
+const MIN_PLAYERS_TO_START = 9
+const MAX_PLAYERS_TO_START = 10
 const MAX_CHAT_HISTORY = 200
 const LOG_PREFIX = "[room:socket]"
 
@@ -105,10 +107,12 @@ const buildRoomPayload = (room, onlineIds, readySet) => {
     currentPlayers: room.participants.length,
     maxPlayers: room.maxPlayers,
     status: room.status,
+    currentGameId: room.currentGameId,
     readyCount,
     canStart:
       hostOnline &&
       participants.length >= MIN_PLAYERS_TO_START &&
+      participants.length <= MAX_PLAYERS_TO_START &&
       allNonHostReady,
   }
 }
@@ -255,9 +259,10 @@ export const registerRoomHandlers = (io) => {
           chatMessages,
         })
 
-        if (room.status === "playing") {
+        if (room.status === "playing" && room.currentGameId) {
           socket.emit("room:start", {
             roomId: room._id,
+            gameId: room.currentGameId,
             inviteCode: room.inviteCode,
             title: room.title,
           })
@@ -408,83 +413,39 @@ export const registerRoomHandlers = (io) => {
       }
     })
 
-    socket.on("room:start", async ({ roomId }) => {
+    socket.on("room:start", async ({ roomId }, callback) => {
       try {
-        const result = await verifyRoomParticipant(roomId, socket.userId)
-
-        if (result.error) {
-          socket.emit("room:error", { message: result.error })
-          return
-        }
-
-        const { room } = result
-
-        if (String(room.host) !== String(socket.userId)) {
-          socket.emit("room:error", {
-            message: "방장만 게임을 시작할 수 있습니다.",
-          })
-          return
-        }
-
-        if (room.status !== "waiting") {
-          socket.emit("room:error", {
-            message: "현재 게임을 시작할 수 없는 방입니다.",
-          })
-          return
-        }
-
-        const populatedRoom = await populateRoom(Room.findById(roomId))
-        const onlineIds = getOnlineUserIds(io, roomId)
-        const readySet = getReadySet(roomId)
-        const roomPayload = buildRoomPayload(
-          populatedRoom,
-          onlineIds,
-          readySet
-        )
-
-        if (roomPayload.currentPlayers < MIN_PLAYERS_TO_START) {
-          socket.emit("room:error", {
-            message: `게임 시작에는 최소 ${MIN_PLAYERS_TO_START}명의 참가자가 필요합니다.`,
-          })
-          return
-        }
-
-        if (!onlineIds.has(String(room.host))) {
-          socket.emit("room:error", {
-            message: "방장이 대기실에 연결되어 있어야 합니다.",
-          })
-          return
-        }
-
-        if (!roomPayload.canStart) {
-          socket.emit("room:error", {
-            message: "모든 참가자가 준비 완료해야 게임을 시작할 수 있습니다.",
-          })
-          return
-        }
-
-        room.status = "playing"
-        await room.save()
-
-        roomReadyUsers.delete(String(roomId))
-
-        io.to(`room:${roomId}`).emit("room:start", {
-          roomId: room._id,
-          inviteCode: room.inviteCode,
-          title: room.title,
+        const result = await startGame({
+          roomId,
+          userId: socket.userId,
         })
 
+        io.to(`room:${roomId}`).emit("room:start", result)
         await emitParticipantsUpdated(io, roomId)
 
         logRoomDebug("room:start", {
           roomId: String(roomId),
           userId: String(socket.userId),
+          gameId: result.gameId,
         })
+
+        if (typeof callback === "function") {
+          callback({ ok: true, ...result })
+        }
       } catch (error) {
         logRoomError("room:start", error)
-        socket.emit("room:error", {
-          message: "게임 시작 중 오류가 발생했습니다.",
-        })
+
+        const payload = {
+          message: error.message || "게임 시작 중 오류가 발생했습니다.",
+          code: error.code || "ROOM_START_ERROR",
+          status: error.status || 500,
+        }
+
+        socket.emit("room:error", payload)
+
+        if (typeof callback === "function") {
+          callback({ ok: false, error: payload })
+        }
       }
     })
 

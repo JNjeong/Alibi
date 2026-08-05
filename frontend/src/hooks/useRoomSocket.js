@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
 
-import socket from "../socket/socket"
+import { getRoomSocket } from "../api/socket"
 
 export const useRoomSocket = (roomId) => {
+  const socket = getRoomSocket()
+
   const [connected, setConnected] = useState(socket.connected)
   const [reconnecting, setReconnecting] = useState(false)
   const [roomState, setRoomState] = useState(null)
@@ -111,10 +113,14 @@ export const useRoomSocket = (roomId) => {
       socket.off("room:error", handleError)
       socket.off("room:closed", handleRoomClosed)
     }
-  }, [roomId])
+  }, [roomId, socket])
 
   const retryConnection = useCallback(() => {
     setSocketError("")
+
+    socket.auth = {
+      token: localStorage.getItem("token"),
+    }
 
     if (!socket.connected) {
       setReconnecting(true)
@@ -123,7 +129,7 @@ export const useRoomSocket = (roomId) => {
     }
 
     socket.emit("room:join", { roomId })
-  }, [roomId])
+  }, [roomId, socket])
 
   const clearSocketError = useCallback(() => {
     setSocketError("")
@@ -135,7 +141,7 @@ export const useRoomSocket = (roomId) => {
     }
 
     socket.emit("room:leave", { roomId })
-  }, [roomId])
+  }, [roomId, socket])
 
   const sendChat = useCallback(
     (content) => {
@@ -145,7 +151,7 @@ export const useRoomSocket = (roomId) => {
 
       socket.emit("room:chat", { roomId, content })
     },
-    [roomId]
+    [roomId, socket]
   )
 
   const setReady = useCallback(
@@ -156,7 +162,7 @@ export const useRoomSocket = (roomId) => {
 
       socket.emit("room:ready", { roomId, ready })
     },
-    [roomId]
+    [roomId, socket]
   )
 
   const startGame = useCallback(() => {
@@ -165,15 +171,18 @@ export const useRoomSocket = (roomId) => {
     }
 
     socket.emit("room:start", { roomId })
-  }, [roomId])
+  }, [roomId, socket])
 
-  const onGameStart = useCallback((handler) => {
-    socket.on("room:start", handler)
+  const onGameStart = useCallback(
+    (handler) => {
+      socket.on("room:start", handler)
 
-    return () => {
-      socket.off("room:start", handler)
-    }
-  }, [])
+      return () => {
+        socket.off("room:start", handler)
+      }
+    },
+    [socket]
+  )
 
   return {
     connected,

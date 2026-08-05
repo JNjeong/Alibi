@@ -1,19 +1,8 @@
 import PlayerStatus from "./PlayerStatus";
+import mockGame from "../../../data/mockgame";
 
 function SubmissionStatus() {
-
-    const players = [
-        { name: "윤서진", status: "제출 완료", me: true, progress: "7 / 10" },
-        { name: "한도윤", status: "제출 완료" },
-        { name: "박정원", status: "제출 완료" },
-        { name: "최유진", status: "제출 완료" },
-        { name: "차은별", status: "제출 완료" },
-        { name: "강민석", status: "제출 완료" },
-        { name: "김하린", status: "제출 완료" },
-        { name: "서지훈", status: "제출 완료" },
-        { name: "문태성", status: "추리 중" },
-        { name: "이준호", status: "추리 중" }
-    ];
+    const players = mockGame.players;
 
     return (
         <aside className="submission-status">
@@ -29,11 +18,18 @@ function SubmissionStatus() {
             <div className="status-list">
                 {players.map((player) => (
                     <PlayerStatus
-                        key={player.name}
-                        name={player.name}
-                        status={player.status}
-                        isMe={player.me}
-                        progress={player.progress}
+                        key={player.id}
+                        name={player.character.name}
+                        status={
+                            player.statusmentSubmitted
+                                ? "제출 완료" : "추리 중"
+                        }
+                        isMe={player.isMe}
+                        progress={
+                            player.isMe
+                                ? `${mockGame.rounds[mockGame.currentRound - 1].submitted} / ${mockGame.rounds[mockGame.currentRound - 1].total}`
+                                : undefined
+                        }
                     />
                 ))}
             </div>
@@ -45,7 +41,7 @@ function SubmissionStatus() {
                 </p>
             </div>
         </aside>
-    );
+    )
 }
 
-export default SubmissionStatus;
+export default SubmissionStatus

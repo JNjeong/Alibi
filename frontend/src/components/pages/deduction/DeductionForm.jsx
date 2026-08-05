@@ -1,52 +1,51 @@
 import "./deduction.css"
 import { useState } from "react";
-import DeductionSelect from "./DeductionSelect";
+import DeductionSelect from "./DeductionSelect"
+import mockGame from "../../../data/mockgame"
 
-function DeductionForm() {
-    const suspects = [
-        "윤서진",
-        "한도윤",
-        "박정원",
-        "최유진",
-        "차은별",
-        "강민석",
-        "김하린",
-        "서지훈"
-    ];
+// mock
+const suspects = mockGame.characterPool.map(
+    suspect => suspect.name
+)
+const times = mockGame.timeSlots.map(
+    time => time.label
+)
+const places = mockGame.places.map(
+    place => place.name
+)
+const weapons = mockGame.toolPool.map(
+    tool => tool.name
+)
 
-    const times = [
-        "17:10",
-        "17:20",
-        "17:30",
-        "17:40",
-        "17:50",
-        "18:00"
-    ];
 
-    const places = [
-        "응접실",
-        "서재",
-        "1층 복도",
-        "식당",
-        "주방",
-        "온실"
-    ];
-
-    const weapons = [
-        "고농도 수면제",
-        "의료용 주사기",
-        "독성 원예 약품",
-        "은제 편지칼",
-        "정원용 전지가위",
-        "실크 커튼 끈"
-    ];
-
+function DeductionForm({ onTabChange }) {
     const [deduction, setDeduction] = useState({
         suspect: "",
         time: "",
         place: "",
         weapon: ""
-    });
+    })
+
+    // 제출하면 수정 불가
+    const [submitted, setSubmitted] = useState(false)
+
+    const isValid = // 제출 가능?
+        deduction.suspect &&
+        deduction.time &&
+        deduction.place &&
+        deduction.weapon
+
+    const handleChange = (key, value) =>
+        setDeduction(prev => ({
+            ...prev,
+            [key]: value
+        }))
+
+    const handleSubmit = () => {
+        if (!isValid) return
+        setSubmitted(true)
+        alert("최종 추리가 제출되었습니다.")
+    }
 
     return (
         <section className="deduction-form">
@@ -68,11 +67,9 @@ function DeductionForm() {
                     title="범인"
                     value={deduction.suspect}
                     options={suspects}
+                    disabled={submitted}
                     onChange={(value) =>
-                        setDeduction({
-                            ...deduction,
-                            suspect: value
-                        })
+                        handleChange("suspect", value)
                     }
                 />
 
@@ -81,11 +78,9 @@ function DeductionForm() {
                     title="범행 시간"
                     value={deduction.time}
                     options={times}
+                    disabled={submitted}
                     onChange={(value) =>
-                        setDeduction({
-                            ...deduction,
-                            time: value
-                        })
+                        handleChange("time", value)
                     }
                 />
 
@@ -94,11 +89,9 @@ function DeductionForm() {
                     title="범행 장소"
                     value={deduction.place}
                     options={places}
+                    disabled={submitted}
                     onChange={(value) =>
-                        setDeduction({
-                            ...deduction,
-                            place: value
-                        })
+                        handleChange("place", value)
                     }
                 />
 
@@ -107,25 +100,30 @@ function DeductionForm() {
                     title="범행 도구"
                     value={deduction.weapon}
                     options={weapons}
+                    disabled={submitted}
                     onChange={(value) =>
-                        setDeduction({
-                            ...deduction,
-                            weapon: value
-                        })
+                        handleChange("weapon", value)
                     }
                 />
             </div>
 
             <div className="deduction-actions">
-                <button className="note-btn">
-                    추리 노트 다시 보기
+                <button
+                    className="note-btn"
+                    onClick={() => onTabChange("board")}
+                >
+                    추리 보드 다시 보기
                 </button>
-                <button className="deduction-submit-btn">
-                    최종 추리 제출
+                <button
+                    className="deduction-submit-btn"
+                    disabled={!isValid || submitted}
+                    onClick={handleSubmit}
+                >
+                    {submitted ? "제출 완료" : "최종 추리 제출"}
                 </button>
             </div>
         </section>
-    );
+    )
 }
 
-export default DeductionForm;
+export default DeductionForm

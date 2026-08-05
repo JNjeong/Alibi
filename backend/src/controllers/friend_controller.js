@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 import Friendship from "../models/Friendship.js"
 
-import User from "../user/User.js"
+import User from "../models/User.js"
 
 
 
