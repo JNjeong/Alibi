@@ -28,5 +28,3 @@ export const disconnectRoomSocket = () => {
     sharedSocket = null
   }
 }
-
-
