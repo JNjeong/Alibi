@@ -1,17 +1,33 @@
 // 사건 브리핑 화면 왼쪽
 import "./brief.css"
 
-function CaseInfo() {
+function CaseInfo({ crimeInfo }) {
     return (
         <aside className="case-info">
-            <h2 className="case-title">김사과 씨 살인사건</h2>
+            <h2 className="case-title">{crimeInfo.title}</h2>
 
             <div className="case-card">
                 <h3>사건 개요</h3>
-                <p>피해자: 김사과 (22세)</p>
-                <p>2026년 7월 25일 오후 9시.</p>
-                <p>저택에서 피해자가 숨진 채 발견되었습니다.</p>
-                <p>모든 플레이어는 용의자이며 자신의 알리바이를 가지고 있습니다.</p>
+                <p>
+                    피해자: {crimeInfo.victimName}
+                    {crimeInfo.victimAge && ` (${crimeInfo.victimAge}세)`}
+                </p>
+
+                <p>
+                    직업: {crimeInfo.victimOccupation}
+                </p>
+
+                <p>
+                    발견 시각: {crimeInfo.discoveredAt}
+                </p>
+
+                <p>
+                    사인: {crimeInfo.causeOfDeath}
+                </p>
+
+                <p>
+                    {crimeInfo.victimDescription}
+                </p>
             </div>
 
             <div className="objective">
