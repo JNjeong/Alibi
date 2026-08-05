@@ -4,6 +4,7 @@ const SOCKET_URL = "http://localhost:5000"
 
 let sharedSocket = null
 
+
 export const getRoomSocket = () => {
   if (sharedSocket) {
     return sharedSocket
