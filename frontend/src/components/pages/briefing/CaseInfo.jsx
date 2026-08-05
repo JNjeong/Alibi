@@ -1,5 +1,5 @@
 // 사건 브리핑 화면 왼쪽
-import "./brief.css";
+import "./brief.css"
 
 function CaseInfo() {
     return (
@@ -27,4 +27,4 @@ function CaseInfo() {
     )
 }
 
-export default CaseInfo;
+export default CaseInfo

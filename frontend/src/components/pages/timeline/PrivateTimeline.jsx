@@ -10,7 +10,7 @@ function PrivateTimeline() {
                 <TimelineBlock />
             </div>
         </div>
-    );
+    )
 }
 
-export default PrivateTimeline;
+export default PrivateTimeline

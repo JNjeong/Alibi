@@ -6,6 +6,8 @@ import friendRoutes from "./routes/friend_routes.js";
 import chatRoomRoutes from "./routes/chatRoom_routes.js";
 import gameLogRoutes from "./routes/gameLog_routes.js";
 
+import gameRoutes from "./routes/gamePages_routes.js"
+
 const app = express();
 
 app.use(cors());
@@ -20,5 +22,8 @@ app.use("/api/rooms", roomRouter);
 app.use("/api/friends", friendRoutes);
 app.use("/api/chat-rooms", chatRoomRoutes);
 app.use("/api/game-logs", gameLogRoutes);
+
+// 게임 페이지 API
+app.use("/api/games", gameRoutes)
 
 export default app;
