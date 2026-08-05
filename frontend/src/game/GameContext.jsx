@@ -14,7 +14,7 @@
 import { createContext, useContext, useState, useEffect, useMemo, useRef, useCallback } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { answerGameQuestion, createClientRequestId, createGameDeduction, createGameQuestion, createGameStatement, getGame } from "../api/game_api"
-import socket from "../socket/socket"
+import { getRoomSocket } from "../api/socket";
 import adaptGameResponse from "./gameAdapter"
 
 
@@ -65,6 +65,7 @@ export function GameProvider({ children }) {
   const [error, setError] = useState("")
 
   // Socket 연결 여부와 라운드 검사 요청 상태를 분리해 버튼/안내 문구에 사용합니다.
+  const socket = getRoomSocket()
   const [connected, setConnected] = useState(socket.connected)
   const [roundCheckStatus, setRoundCheckStatus] = useState("idle")
 
