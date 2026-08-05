@@ -433,13 +433,17 @@ function createPlayersAlibi(playerTimelineMap, playersRoles, players, map_places
             ["section02","section24","section46"].forEach(sectionKey =>{
                 if(!playerObj.alibi[timeKey][sectionKey].place){
                     let alibi;
+                    const maxAttempts = 300;
+                    let attemps = 0
                     do{
+                        if (attemps >= maxAttempts) throw new Error("알리바이 생성 최대 횟수 도달")
                         const randomplace = pickOneRandomly(map_places) 
                         alibi={
                             place: randomplace,
                             item: Math.random() < 0.5 ? pickOneRandomly(items_in_use): null,
                             action: pickOneRandomly(randomplace.place_action)
                         } 
+                        attemps += 1
                     } while (!checkAlibiValidation(timelineMap, playerObj, timeKey, sectionKey, alibi, crimeInfo, playersRoles))
                     playerObj.alibi[timeKey][sectionKey]=alibi
                 }
@@ -461,7 +465,7 @@ function checkAlibiValidation(PlayerTimelineMap, playerObj, timeKey, sectionKey,
     if (itemCheck.length >= 1) return false
 
     // 범행 장소 동행자 금지
-    if (timeKey === crimeInfo.crimeTime && sectionKey === crimeInfo.timeSection){
+    if (Number(timeKey) === Number(crimeInfo.crimeTime) && sectionKey === crimeInfo.timeSection){
         const player_role = playersRoles.find(pr=>pr.player._id === playerObj._id)
         if(alibi.place === crimeInfo.crimePlace && player_role.role.role_id !== crimeInfo.crimeRole.role_id) return false
         if(alibi.item?.item_id === crimeInfo.crimeItem.item_id && player_role.role.role_id !== crimeInfo.crimeRole.role_id) return false
@@ -596,15 +600,19 @@ function createHintsPerRound(preparedPlayerTimelineMap, crimeInfo,map_places){
     const idx = times.indexOf(crimeInfo.crimeTime)
     const round2Times = [crimeInfo.crimeTime]
     if(idx>0) round2Times.push(times[idx-1])
-    if(idx<times.length-1) round2Times.push(times[idx+1])
+    if(idx<times.length-1) round2Times.push(times[idx+1])   
+    if (round2Times.length !== 3){
+        if (idx>1) round2Times.push(times[idx-2])
+        else if(idx<times.length-2) round2Times.push(times[idx+2])
+    }
     hints.round2= round2Times
 
     // 3라운드: 범행도구 특징 공개
-    hints.round3= pickOneRandomly([
+    hints.round3= [
         {"sharp":"예리한 흉기에 의한 자상"},
         {"blunt":"둔기에 의한 두부 손상"},
         {"poison":"독성 물질에 의한 중독"},
-        {"asphyxia":"기도 압박에 의한 질식"}])
+        {"asphyxia":"기도 압박에 의한 질식"}].map((feature)=>feature === crimeInfo.crimeItem.item_feature)
 
     // 4라운드: 1라운드에서 선정된 6개의 장소중, 범행장소 포함하여, 범행시각 내 최다빈도 장소 2개 추가선정, 부족분 랜덤지정
     const round4Places = dedupePlacesById([crimeInfo.crimePlace, ...sortedPlaces.slice(0,2)])
