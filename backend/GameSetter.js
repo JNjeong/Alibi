@@ -26,7 +26,18 @@ export function setGame(users, mapinfo){
     // 빈 동행/목격 정보 생성
     const inGameWitnessesMap = createInGameWitnessesMap(preparedPlayerTimelineMap)
 
-    return {crimeInfo, preparedPlayerTimelineMap, inGamePlayerTimelineMap,playersRoles,hintsPerRound, witnessesMap, inGameWitnessesMap}
+    const caseBriefing = {
+        title="오래된 대저택 살인사건",
+        victimName="김사과",
+        victimAge=55,
+        victimOccupation="저택 주인",
+        victimDescription="RIP 여기 잠들다...",
+        discoveredAt="",
+        discoveredPlaceId="",
+        causeOfDeath="",
+    }
+
+    return {crimeInfo, preparedPlayerTimelineMap, playersRoles, inGamePlayerTimelineMap,hintsPerRound, witnessesMap, inGameWitnessesMap, itemsInUse: items_in_use, caseBriefing}
 }
 // 인게임 모순검사 함수
 export function inGameCheckValidation(inGamePlayerTimelineMap,inGameWitnessesMap, playerObj, timeKey, sectionKey, qandaList, alibi=null, qanda=null){
