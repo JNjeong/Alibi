@@ -1,0 +1,46 @@
+.wrapper {
+    padding: 24px;
+}
+
+.title {
+    margin-bottom: 24px;
+
+    color: white;
+
+    font-size: 28px;
+}
+
+.table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #1b1b2b;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+.table th {
+
+    background: #2b2d42;
+
+    color: white;
+
+    padding: 14px;
+
+    text-align: center;
+}
+
+.table td {
+    padding: 14px;
+    text-align: center;
+    border-top: 1px solid #34364d;
+    color: #d4d4dd;
+}
+
+.table tr:hover {
+    background: #23253a;
+}

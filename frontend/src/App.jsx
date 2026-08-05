@@ -33,6 +33,9 @@ import useAuthStore from "./store/authStore"
 
 import socket from "./socket/socket"
 
+// 마이페이지
+import MyPage from "./pages/login/MyPage";
+
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth)
   const loading = useAuthStore((state) => state.loading)
@@ -175,6 +178,15 @@ useEffect(() => {
               <AdminPage />
             </AdminRoute>
           }
+        />
+
+        {/* 마이 페이지 */}
+        <Route
+          path="/mypage"
+          element={
+            <ProtectedRoute>
+              <MyPage />
+            </ProtectedRoute>}
         />
       </Routes>
     </BrowserRouter>

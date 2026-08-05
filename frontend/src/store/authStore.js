@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getMe } from "../api/auth_api"
+import { getMe, updateProfile, changePassword as changePasswordAPI, checkPassword as checkPasswordAPI, } from "../api/auth_api"
 
 const useAuthStore = create((set) => ({
     token: localStorage.getItem("token"),
@@ -71,6 +71,24 @@ const useAuthStore = create((set) => ({
             })
         }
     },
+
+    updateProfile: async (nickname) => {
+        const data = await updateProfile(nickname)
+
+        set({
+            user: data.user,
+        })
+
+        return data
+    },
+
+    checkPassword: async (currentPassword) => {
+    return await checkPasswordAPI(currentPassword);
+    },
+
+    changePassword: async (newPassword) => {
+        return await changePasswordAPI(newPassword);
+    }
 
 }))
 
