@@ -21,6 +21,10 @@ import OfficialStatement from "./components/pages/statement/OfficialStatement"
 import OfficialQuestion from "./components/pages/question/OfficialQuestion"
 import FinalDeduction from "./components/pages/deduction/FinalDeduction"
 
+// 메인 게임 페이지
+import MainGamePage from "./pages/game/MainGamePage"
+import { GameProvider } from "./game/GameContext"
+
 // 관리자 페이지
 import AdminRoute from "./components/Route/AdminRoute"
 import AdminPage from "./pages/Admin/AdminPage"
@@ -138,6 +142,20 @@ useEffect(() => {
             </ProtectedRoute>
           }
         />
+
+        {/* 게임 */}
+        <Route
+          path="/game/:gameId"
+          element={
+            <ProtectedRoute>
+              <GameProvider>
+                <MainGamePage />
+              </GameProvider>
+            </ProtectedRoute>
+          }
+        />
+
+
 
         {/* 게임 결과 */}
         <Route
