@@ -31,7 +31,7 @@ import AdminPage from "./pages/Admin/AdminPage"
 
 import useAuthStore from "./store/authStore"
 
-import socket from "./socket/socket"
+import socket from "./api/socket"
 
 // 마이페이지
 import MyPage from "./pages/login/MyPage";

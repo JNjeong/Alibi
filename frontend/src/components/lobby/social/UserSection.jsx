@@ -20,7 +20,7 @@ import {
 } from "../../../api/chat_api"
 
 
-import socket from "../../../socket/socket"
+import socket from "../../../api/socket"
 
 import styles from "./UserSection.module.css"
 
