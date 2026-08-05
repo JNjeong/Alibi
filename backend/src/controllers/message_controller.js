@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 import ChatRoom from "../models/ChatRoom.js"
 import Message from "../models/Message.js"
 import Friendship from "../models/Friendship.js"
-import User from "../user/User.js"
+import User from "../models/User.js"
 import Room from "../models/Room.js"
 
 // 특정 채팅방 메시지 목록 조회
