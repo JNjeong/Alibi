@@ -8,6 +8,53 @@ import { useRoomSocket } from "../../hooks/useRoomSocket"
 import useAuthStore from "../../store/authStore"
 import styles from "./WaitingRoomPage.module.css"
 
+const MIN_PLAYERS = 9
+const MAX_PLAYERS = 10
+
+function getStartGuideMessage({ roomState, isHost, canStart }) {
+  if (!roomState) {
+    return null
+  }
+
+  const count = roomState.currentPlayers ?? 0
+
+  if (count < MIN_PLAYERS) {
+    return `게임 시작에는 ${MIN_PLAYERS}~${MAX_PLAYERS}명이 필요합니다. (현재 ${count}명)`
+  }
+
+  if (count > MAX_PLAYERS) {
+    return `참가자는 최대 ${MAX_PLAYERS}명까지 가능합니다.`
+  }
+
+  const hostParticipant = roomState.participants?.find(
+    (participant) => participant.isHost
+  )
+
+  if (hostParticipant && !hostParticipant.isOnline) {
+    return "방장이 대기실에 접속해야 게임을 시작할 수 있습니다."
+  }
+
+  const nonHostParticipants =
+    roomState.participants?.filter((participant) => !participant.isHost) ?? []
+  const notReadyCount = nonHostParticipants.filter(
+    (participant) => !participant.isReady
+  ).length
+
+  if (notReadyCount > 0) {
+    return `모든 참가자가 준비해야 합니다. (준비 ${roomState.readyCount ?? 0}/${count}, 미준비 ${notReadyCount}명)`
+  }
+
+  if (isHost && canStart) {
+    return "모든 조건이 충족되었습니다. 게임을 시작할 수 있습니다."
+  }
+
+  if (!isHost) {
+    return "전원 준비 완료. 방장의 시작을 기다리는 중입니다."
+  }
+
+  return null
+}
+
 function WaitingRoomPage() {
   const navigate = useNavigate()
   const { roomId } = useParams()
@@ -84,6 +131,11 @@ function WaitingRoomPage() {
 
   const isReady = currentParticipant?.isReady ?? false
   const canStart = roomState?.canStart ?? false
+  const startGuideMessage = getStartGuideMessage({
+    roomState,
+    isHost,
+    canStart,
+  })
 
   const handleLeave = () => {
     leaveRoom()
@@ -165,6 +217,9 @@ function WaitingRoomPage() {
           <p className={styles.meta}>
             초대 코드: {roomState?.inviteCode || "-"}
           </p>
+          <p className={styles.ruleHint}>
+            게임 시작: {MIN_PLAYERS}~{MAX_PLAYERS}명 · 전원 준비 후 방장 시작
+          </p>
         </div>
 
         <div className={styles.headerActions}>
@@ -221,6 +276,17 @@ function WaitingRoomPage() {
 
       {showRoomSync && (
         <p className={styles.message}>대기실 정보를 동기화하는 중...</p>
+      )}
+
+      {startGuideMessage && (
+        <div
+          className={[
+            styles.guideBanner,
+            canStart && isHost ? styles.guideBannerReady : "",
+          ].join(" ")}
+        >
+          <p className={styles.guideText}>{startGuideMessage}</p>
+        </div>
       )}
 
       {socketError && (
