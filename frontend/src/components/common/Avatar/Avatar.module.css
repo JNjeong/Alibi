@@ -1,0 +1,23 @@
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #ef4444,
+        #b91c1c
+    );
+
+    color: white;
+
+    font-weight: 800;
+
+    user-select: none;
+
+    overflow: hidden;
+
+}
+
