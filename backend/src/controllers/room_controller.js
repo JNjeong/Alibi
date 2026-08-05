@@ -44,6 +44,7 @@ const formatRoom = (room) => ({
   currentPlayers: room.participants.length,
   maxPlayers: room.maxPlayers,
   status: room.status,
+  currentGameId : room.currentGameId,
   createdAt: room.createdAt
 })
 
