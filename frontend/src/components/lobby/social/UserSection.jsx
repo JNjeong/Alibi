@@ -20,7 +20,7 @@ import {
 } from "../../../api/chat_api"
 
 
-import socket from "../../../api/socket"
+import {getRoomSocket} from "../../../api/socket"
 
 import styles from "./UserSection.module.css"
 
@@ -29,6 +29,9 @@ import styles from "./UserSection.module.css"
 
 
 function UserSection() {
+
+  const socket = getRoomSocket()
+
   const currentUser = useAuthStore(
     (state) => state.user
   )

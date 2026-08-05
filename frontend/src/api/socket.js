@@ -4,9 +4,6 @@ const SOCKET_URL = "http://localhost:5000"
 
 let sharedSocket = null
 
-const socket = io(SOCKET_URL,{
-  autoConnect: false,
-})
 
 export const getRoomSocket = () => {
   if (sharedSocket) {
@@ -32,4 +29,4 @@ export const disconnectRoomSocket = () => {
   }
 }
 
-export default socket
+
