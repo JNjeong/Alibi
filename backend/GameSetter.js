@@ -26,49 +26,103 @@ export function setGame(users, mapinfo){
     // 빈 동행/목격 정보 생성
     const inGameWitnessesMap = createInGameWitnessesMap(preparedPlayerTimelineMap)
 
-    return {crimeInfo, preparedPlayerTimelineMap, playersRoles, inGamePlayerTimelineMap, hintsPerRound, witnessesMap, inGameWitnessesMap}
+    return {crimeInfo, preparedPlayerTimelineMap, inGamePlayerTimelineMap,playersRoles,hintsPerRound, witnessesMap, inGameWitnessesMap}
 }
 // 인게임 모순검사 함수
-export function inGameCheckValidation(inGamePlayerTimelineMap,inGameWitnessesMap, playerObj, timeKey, sectionKey, alibi, qanda){
-    // 알리바이 모순
-    // 시간:section 내의 장소 2인이상 모순 검사
-    const placeCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.place === alibi.place) 
-    if (placeCheck.length >= 2) {
-        return {valid:false, conflicts: placeCheck}
-    };
+export function inGameCheckValidation(inGamePlayerTimelineMap,inGameWitnessesMap, playerObj, timeKey, sectionKey, qandaList, alibi=null, qanda=null){
+    const conflicts = {placeCheck:[], itemCheck:[], qandaCheck:[], witnessCheck:[]}
 
-    // 시간:section 내의 동일 도구 중복 소유 검사
-    const itemCheck = PlayerTimelineMap.map(p=>p.alibi[timeKey][sectionKey]).filter(ali=>ali?.item && ali?.item.item_id === alibi.item?.item_id)
-    if (itemCheck.length >= 1) return {valid:false, conflicts: itemCheck}
-    
+    if(alibi) {
+        // 알리바이 모순
+        // 시간:section 내의 장소 2인이상 모순 검사
+        const placeCheck = inGamePlayerTimelineMap.map(p=>{
+            const ali = p.alibi?.[timeKey]?.[sectionKey]
+            return ali ? {player_id: p.player_id, alibi: ali} : null
+        }).filter(Boolean).filter(entry => entry.alibi.place === alibi.place) 
+        const {QandaList_alibi, _} = seperateQandAList(qandaList)
+        QandaList_alibi.forEach(qa=>{
+            if(qa.time === timeKey && qa.section === sectionKey && qa.alibi?.place){
+                if (qa.alibi?.place === alibi.place) placeCheck.push({player_id: qa.player_to, alibi: qa.alibi})
+            }
+        })
+        if (placeCheck.length >= 2) conflicts.placeCheck.push(...placeCheck)
+
+        // 시간:section 내의 동일 도구 중복 소유 검사
+        const itemCheck = inGamePlayerTimelineMap.map(p=>{
+            const ali = p.alibi?.[timeKey]?.[sectionKey]
+            return ali ? {player_id: p.player_id, alibi: ali} : null
+        }).filter(Boolean).filter(entry => entry.alibi.item && entry.alibi.item.item_id === alibi.item.item_id)
+        const {QandaList_alibi, _} = seperateQandAList(qandaList)
+        QandaList_alibi.forEach(qa=>{
+            if(qa.time === timeKey && qa.section === sectionKey && qa.alibi?.item){
+                if (qa.alibi?.item.item_id === alibi.item.item_id) itemCheck.push({player_id: qa.player_to, alibi: qa.alibi})
+            }
+        })
+        if (itemCheck.length >= 1) conflicts.itemCheck.push(...itemCheck)
+    }
+    if(qanda) {
+        /* 질의응답 모순여부 검사 
+        [
+            {
+                player_from: plyer_id,
+                player_to: player_id,
+                time: timeKey,
+                section: sectionKey,
+                alibi: alibi{place,time,action},
+                answer: answer(true/false)
+            }, ...
+        ]
+        */
+       const {QandaList_alibi,_} = seperateQandAList(qandaList)
+       const qandaCheck = QandaList_alibi.forEach(qa=>{
+            if(qa.answer){
+                if(qa.time === timeKey && qa.section === sectionKey){
+                    const targetAli = inGamePlayerTimelineMap.find(p => p.player._id === qa.player_to)?.alibi?.[timeKey]?.[sectionKey];
+                    
+                    // qa와 장소모순
+                    if(qa.alibi.place && targetAli.place && qa.alibi.place !== targetAli.place) conflicts.qandaCheck.push({player_id: qa.player_to, alibi: targetAli})
+                    
+                    // qa와 도구모순
+                    if(qa.alibi.item && targetAli.item && qa.alibi.item.item_id !== targetAli.item.item_id) conflicts.qandaCheck.push({player_id: qa.player_to, alibi: targetAli})
+                    
+                }
+            }    
+            else if (qa.answer === false){
+                const targetAli = inGamePlayerTimelineMap.find(p => p.player._id === qa.player_to)?.alibi?.[timeKey]?.[sectionKey]
+
+                // 본인 진술의 장소 비교
+                if (qa.alibi?.place && targetAli?.place && qa.alibi.place !== targetAli.place) conflicts.qandaCheck.push({player_id: qa.player_to, alibi: targetAli})
+                
+                // 해당시각 목격정보와 비교
+                inGameWitnessesMap.forEach(entry=>{
+                    if(entry.player === qa.player_to) return
+                    const witnessAli = inGamePlayerTimelineMap.find(p => p.player._id === entry.player)?.alibi?.[timeKey]?.[sectionKey];
+                    entry.witnesses.forEach(wit=>{
+                        if(wit.time === timeKey && wit.section === sectionKey && wit.witness === qa.player_to){
+                            if(qa.alibi?.place && wit.place && qa.alibi.place !== wit.place){
+                                conflicts.witnessCheck.push(witnessAli) 
+                            }
+                        }
+                    })
+                })
+
+                // 본인 진술의 도구 소유와 비교
+                if (qa.alibi?.item && targetAli?.item && qa.alibi.item.item_id !== targetAli.item?.item_id) conflicts.qandaCheck.push({player_id: qa.player_to, alibi: targetAli})
+            }
+        })
+    }
+
     // 알리바이 시 상호 목격정보 불일치 모순
-    const witnessCheck = checkPlayerWitnessAtSlot(inGameWitnessesMap,playerObj.player._id,timeKey, sectionKey, alibi.place)
-    if(!witnessCheck.valid) return {valid: false, conflicts: witnessCheck.conflicts}
+    const witnessCheckAsSlot = checkPlayerWitnessAtSlot(inGameWitnessesMap,playerObj.player._id,timeKey, sectionKey, alibi.place)
+    let witnessAlibis=null
+    if(!witnessCheckAsSlot.valid) {
+        witnessAlibis = witnessCheckAsSlot.conflicts.map(c=>{
+            return findWitnessAlibi(inGamePlayerTimelineMap, qandaList,c.time,c.section, c.place, c.witness)
+        }).filter(Boolean)
+    }
+    conflicts.witnessCheck.push(...witnessAlibis)
 
-    // 질의응답 모순여부 검사
-    /*
-    [
-        {
-            player_from: plyer_id,
-            player_to: player_id,
-            time: timeKey,
-            section: sectionKey,
-            alibi: alibi{place,time,action},
-            answer: answer(true/false)
-        }, ...
-    ]
-    */
-    // 같은시각 다른장소 알리바이 모순
-    // 장소가 null이 아닌데, 값이 다르면 모순
-    
-
-    // 같은시각 다른 도구 소지 모순
-    // 도구가 null이 아닌데, 값이 다르면 모순
-
-    // TODO : 모순이 누구 알리바이인지 알려줘야하지 않나?
-
-     // 모순없음
-    return {valid: true , conflicts: []}
+    return conflicts
 }
 
 
@@ -118,6 +172,68 @@ export function checkWitnessMapValidation(witnessesMap){
     })
 
     return {valid: conflicts.length === 0, conflicts}
+}
+
+function findWitnessAlibi(inGamePlayerTimelineMap, qandaList, timeKey,sectionKey, place, playerid){
+    // TODO: 목격자의 알리바이가, 질의응답에 있거나 timelinemap 에 있거나 두가지 경우가 있음
+    const {QandaList_alibi, _} = seperateQandAList(qandaList)
+
+    let alibi = null 
+
+    // qandaList에서 목격
+    const qandaMatch = qandaList.find(qa=>
+        qa.player_to === playerid && qa.time === timeKey && qa.section === sectionKey && qa.alibi
+    )
+    if (qandaMatch){
+        alibi = {
+            player_id: qandaMatch.player_to,
+            alibi: qandaMatch.alibi
+        }
+    }
+
+    //timelinemap에서 목격
+    if(!alibi){
+        const playerEntry = inGamePlayerTimelineMap.find(p=>p.player._id === playerid)
+        if(playerEntry&& playerEntry.alibi?.[timeKey]?.[sectionKey]){
+            const timelineAli = playerEntry.alibi[timeKey][sectionKey]
+            if(!place || timelineAli.place === place){
+                alibi = {player_id: playerid, alibi: timelineAli}
+            }
+        }
+    }
+    return alibi
+}
+
+function seperateQandAList(qandaList){
+    const QandaList_alibi = []
+    const QandaList_wit = []
+
+    qandaList.forEach(qa => {
+        // alibi가 존재하는 경우
+        if(qa.alibi){
+            QandaList_alibi.push({
+                player_from: qa.player_from,
+                player_to: qa.player_to,
+                time: qa.time,
+                section: qa.section,
+                alibi: qa.alibi,
+                answer: qa.answer
+            })
+        }
+        // witness가 존재하는 경우
+        else if(qa.witness){
+            QandaList_wit.push({
+                player_from: qa.player_from,
+                player_to: qa.player_to,
+                time: qa.time,
+                section: qa.section,
+                witness: qa.witness,
+                answer: qa.answer
+            })
+        }
+    })
+
+    return { QandaList_alibi, QandaList_wit }
 }
 
 // 범행생성 함수
