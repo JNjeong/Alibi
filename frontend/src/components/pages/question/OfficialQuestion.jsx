@@ -8,8 +8,9 @@ import { useState, useEffect } from "react"
 
 function OfficialQuestion({ game }) {
     const players = game.players
-    const places = game.mapSnapshot.places
-    const times = game.rulesSnapshot.timeSlots
+    const places = game.places ?? []
+    const times = game.rules?.timeSlots ?? []
+
 
     const [selectedPlayer, setSelectedPlayer] = useState(null)
     useEffect(() => {
@@ -19,7 +20,7 @@ function OfficialQuestion({ game }) {
     }, [players])
 
     const [answer, setAnswer] = useState(null)
-    const history = game.officialRecords
+    const [history, setHistory] = useState([])
 
     return (
         <div className="official-question">

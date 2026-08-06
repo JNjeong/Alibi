@@ -1,16 +1,15 @@
 export const getQuestionTemplates = (game) => {
-    const times = game.rulesSnapshot.timeSlots.map(time => ({
+    const times = (game.rules?.timeSlots ?? []).map(time => ({
         label: time.label,
         value: `${time.time}_${time.section}`,
         time: time.time,
         section: time.section
     }))
 
-    const places = game.mapSnapshot.places.map(
-        place => ({
-            label: place.name,
-            value: place.id
-        })
+    const places = (game.places ?? []).map(place => ({
+        label: place.name,
+        value: place.id
+    })
     )
 
     const players = game.players.map(
@@ -20,11 +19,10 @@ export const getQuestionTemplates = (game) => {
         })
     )
 
-    const items = game.mapSnapshot.itemsInUse.map(
-        item => ({
-            label: item.name,
-            value: item.id
-        })
+    const items = (game.toolPool ?? []).map(item => ({
+        label: item.name,
+        value: item.id
+    })
     )
 
     return {

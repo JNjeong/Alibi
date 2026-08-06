@@ -1,10 +1,8 @@
-import { getGame } from "../../../api"
-import { useEffect, useState } from "react"
 import RolePanel from "./RolePanel"
 import TimelineBlock from "./TimelineBlock"
 import "./timeline.css"
 
-function PrivateTimeline() {
+function PrivateTimeline({ game }) {
     const [gameData, setGameData] = useState(null)
 
     useEffect(() => {
@@ -28,12 +26,12 @@ function PrivateTimeline() {
         <div className="private-timeline-page">
             <div className="private-timeline-container">
                 <RolePanel
-                    game={gameData.game}
-                    viewer={gameData.viewer}
+                    game={game}
+                    viewer={game.viewer}
                 />
                 <TimelineBlock
-                    game={gameData.game}
-                    viewer={gameData.viewer}
+                    game={game}
+                    viewer={game.viewer}
                 />
             </div>
         </div>

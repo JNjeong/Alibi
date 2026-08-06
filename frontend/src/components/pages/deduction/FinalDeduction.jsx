@@ -11,7 +11,7 @@ function FinalDeduction({ game, onTabChange }) {
                 game={game}
                 onTabChange={onTabChange}
             />
-            <SubmissionStatus gaem={game} />
+            <SubmissionStatus game={game} />
         </div>
     )
 }

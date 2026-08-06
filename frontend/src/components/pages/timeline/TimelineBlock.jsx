@@ -17,10 +17,10 @@ function TimelineBlock({ game, viewer }) {
         map_WineCellar: "brown",
     }
 
-    const timeSlots = game.rulesSnapshot.timeSlots
+    const timeSlots = game.rules?.timeSlots ?? []
 
     const timeline = timeSlots.map(slot => {
-        const record = viewer.timeline.find(
+        const record = viewer?.timeline?.find(
             item => item.timeId === slot.id
         )
 
@@ -31,12 +31,12 @@ function TimelineBlock({ game, viewer }) {
             }
         }
 
-        const place = game.mapSnapshot.places.find(
+        const place = game.places?.find(
             p => p.id === record.placeId
         )
 
-        const item = game.mapSnapshot.itemsInUse.find(
-            i => i.id === record.itemId
+        const item = game.toolPool?.find(
+            i => i.id === record.toolId
         )
 
         return {
@@ -46,7 +46,7 @@ function TimelineBlock({ game, viewer }) {
             color: placeColors[record.placeId] ?? "gray",
             tool: item?.name ?? "도구 X",
             companion:
-                record.companionPlayerIds?.join(", ") ||
+                record.companionIds?.join(", ") ||
                 "동행인 X"
         }
     })
@@ -64,9 +64,9 @@ function TimelineBlock({ game, viewer }) {
                 <div>
                     <h2 className="section-title">
                         개인 타임라인 :
-                        {timeSlots[0].label}
+                        {timeSlots[0]?.label}
                         {" ~ "}
-                        {timeSlots[timeSlots.length - 1].label}                    </h2>
+                        {timeSlots[timeSlots.length - 1]?.label}                    </h2>
                     <p className="timeline-desc">
                         서버에 저장된 실제 일정입니다.
                     </p>
@@ -96,7 +96,7 @@ function TimelineBlock({ game, viewer }) {
                             key={index}
                             className={`timeline-segment ${item.color}`}
                             style={{
-                                gridColumn: `span ${item.length}`
+                                gridColumn: `span 1`
                             }}
                         >
                             <div className="timeline-room">
