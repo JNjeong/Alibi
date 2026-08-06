@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react"
 import api from "../../../api/axios"
-import { sendFriendRequest,getSentFriendRequests } from "../../../api/friend_api"
+import { sendFriendRequest,getSentFriendRequests, getFriendsList } from "../../../api/friend_api"
 import styles from "./UserList.module.css"
+import useAuthStore from "../../../store/authStore"
 
 function UserList() {
+  const currentUser = useAuthStore(
+    (state) => state.user
+  )
+
   const [users, setUsers] = useState([])
+  const [friendIds, setFriendIds] = useState([])
   const [searchKeyword, setSearchKeyword] = useState("")
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
@@ -62,10 +68,50 @@ const fetchSentFriendRequests = async () => {
   }
 }
 
-  useEffect(() => {
-    fetchAllUsers()
-    fetchSentFriendRequests()
-  }, [])
+const fetchFriends = async () => {
+  try {
+    const data = await getFriendsList()
+
+    const ids = (data.friends || [])
+      .map((friendship) => {
+        const requester = friendship.requester
+        const receiver = friendship.receiver
+
+        if (
+          !currentUser?._id ||
+          !requester ||
+          !receiver
+        ) {
+          return null
+        }
+
+        const isCurrentUserRequester =
+          String(requester._id) ===
+          String(currentUser._id)
+
+        return isCurrentUserRequester
+          ? String(receiver._id)
+          : String(requester._id)
+      })
+      .filter(Boolean)
+
+    setFriendIds(ids)
+  } catch (error) {
+    console.error(
+      "친구 목록 조회 실패:",
+      error
+    )
+  }
+}
+
+useEffect(() => {
+  fetchAllUsers()
+  fetchSentFriendRequests()
+
+  if (currentUser?._id) {
+    fetchFriends()
+  }
+}, [currentUser?._id])
 
   // 사용자 검색
   const handleSearch = async (event) => {
@@ -248,6 +294,10 @@ const handleSendFriendRequest = async (username) => {
 
                 const isRequested = requestedUsernames.includes(user.username)
 
+                const isFriend = friendIds.includes(
+                  String(user._id)
+                )
+
                 return (
                   <article
                     className={styles["member-card"]}
@@ -281,21 +331,48 @@ const handleSendFriendRequest = async (username) => {
                       </span>
                     </div>
 
-                <button
-                  type="button"
-                  className={styles["member-friend-button"]}
-                  onClick={() => handleSendFriendRequest(user.username)}
-                  disabled={
-                    sendingUsername === user.username ||
-                    isRequested
-                  }
-                >
-                  {sendingUsername === user.username
-                    ? "요청 중..."
-                    : isRequested
-                      ? "요청 보냄"
+              {isFriend ? (
+                  <button
+                    type="button"
+                    disabled
+                      className={[
+                      styles["member-friend-button"],
+                      styles["friend-status-button"],
+                    ].join(" ")}
+                  >
+                    이미 친구
+                  </button>
+                ) : isRequested ? (
+                  <button
+                    type="button"
+                    disabled
+                    className={[
+                    styles["member-friend-button"],
+                    styles["friend-requested-button"],
+                  ].join(" ")}
+                  >
+                    요청 보냄
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className={
+                      styles["member-friend-button"]
+                    }
+                    onClick={() =>
+                      handleSendFriendRequest(
+                        user.username
+                      )
+                    }
+                    disabled={
+                      sendingUsername === user.username
+                    }
+                  >
+                    {sendingUsername === user.username
+                      ? "요청 중..."
                       : "+ 친구 추가"}
-                </button>
+                  </button>
+                )}
                   </article>
                 )
               })}
