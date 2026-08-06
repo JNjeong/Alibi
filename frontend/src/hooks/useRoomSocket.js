@@ -178,15 +178,10 @@ export const useRoomSocket = (roomId) => {
       return
     }
 
-    const socket = getEmitSocket()
-    socket.emit(
-      "room:start",
-      { roomId },
-      callback
-    )
+    socket.emit("room:start", { roomId }, callback)
   },
-  [getEmitSocket, roomId]
-)
+  [roomId, socket]
+  )
 
   const onGameStart = useCallback(
     (handler) => {

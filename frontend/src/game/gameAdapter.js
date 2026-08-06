@@ -52,7 +52,7 @@ const makeShortPlaceName = (name="") =>
 
 
 //  백앤드 장소 > deductionboard/hintpanel 형식으로 변경
-const adaptPlaceS = (places = []) => 
+const adaptPlaces = (places = []) => 
     places.map((place) => ({
         id: place.id || place._id,
         name: place.name || place.place_name,

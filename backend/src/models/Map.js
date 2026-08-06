@@ -283,10 +283,8 @@ MapSchema.statics.checkAndCreateDefaultMap = async function() {
             )
         }
         console.log( `기존 Map 데이터 확인 완료 : ${existingMap._id}` )
+        return existingMap
     }
-    return existingMap
-}
-
     const createdMap = await this.create({})
 
     console.log( `기본 Map 데이터 생성 완료 : ${createdMap._id}` )
