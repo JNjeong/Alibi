@@ -1,14 +1,17 @@
 // 최종 추리
-import "./deduction.css";
+import "./deduction.css"
 import DeductionForm from "./DeductionForm"
 import SubmissionStatus from "./SubmissionStatus"
 
-function FinalDeduction({ onTabChange }) {
+function FinalDeduction({ game, onTabChange }) {
     return (
         <div className="final-deduction">
             {/* 최종 추리 화면 */}
-            <DeductionForm onTabChange={onTabChange} />
-            <SubmissionStatus />
+            <DeductionForm
+                game={game}
+                onTabChange={onTabChange}
+            />
+            <SubmissionStatus gaem={game} />
         </div>
     )
 }

@@ -24,7 +24,7 @@ import Game from "../models/Game.js"
 import GameLog from "../models/GameLog.js"
 import GameMap from "../models/Map.js"
 import Room from "../models/Room.js"
-import User from "../user/User.js"
+import User from "../models/User.js"
 
 // 실제 확정된 5라운드 설명을 게임 시작 시 Game 문서에 스냅샷으로 저장합니다.
 const ROUND_CONFIG = [
@@ -182,17 +182,17 @@ const normalizeItems = (items = []) =>
 const extractItemsInUseFallback = (generated) => {
   const itemById = new Map()
 
-  ;(generated.preparedPlayerTimelineMap || []).forEach((playerTimeline) => {
-    Object.values(playerTimeline.alibi || {}).forEach((hourSlots) => {
-      Object.values(hourSlots || {}).forEach((slot) => {
-        const item = slot?.item
+    ; (generated.preparedPlayerTimelineMap || []).forEach((playerTimeline) => {
+      Object.values(playerTimeline.alibi || {}).forEach((hourSlots) => {
+        Object.values(hourSlots || {}).forEach((slot) => {
+          const item = slot?.item
 
-        if (item?.item_id) {
-          itemById.set(item.item_id, item)
-        }
+          if (item?.item_id) {
+            itemById.set(item.item_id, item)
+          }
+        })
       })
     })
-  })
 
   const crimeItem = generated.crimeInfo?.crimeItem
 
@@ -1153,7 +1153,7 @@ export const runRoundContradictionCheck = async (_input) => {
 
 // 검사 결과를 officialRecords의 status/conflicts에 반영합니다.
 const applyRoundCheckResult = (game, checkResult) => {
-  ;(checkResult.records || []).forEach((recordResult) => {
+  ; (checkResult.records || []).forEach((recordResult) => {
     const record = game.officialRecords.id(recordResult.recordId)
 
     if (!record) {
@@ -1389,7 +1389,7 @@ const finalizeGameIfReady = async (game) => {
     }
   }
 
-  ;(evaluation.results || []).forEach((result) => {
+  ; (evaluation.results || []).forEach((result) => {
     const deduction = game.deductions.find((item) =>
       sameId(item.userId, result.userId)
     )

@@ -1,8 +1,11 @@
 import PlayerStatus from "./PlayerStatus";
-import mockGame from "../../../data/mockgame";
 
-function SubmissionStatus() {
-    const players = mockGame.players;
+function SubmissionStatus({ game }) {
+    const players = game.players
+    const status =
+        game.deductionStatus.find(
+            p => p.userId === player.userId
+        )
 
     return (
         <aside className="submission-status">
@@ -18,10 +21,10 @@ function SubmissionStatus() {
             <div className="status-list">
                 {players.map((player) => (
                     <PlayerStatus
-                        key={player.id}
+                        key={player.userId}
                         name={player.character.name}
                         status={
-                            player.statusmentSubmitted
+                            status?.submitted
                                 ? "제출 완료" : "추리 중"
                         }
                         isMe={player.isMe}

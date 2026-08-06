@@ -1,8 +1,15 @@
 import { useState } from "react"
 import "./statement.css"
 import StatementBlock from "./StatementBlock"
+import {
+    createGameStatement,
+    createClientRequestId
+} from "../../../api"
 
-function StatementForm() {
+function StatementForm({ game, setValidation }) {
+    // 임시
+    const gameId = "test123"
+
     const [statements, setStatements] = useState([
         {
             id: 1,
@@ -25,10 +32,48 @@ function StatementForm() {
         )
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!validation.submit) return
+        try {
+            for (const statement of statements) {
+                const startHour = Number(statement.start.split(":")[0])
+                const minute = statement.start.split(":")[1]
 
-        alert("공식 진술이 제출되었습니다.")
+                let section = "section02"
+
+                if (minute === "20") {
+                    section = "section24"
+                }
+                else if (minute === "40") {
+                    section = "section46"
+                }
+
+                const payload = {
+                    round: 1,
+                    statementType: "ALIBI",
+                    time: startHour,
+                    section,
+                    placeId: statement.place,
+                    companionPlayerIds:
+                        statement.companion
+                            ? [statement.companion]
+                            : [],
+                    action: statement.memo,
+                    clientRequestId:
+                        createClientRequestId("statement")
+                }
+
+                await createGameStatement(
+                    gameId,
+                    payload
+                )
+            }
+            alert("공식 진술이 제출되었습니다.")
+        }
+        catch (err) {
+            console.error(err)
+            alert("공식 진술 제출 실패")
+        }
     }
 
     const addStatement = () => {
@@ -122,6 +167,7 @@ function StatementForm() {
                         statement={statement}
                         onChange={handleChange}
                         onDelete={deleteStatement}
+                        game={game}
                     />
                 ))}
             </div>

@@ -32,7 +32,7 @@ function TargetList({
 
             <div className="question-count">
                 <span>질문 횟수</span>
-                <strong>{history.length} / 3</strong>
+                <strong>{history.length} / 2</strong>
             </div>
         </aside>
     )
