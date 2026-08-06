@@ -267,5 +267,33 @@ const MapSchema = new mongoose.Schema({
     }
 })
 
+// 게임 생성에 필요한 기본 Map 문서 존재 여부 확인 절차
+// 존재하지 않으면 기본 Map 문서 생성
+MapSchema.statics.checkAndCreateDefaultMap = async function() {
+    const existingMap = await this.findOne()
+
+    if (existingMap) {
+        const placeCount = existingMap.map_places.length ?? 0
+        const roleCount = existingMap.roles?.length ?? 0
+        const itemCount = existingMap.items?.length ?? 0
+
+        if (placeCount !== 12 || roleCount < 10 || itemCount < 8) {
+            throw new Error(
+                ["기본 맵 문서가 유효하지 않습니다. 관리자에게 문의하세요.", `장소: ${placeCount}/12`, `역할: ${roleCount}/10 이상`, `아이템: ${itemCount}/8 이상`].join(' ')
+            )
+        }
+        console.log( `기존 Map 데이터 확인 완료 : ${existingMap._id}` )
+    }
+    return existingMap
+}
+
+    const createdMap = await this.create({})
+
+    console.log( `기본 Map 데이터 생성 완료 : ${createdMap._id}` )
+    return createdMap
+}
+    
+
+
 const Map = mongoose.model("Map", MapSchema)
 export default Map

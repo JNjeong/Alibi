@@ -3,7 +3,6 @@
 // - 게임 컴포넌트에서 필요한 데이터만 추출하여 반환
 // - Map.js의 place_id, item_id, officialRecords, viewer, timeline을 화면 필드로 맞춤
 
-import { getGame, createGameStatement, createGameQuestion, answerGameQuestion } from "../api/game_api.js"
 
 // section 키를 20분 단위 화면 분 값으로 변환
 // - section02 : 0분, section24 : 20분, section46 : 40분
@@ -19,7 +18,7 @@ const getId = (value) => String(value?._id || value?.id || value || "")
 // ISO DATE 문자열을 Date 객체의 HH:MM 형식으로 변환
 // - value : ISO DATE 문자열 또는 Date 객체
 // - 반환값 : "HH:MM" 형식 문자열, value가 유효하지 않으면 "--:--" 반환
-const formateCreatedAt = (value) => {
+const formatCreatedAt = (value) => {
     if (!value) return "--:--"
 
     const date = new Date(value)
@@ -53,15 +52,16 @@ const makeShortPlaceName = (name="") =>
 
 
 //  백앤드 장소 > deductionboard/hintpanel 형식으로 변경
-const adaptPlace = (places = []) => 
+const adaptPlaceS = (places = []) => 
     places.map((place) => ({
         id: place.id || place._id,
         name: place.name || place.place_name,
-        shortName: makeShortPlaceName(place.name || place.place_name),
+        shortName: makeShortPlaceName(place.name), 
         floor : place.floor || "",
-        actions : place.actions || place.pllace_actions || [],
+        actions : Array.isArray(place.actions)
+        ? place.actions
+        : [],
     }))
-               
 
 // 백엔드 도구 UI의 toolPool 형식으로 변경
 const adaptItems = (items = []) => 
@@ -115,7 +115,7 @@ const adaptRounds = ({ roundsSnapshot = [], currentRound, phase, submissionStatu
 
 
 // 힌트의 hour 또는 {time, section} 값을 현재 time slot ID로 변환
-const hintValuestoIds = (hint, timeSlots) => {
+const hintValuesToIds = (hint, timeSlots) => {
     const values = hint.values || []
 
     if (hint.type === "PLACE_IDS") {
