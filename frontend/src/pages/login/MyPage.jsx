@@ -192,6 +192,7 @@ function MyPage() {
                                         >
                                             확인
                                         </button>
+
                                     </div>
                                 </div>
 

@@ -28,6 +28,9 @@ function LogPage() {
 
         fetchLogs();
 
+        const interval = setInterval(fetchLogs, 20000)
+        return () => clearInterval(interval)
+
     }, []);
 
     return (
@@ -62,5 +65,6 @@ function LogPage() {
         </table>
     )
 }
+
 
 export default LogPage;
