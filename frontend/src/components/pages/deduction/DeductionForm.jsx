@@ -2,25 +2,27 @@ import "./deduction.css"
 import { useState } from "react"
 import DeductionSelect from "./DeductionSelect"
 
+import { createGameDeduction } from "../../../api"
+import { createClientRequestId } from "../../../api"
+
 function DeductionForm({ game, onTabChange }) {
     const suspects = game.players.map(player => ({
         label: player.character.name,
         value: player.userId
     }))
 
-    const times = game.hints
-        .find(h => h.key === "FINAL_TIME_SLOTS_5")
-        ?.values.map(slot => ({
-            label: `${slot.time}:${slot.section}`,
-            value: slot
-        })) ?? []
+    const times = (game.rules?.timeSlots ?? []).map(slot => ({
+        label: slot.label,
+        value: slot.id,
+        slot
+    }))
 
-    const places = game.mapSnapshot.places.map(place => ({
+    const places = (game.places ?? []).map(place => ({
         label: place.name,
         value: place.id
     }))
 
-    const weapons = game.mapSnapshot.itemsInUse.map(item => ({
+    const weapons = (game.toolPool ?? []).map(item => ({
         label: item.name,
         value: item.id
     }))
@@ -50,14 +52,17 @@ function DeductionForm({ game, onTabChange }) {
     const handleSubmit = async () => {
         if (!isValid) return
 
+        const selectedTime = times.find(
+            (t) => t.value === deduction.time
+        )
+
         const payload = {
             criminalPlayerId: deduction.suspect,
-            crimeTime: deduction.time.time,
-            crimeSection: deduction.time.section,
+            crimeTime: selectedTime?.slot.time,
+            crimeSection: selectedTime?.slot.section,
             crimePlaceId: deduction.place,
             crimeItemId: deduction.weapon,
-            clientRequestId:
-                createClientRequestId("deduction")
+            clientRequestId: createClientRequestId("deduction")
         }
 
         await createGameDeduction(

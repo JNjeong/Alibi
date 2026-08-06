@@ -17,7 +17,7 @@ function TargetList({
                 {players.map((player) => (
                     <button
                         key={player.id}
-                        className={`player-card ${selectedPlayer.id === player.id ? "active" : ""
+                        className={`player-card ${selectedPlayer?.id === player.id ? "active" : ""
                             }`}
                         onClick={() => setSelectedPlayer(player)}
                     >

@@ -7,12 +7,12 @@ import "./statement.css"
 import { useState } from "react"
 
 function OfficialStatement({ game }) {
-    // const [validation, setValidation] = useState({
-    //     required: true,
-    //     timeOrder: true,
-    //     overlap: true,
-    //     submit: true
-    // })
+    const [validation, setValidation] = useState({
+        required: true,
+        timeOrder: true,
+        overlap: true,
+        submit: true
+    })
 
     return (
         <div className="official-statement">
@@ -22,7 +22,7 @@ function OfficialStatement({ game }) {
                 setValidation={setValidation}
             />
             <LiveCheck
-            // validation={validation}
+                validation={validation}
             />
         </div>
     )

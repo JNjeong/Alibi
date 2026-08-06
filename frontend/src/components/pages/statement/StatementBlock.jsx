@@ -1,8 +1,8 @@
 function StatementBlock({ statement, index, onChange, onDelete, game }) {
-    const players = game.players
-    const tools = game.mapSnapshot.itemsInUse
-    const places = game.mapSnapshot.places
-    const times = game.rulesSnapshot.timeSlots
+    const players = game.players ?? []
+    const tools = game.toolPool ?? []
+    const places = game.places ?? []
+    const times = game.rules?.timeSlots ?? []
 
     return (
         <div className="statement-block">
