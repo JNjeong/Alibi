@@ -64,6 +64,7 @@ function WaitingRoomPage() {
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
+  const [starting, setStarting] = useState(false)
 
   const {
     connected,
@@ -81,12 +82,32 @@ function WaitingRoomPage() {
   } = useRoomSocket(roomId)
 
   useEffect(() => {
-    return onGameStart(({ gameId }) => {
-      if (gameId) {
-        navigate(`/game/${gameId}`)
+    return onGameStart(({ gameId } = {}) => {
+    // 서버가 게임 시작 이벤트를 보내고, 시작 버튼의 로딩 상태를 해제
+      setStarting(false)
+      
+      if (!gameId) {
+        console.error(
+          "room:start 이벤트에 gameId가 없습니다."
+        )
+        return
       }
+      
+      // 모든 참가자가 서버에서 전달받은 동일한 gameId로 이동합니다.
+      // replace를 사용해 게임 중 뒤로 가기로 대기실에 돌아가는 것을 막습니다.
+      navigate(`/game/${gameId}`, {
+        replace: true,
+      })
     })
   }, [navigate, onGameStart])
+
+  useEffect(() => {
+
+    if (socketError) {
+      setStarting(false)
+    }
+  }, [socketError])
+
 
   useEffect(() => {
     let cancelled = false
@@ -159,7 +180,34 @@ function WaitingRoomPage() {
   }
 
   const handleStart = () => {
-    startGame()
+     // 연결이 끊겼거나 시작 조건을 충족하지 않았거나
+    // 이미 게임 생성 요청 중이면 다시 요청하지 않습니다.
+    if (
+      !connected ||
+      !canStart ||
+      starting
+    ) {
+      return
+    }
+
+    // 이전 Socket 오류 메시지가 남아 있다면 제거합니다.
+    clearSocketError()
+
+    // 게임 생성 중 상태로 변경해 버튼 중복 클릭을 막습니다.
+    setStarting(true)
+
+    startGame((response) => {
+      if (!response?.ok) {
+        // 실패하면 버튼을 다시 사용할 수 있도록 복구합니다.
+        setStarting(false)
+      }
+
+      // 성공한 경우 여기서 navigate하지 않습니다.
+      //
+      // ACK callback은 시작 버튼을 누른 방장에게만 오지만,
+      // 실제 room:start 이벤트는 방 전체 참가자에게 전송됩니다.
+      // 따라서 화면 이동은 위의 onGameStart effect가 담당합니다.
+    })
   }
 
   const handleToggleReady = () => {
@@ -266,9 +314,9 @@ function WaitingRoomPage() {
               type="button"
               className={styles.primaryButton}
               onClick={handleStart}
-              disabled={!connected || !canStart}
+              disabled={!connected || !canStart || starting}
             >
-              게임 시작
+              {starting ? "게임 생성 중..." : "게임 시작"}
             </button>
           )}
         </div>

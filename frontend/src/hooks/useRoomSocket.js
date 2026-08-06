@@ -165,13 +165,28 @@ export const useRoomSocket = (roomId) => {
     [roomId, socket]
   )
 
-  const startGame = useCallback(() => {
+  const startGame = useCallback(
+  (callback) => {
     if (!roomId) {
+      callback?.({
+        ok: false,
+        error: {
+          message: "방 ID가 없습니다.",
+        },
+      })
+
       return
     }
 
-    socket.emit("room:start", { roomId })
-  }, [roomId, socket])
+    const socket = getEmitSocket()
+    socket.emit(
+      "room:start",
+      { roomId },
+      callback
+    )
+  },
+  [getEmitSocket, roomId]
+)
 
   const onGameStart = useCallback(
     (handler) => {
