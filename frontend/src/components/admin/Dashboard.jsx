@@ -15,21 +15,21 @@ function Dashboard() {
 
         const fetchDashboard = async () => {
             try {
-                const data = await getDashboard();
+                const data = await getDashboard()
                 setDashboard(data);
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
         }
-        fetchDashboard();
-    }, []);
+        fetchDashboard()
+
+        const interval = setInterval(fetchDashboard, 20000)
+        return () => clearInterval(interval)
+    }, [])
 
     return (
 
         <div className={styles.wrapper}>
-            <h2 className={styles.title}>
-                📊 대시보드
-            </h2>
 
             <div className={styles.cardContainer}>
                 <div className={styles.card}>

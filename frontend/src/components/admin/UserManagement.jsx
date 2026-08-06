@@ -20,6 +20,9 @@ function UserManagement() {
             }
         }
         fetchUsers()
+
+        const interval = setInterval(fetchUsers, 20000)
+        return () => clearInterval(interval)
     }, [])
 
     const handleRoleChange = async (userId, currentRole) => {

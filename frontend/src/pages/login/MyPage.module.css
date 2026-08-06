@@ -139,65 +139,7 @@
     font-weight: 700;
 }
 
-/*게임 전적*/
-
-.historyList {
-    display: flex;
-    flex-direction: column;
-
-    gap: 12px;
-}
-
-.historyItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 14px 18px;
-
-    background: #1b1b2b;
-
-    border: 1px solid #262638;
-    border-radius: 10px;
-
-    transition: 0.2s;
-}
-
-
-.win {
-    color: #4CAF50;
-    font-weight: 700;
-}
-
-.lose {
-    color: #E53935;
-    font-weight: 700;
-}
-
-.Date {
-    color: #fff
-}
-
-.nicknameInput {
-    width: 260px;
-
-    padding: 12px 16px;
-
-    background: #1b1b2b;
-
-    border: 2px solid #2f3146;
-    border-radius: 10px;
-
-    color: white;
-
-    font-size: 20px;
-    font-weight: 600;
-
-    outline: none;
-
-    transition: .2s;
-}
-
+/* ========= 프로필 저장, 수정 버튼 ========= */
 .buttonGroup {
     display: flex;
     justify-content: flex-end;
@@ -222,7 +164,8 @@
 
 .saveButton {
     background: #d82731;
-}
+} 
+
 
 /* ================= 게임 전적 ================= */
 

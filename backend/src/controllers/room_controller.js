@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import Room from "../models/Room.js"
 import User from "../models/User.js"
+import Log from "../models/AdminLog.js"
 
 const generateInviteCode = () => { // 무작위 코드 생성하기 
   const characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
@@ -169,6 +170,14 @@ export const createRoom = async (req, res) => {
       participants: [user._id]
     })
 
+    // 방 생성하면 로그도 같이 생성
+    await Log.create({
+      type: "방 생성",
+      username: user.username,
+      nickname: user.nickname,
+      content: `${roomTitle} 생성`,
+    }) 
+
     const populatedRoom = await populateRoom(Room.findById(newRoom._id))
 
     return res.status(201).json({
@@ -258,6 +267,16 @@ export const joinRoom = async (req, res) => {
       user._id
     )
 
+    // 방에 입장하면 로그 생성
+    if (joined) {
+      await Log.create({
+        type:"방입장",
+        username: user.username,
+        nickname: user.nickname,
+        content: `${room.title} 입장`
+      })
+    }
+
     return res.status(200).json({
       message: joined
         ? "방 입장 성공"
@@ -304,6 +323,15 @@ export const joinRoomByCode = async (req, res) => {
       },
       user._id
     )
+
+    if(joined) {
+      await Log.create({
+        type: "방입장",
+        username: user.username,
+        nickname: user.nickname,
+        content: `${room.title} 입장`,
+      })
+    }
 
     return res.status(200).json({
       message: joined

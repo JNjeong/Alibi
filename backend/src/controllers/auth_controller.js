@@ -314,6 +314,18 @@ export const changePassword = async (req, res) => {
             });
         }
 
+        // 현재 비밀번호와 동일한지 확인
+        const isSamePassword = await bcrypt.compare(
+            newPassword,
+            user.password
+        )
+
+        if(isSamePassword) {
+            return res.status(400).json({
+                message:"현재 비밀번호와 동일한 비밀번호는 사용할 수 없습니다."
+            })
+        }
+
         // 새 비밀번호 암호화
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
