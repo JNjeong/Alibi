@@ -6,6 +6,18 @@
   background: #080811;
 }
 
+.previewBanner {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  border: 1px solid rgba(230, 199, 122, 0.24);
+  border-radius: 12px;
+  background: rgba(230, 199, 122, 0.08);
+  color: #e6c77a;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
 .header {
   margin-bottom: 24px;
 }
@@ -27,6 +39,48 @@
   color: #b4b4c7;
 }
 
+.summaryCard {
+  margin-bottom: 24px;
+  padding: 24px;
+  border: 1px solid rgba(230, 199, 122, 0.18);
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(230, 199, 122, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+}
+
+.summaryLabel {
+  margin: 0 0 8px;
+  color: #8d8da3;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.summaryTitle {
+  margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+.summaryStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.statValue {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.statLabel {
+  color: #b4b4c7;
+  font-size: 13px;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -46,27 +100,81 @@
   font-size: 18px;
 }
 
-.card ul {
+.memberList,
+.resultList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin: 0;
-  padding-left: 18px;
+  padding: 0;
+  list-style: none;
 }
 
-.winner {
+.memberItem,
+.winnerItem,
+.loserItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.memberWinner {
+  border: 1px solid rgba(126, 226, 184, 0.24);
+}
+
+.memberLoser {
+  border: 1px solid rgba(255, 157, 143, 0.2);
+}
+
+.memberName {
+  font-size: 15px;
+}
+
+.memberBadge,
+.memberBadgeLose {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.memberBadge {
+  background: rgba(126, 226, 184, 0.14);
   color: #7ee2b8;
 }
 
-.loser {
+.memberBadgeLose {
+  background: rgba(255, 157, 143, 0.14);
   color: #ff9d8f;
 }
 
+.winnerItem {
+  color: #7ee2b8;
+  background: rgba(126, 226, 184, 0.08);
+}
+
+.loserItem {
+  color: #ff9d8f;
+  background: rgba(255, 157, 143, 0.08);
+}
+
 .empty,
-.message,
-.error {
+.message {
   color: #b4b4c7;
 }
 
 .error {
   color: #ff9d8f;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .primaryButton,
@@ -90,7 +198,8 @@
 }
 
 @media (max-width: 960px) {
-  .grid {
+  .grid,
+  .summaryStats {
     grid-template-columns: 1fr;
   }
 }

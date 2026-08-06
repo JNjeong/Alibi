@@ -1,17 +1,25 @@
 // 공식 질문 전체 화면
 import "./question.css"
-import TargetList from "./TargetList";
-import QuestionForm from "./QuestionForm";
-import AnswerPanel from "./AnswerPanel";
-import HistoryPanel from "./HistoryPanel";
-import { useState, useEffect } from "react";
-import mockGame from "../../../data/mockgame";
+import TargetList from "./TargetList"
+import QuestionForm from "./QuestionForm"
+import AnswerPanel from "./AnswerPanel"
+import HistoryPanel from "./HistoryPanel"
+import { useState, useEffect } from "react"
 
-function OfficialQuestion() {
-    const players = mockGame.players
-    const [selectedPlayer, setSelectedPlayer] = useState(mockGame.players[0])
+function OfficialQuestion({ game }) {
+    const players = game.players
+    const places = game.mapSnapshot.places
+    const times = game.rulesSnapshot.timeSlots
+
+    const [selectedPlayer, setSelectedPlayer] = useState(null)
+    useEffect(() => {
+        if (players.length > 0 && !selectedPlayer) {
+            setSelectedPlayer(players[0])
+        }
+    }, [players])
+
     const [answer, setAnswer] = useState(null)
-    const [history, setHistory] = useState([])
+    const history = game.officialRecords
 
     return (
         <div className="official-question">
@@ -25,6 +33,7 @@ function OfficialQuestion() {
 
             <div className="question-content">
                 <QuestionForm
+                    game={game}
                     selectedPlayer={selectedPlayer}
                     setAnswer={setAnswer}
                     history={history}
@@ -34,7 +43,6 @@ function OfficialQuestion() {
                     answer={answer}
                     setAnswer={setAnswer}
                     history={history}
-                    setHistory={setHistory}
                 />
                 <HistoryPanel
                     history={history}

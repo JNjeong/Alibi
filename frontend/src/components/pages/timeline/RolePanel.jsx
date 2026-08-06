@@ -1,12 +1,11 @@
 // 역할
 import "./timeline.css"
-import mockGame from "../../../data/mockgame"
 
-function RolePanel() {
-    // 나 찾기
-    const me = mockGame.players.find(player => player.isMe)
-    const isCriminal =
-        me.id === mockGame.solution.criminalId
+function RolePanel({ game, viewer }) {
+    const role = viewer.role
+
+    // role_name : "김사과(의사)"
+    const [name, occupation] = role.role_name.split(/[()]/)
 
     return (
         <aside className="role-panel">
@@ -15,18 +14,17 @@ function RolePanel() {
             </span>
 
             <div className="role-badges">
-                <span className={`badge ${isCriminal ? "danger" : "red"}`}>
-                    {isCriminal ? "범인" : "일반인"}
+                <span className="badge">
+                    역할 {role.role_id.slice(-2)}
                 </span>
-                <span className="badge">역할 {me.character.id.slice(-2)}/{mockGame.characterPool.length}</span>
             </div>
 
             <div className="role-profile">
                 <div className="profile-circle">
-                    {me.character.name[0]}
+                    {name[0]}
                 </div>
-                <h2>{me.character.name}</h2>
-                <p>{me.character.occupation}</p>
+                <h2>{name}</h2>
+                <p>{occupation}</p>
             </div>
 
             <div className="info-card danger">
@@ -34,7 +32,7 @@ function RolePanel() {
                     사건 배경
                 </span>
                 <p>
-                    {me.character.motive}
+                    준비 중...
                 </p>
             </div>
 
@@ -43,8 +41,7 @@ function RolePanel() {
                     플레이어 정보
                 </span>
                 <p>
-                    사건 당시 유언장을 수정하거나
-                    확인해야 할 일정이 있었다.
+                    준비 중...
                 </p>
             </div>
         </aside>

@@ -1,19 +1,28 @@
 // 공식 질문 작성
-import { useEffect, useState } from "react";
-import "./question.css";
-import { questionTemplates } from "./questionTemplates";
+import { useEffect, useState } from "react"
+import "./question.css"
+import { getQuestionTemplates } from "./getQuestionTemplates"
+import {
+    createGameQuestion,
+    createClientRequestId
+} from "../../../api"
 
 function QuestionForm({
+    game,
     selectedPlayer,
     setAnswer,
     history,
     setHistory
 }) {
-    const questionCount = history.filter(item => item.question).length
-
+    const questionCount =
+        history.filter(
+            record => record.recordType === "question"
+        ).length
+    const questionTemplates = getQuestionTemplates(game)
     const [selectedType, setSelectedType] = useState("place")
     const current = questionTemplates[selectedType]
     const [selectedValues, setSelectedValues] = useState([])
+
 
     useEffect(() => {
         setSelectedValues(
@@ -23,8 +32,20 @@ function QuestionForm({
 
     const question = current.template.replace(
         /\{(\d+)\}/g,
-        (_, i) => selectedValues[i] ?? ""
+        (_, i) => {
+            const value = selectedValues[i]
+            if (typeof value === "object") {
+                return value.label
+            }
+            return value ?? ""
+        }
     )
+
+    const questionTypeMap = {
+        place: "PRESENCE",
+        companion: "WITNESS",
+        possess: "ITEM_POSSESSION"
+    }
 
     const handleTypeChange = (type) => {
         setSelectedType(type);
@@ -52,14 +73,21 @@ function QuestionForm({
             return (
                 <select
                     key={index}
-                    value={selectedValues[fieldIndex] || ""}
-                    onChange={(e) =>
-                        handleSelectChange(fieldIndex, e.target.value)
-                    }
+                    value={selectedValues[fieldIndex]?.value ?? ""}
+                    onChange={(e) => {
+                        const option = field.options.find(
+                            option => option.value === e.target.value
+                        )
+
+                        handleSelectChange(fieldIndex, option)
+                    }}
                 >
                     {field.options.map(option => (
-                        <option key={option} value={option}>
-                            {option}
+                        <option
+                            key={option.value}
+                            value={option.value}
+                        >
+                            {option.label}
                         </option>
                     ))}
                 </select>
@@ -67,27 +95,54 @@ function QuestionForm({
         })
     }
 
-    const handleSubmit = () => {
-        if (questionCount >= 3) {
-            alert("공식 질문은 최대 3번까지 가능합니다.");
-            return;
+    const handleSubmit = async () => {
+        if (questionCount >= 2) {
+            alert("공식 질문은 최대 2번까지 가능합니다.")
+            return
         }
 
-        const newQuestion = {
-            id: Date.now(),
-            player: selectedPlayer.character.name,
-            question,
-            answer: null
+        try {
+            const selectedTime = selectedValues[0]
+
+            const payload = {
+                round: game.currentRound,
+                questionType: questionTypeMap[selectedType],
+                targetPlayerId: selectedPlayer.userId,
+                time: selectedTime.time,
+                section: selectedTime.section,
+                clientRequestId: createClientRequestId("question")
+            }
+
+            if (selectedType === "place")
+                payload.placeId = selectedValues[1].value
+            if (selectedType === "companion")
+                payload.subjectPlayerId = selectedValues[1].value
+            if (selectedType === "possess")
+                payload.itemId = selectedValues[1].value
+
+            const result = await createGameQuestion(
+                game.id,
+                payload
+            )
+
+            const newQuestion = {
+                id: result.record._id,
+                recordType: "question",
+                player: selectedPlayer.nickname,
+                question,
+                answer: null
+            }
+
+            setHistory([...history, newQuestion])
+            setAnswer(newQuestion)
         }
-
-        setHistory([...history, newQuestion])
-
-        setAnswer(newQuestion)
-        // setAnswer({
-        //     player: selectedPlayer.character.name,
-        //     question
-        // })
+        catch (err) {
+            console.error(err)
+            alert("질문 전송 실패")
+        }
     }
+
+    if (!selectedPlayer) return null
 
     return (
         <section className="question-form">
@@ -101,10 +156,10 @@ function QuestionForm({
 
                     <div className="selected-player">
                         <div className="player-avatar">
-                            {selectedPlayer.character.name[0]}
+                            {selectedPlayer.nickname[0]}
                         </div>
 
-                        <span>{selectedPlayer.character.name}</span>
+                        <span>{selectedPlayer.nickname}</span>
                     </div>
                 </div>
 
@@ -138,10 +193,10 @@ function QuestionForm({
                     onClick={handleSubmit}
                     disabled={
                         !selectedPlayer ||
-                        questionCount >= 3
+                        questionCount >= 2
                     }
                 >
-                    {questionCount >= 3 ? "질문 종료" : "질문 보내기"}
+                    {questionCount >= 2 ? "질문 종료" : "질문 보내기"}
                 </button>
             </div>
         </section>

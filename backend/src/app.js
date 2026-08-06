@@ -6,7 +6,7 @@ import friendRoutes from "./routes/friend_routes.js";
 import chatRoomRoutes from "./routes/chatRoom_routes.js";
 import gameLogRoutes from "./routes/gameLog_routes.js";
 
-import gameRoutes from "./routes/gamePages_routes.js"
+import gameRoutes from "./routes/game_routes.js"
 
 const app = express();
 

@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose, { mongo } from "mongoose"
 
 const roomSchema = new mongoose.Schema(
   {
@@ -32,8 +32,14 @@ const roomSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["waiting", "playing", "finished"],
+      enum: ["waiting", "starting","playing", "finished"], // starting 상태 추가
       default: "waiting"
+    },
+    currentGameId:{ // 같은 Room에서 재게임할 수 있으므로 `roomId` 자체를 현재 판 ID로 사용할 수 없습니다. 대기실은 `currentGameId`로 지금 진행 중인 정확한 Game 한 판을 가리킵니다.
+
+      type : mongoose.Schema.Types.ObjectId,
+      ref : "Game",
+      default : null
     }
   },
   {

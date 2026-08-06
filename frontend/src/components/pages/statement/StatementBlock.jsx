@@ -1,18 +1,8 @@
-import mockGame from "../../../data/mockgame"
-
-function StatementBlock({ statement, index, onChange, onDelete }) {
-    const players = mockGame.characterPool.map(
-        (character) => character.name
-    )
-    const tools = mockGame.toolPool.map(
-        (tool) => tool.name
-    )
-    const places = mockGame.places.map(
-        (place) => place.name
-    )
-    const times = mockGame.timeSlots.map(
-        (time) => time.label
-    )
+function StatementBlock({ statement, index, onChange, onDelete, game }) {
+    const players = game.players
+    const tools = game.mapSnapshot.itemsInUse
+    const places = game.mapSnapshot.places
+    const times = game.rulesSnapshot.timeSlots
 
     return (
         <div className="statement-block">
@@ -37,8 +27,11 @@ function StatementBlock({ statement, index, onChange, onDelete }) {
                     >
                         <option value="">선택</option>
                         {times.map((time) => (
-                            <option key={time} value={time}>
-                                {time}
+                            <option
+                                key={time.id}
+                                value={time.label}
+                            >
+                                {time.label}
                             </option>
                         ))}
                     </select>
@@ -54,8 +47,11 @@ function StatementBlock({ statement, index, onChange, onDelete }) {
                     >
                         <option value="">선택</option>
                         {times.map((time) => (
-                            <option key={time} value={time}>
-                                {time}
+                            <option
+                                key={time.id}
+                                value={time.label}
+                            >
+                                {time.label}
                             </option>
                         ))}
                     </select>
@@ -70,10 +66,12 @@ function StatementBlock({ statement, index, onChange, onDelete }) {
                         }
                     >
                         <option value="">선택</option>
-
                         {places.map((place) => (
-                            <option key={place} value={place}>
-                                {place}
+                            <option
+                                key={place.id}
+                                value={place.id}
+                            >
+                                {place.name}
                             </option>
                         ))}
                     </select>
@@ -89,8 +87,11 @@ function StatementBlock({ statement, index, onChange, onDelete }) {
                     >
                         <option value="">선택 안 함</option>
                         {players.map((player) => (
-                            <option key={player} value={player}>
-                                {player}
+                            <option
+                                key={player.userId}
+                                value={player.userId}
+                            >
+                                {player.nickname}
                             </option>
                         ))}
                     </select>
@@ -106,7 +107,12 @@ function StatementBlock({ statement, index, onChange, onDelete }) {
                     >
                         <option value="">선택 안 함</option>
                         {tools.map((tool) => (
-                            <option key={tool} value={tool}>{tool}</option>
+                            <option
+                                key={tool.id}
+                                value={tool.id}
+                            >
+                                {tool.name}
+                            </option>
                         ))}
                     </select>
                 </div>

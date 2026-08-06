@@ -36,6 +36,22 @@
   font-weight: 700;
 }
 
+.badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.readyCount {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(140, 199, 255, 0.12);
+  color: #8cc7ff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -90,4 +106,39 @@
   color: #7ee2b8;
   font-size: 11px;
   font-weight: 700;
+}
+
+.statusGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.onlineBadge,
+.readyBadge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.online {
+  background: rgba(126, 226, 184, 0.14);
+  color: #7ee2b8;
+}
+
+.offline {
+  background: rgba(255, 157, 143, 0.14);
+  color: #ff9d8f;
+}
+
+.ready {
+  background: rgba(140, 199, 255, 0.14);
+  color: #8cc7ff;
+}
+
+.notReady {
+  background: rgba(255, 255, 255, 0.08);
+  color: #9a9ab0;
 }

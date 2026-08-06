@@ -1,24 +1,30 @@
 import "./deduction.css"
-import { useState } from "react";
+import { useState } from "react"
 import DeductionSelect from "./DeductionSelect"
-import mockGame from "../../../data/mockgame"
 
-// mock
-const suspects = mockGame.characterPool.map(
-    suspect => suspect.name
-)
-const times = mockGame.timeSlots.map(
-    time => time.label
-)
-const places = mockGame.places.map(
-    place => place.name
-)
-const weapons = mockGame.toolPool.map(
-    tool => tool.name
-)
+function DeductionForm({ game, onTabChange }) {
+    const suspects = game.players.map(player => ({
+        label: player.character.name,
+        value: player.userId
+    }))
 
+    const times = game.hints
+        .find(h => h.key === "FINAL_TIME_SLOTS_5")
+        ?.values.map(slot => ({
+            label: `${slot.time}:${slot.section}`,
+            value: slot
+        })) ?? []
 
-function DeductionForm({ onTabChange }) {
+    const places = game.mapSnapshot.places.map(place => ({
+        label: place.name,
+        value: place.id
+    }))
+
+    const weapons = game.mapSnapshot.itemsInUse.map(item => ({
+        label: item.name,
+        value: item.id
+    }))
+
     const [deduction, setDeduction] = useState({
         suspect: "",
         time: "",
@@ -41,10 +47,24 @@ function DeductionForm({ onTabChange }) {
             [key]: value
         }))
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!isValid) return
+
+        const payload = {
+            criminalPlayerId: deduction.suspect,
+            crimeTime: deduction.time.time,
+            crimeSection: deduction.time.section,
+            crimePlaceId: deduction.place,
+            crimeItemId: deduction.weapon,
+            clientRequestId:
+                createClientRequestId("deduction")
+        }
+
+        await createGameDeduction(
+            game.id,
+            payload
+        )
         setSubmitted(true)
-        alert("최종 추리가 제출되었습니다.")
     }
 
     return (
