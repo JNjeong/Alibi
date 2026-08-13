@@ -1,0 +1,550 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  padding: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgb(0 0 0 / 72%);
+  backdrop-filter: blur(6px);
+
+  animation: fadeIn 0.18s ease;
+}
+
+.modal {
+  position: relative;
+
+  width: 100%;
+  max-width: 460px;
+  padding: 30px;
+
+  color: #f3f3f7;
+  background: #11111c;
+
+  border: 1px solid #303044;
+  border-radius: 20px;
+
+  box-shadow:
+    0 30px 80px rgb(0 0 0 / 55%),
+    inset 0 1px 0 rgb(255 255 255 / 4%);
+
+  animation: modalUp 0.2s ease;
+}
+
+.closeButton {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: #77778c;
+  background: transparent;
+
+  border: none;
+  border-radius: 50%;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.18s ease,
+    background 0.18s ease;
+}
+
+.closeButton:hover:not(:disabled) {
+  color: #ffffff;
+  background: #242435;
+}
+
+.closeButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.header {
+  padding-right: 42px;
+  margin-bottom: 25px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+
+  color: #d52a32;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.title {
+  margin: 0;
+
+  color: #f4f4f8;
+  font-size: 23px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+.description {
+  margin: 10px 0 0;
+
+  color: #737388;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  color: #c8c8d2;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.count {
+  color: #5f5f72;
+  font-size: 10px;
+}
+
+.input {
+  width: 100%;
+  height: 50px;
+  padding: 0 15px;
+
+  color: #f2f2f6;
+  background: #181825;
+
+  border: 1px solid #323247;
+  border-radius: 11px;
+  outline: none;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.input::placeholder {
+  color: #565669;
+}
+
+.input:hover:not(:disabled) {
+  border-color: #44445d;
+}
+
+.input:focus {
+  background: #1a1a29;
+  border-color: #d02a32;
+
+  box-shadow: 0 0 0 3px rgb(208 42 50 / 14%);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.error {
+  margin: -7px 0 0;
+  padding: 11px 13px;
+
+  color: #e9787e;
+  background: rgb(191 43 51 / 9%);
+
+  border: 1px solid rgb(191 43 51 / 28%);
+  border-radius: 9px;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.actions {
+  margin-top: 3px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancelButton,
+.createButton {
+  height: 44px;
+  padding: 0 18px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.cancelButton {
+  color: #a0a0b2;
+  background: transparent;
+
+  border: 1px solid #35354a;
+}
+
+.cancelButton:hover:not(:disabled) {
+  color: #ffffff;
+  background: #1c1c2b;
+  border-color: #474760;
+}
+
+.createButton {
+  min-width: 112px;
+
+  color: #ffffff;
+  background: #d0252e;
+
+  border: 1px solid #df3a42;
+
+  box-shadow: 0 9px 22px rgb(208 37 46 / 20%);
+}
+
+.createButton:hover:not(:disabled) {
+  background: #df2e37;
+  transform: translateY(-1px);
+}
+
+.cancelButton:disabled,
+.createButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+/* 방 생성 완료 화면 */
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.successIcon {
+  width: 58px;
+  height: 58px;
+  margin-bottom: 16px;
+
+  display: grid;
+  place-items: center;
+
+  color: #29dfa0;
+  background: rgb(28 190 132 / 12%);
+
+  border: 1px solid rgb(39 214 153 / 35%);
+  border-radius: 50%;
+
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.successTitle {
+  margin: 0;
+
+  color: #f2f2f7;
+  font-size: 21px;
+  font-weight: 850;
+}
+
+.successDescription {
+  margin: 9px 0 22px;
+
+  color: #747488;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.roomResult {
+  width: 100%;
+  padding: 17px;
+
+  background: #181825;
+  border: 1px solid #303044;
+  border-radius: 12px;
+
+  text-align: left;
+}
+
+.resultLabel {
+  display: block;
+  margin-bottom: 6px;
+
+  color: #646477;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.resultTitle {
+  display: block;
+  margin-bottom: 15px;
+
+  overflow: hidden;
+
+  color: #e8e8ef;
+  font-size: 14px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inviteCode {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  color: #e8bb55;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.moveButton {
+  width: 100%;
+  height: 48px;
+  margin-top: 18px;
+
+  color: #ffffff;
+  background: #d0252e;
+
+  border: 1px solid #df3a42;
+  border-radius: 11px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.moveButton:hover {
+  background: #df2e37;
+  transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 520px) {
+  .overlay {
+    padding: 16px;
+  }
+
+  .modal {
+    padding: 25px 20px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancelButton,
+  .createButton {
+    width: 100%;
+  }
+}
+
+
+.friendSection {
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #303043;
+  border-radius: 16px;
+  background: #171722;
+}
+
+.friendSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.friendSectionTitle {
+  color: #f4f4f8;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.friendCount {
+  color: #8b8b9c;
+  font-size: 13px;
+}
+
+.friendList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.friendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid #2b2b3c;
+  border-radius: 12px;
+  background: #1d1d29;
+}
+
+.friendProfile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.friendAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(33, 230, 168, 0.35);
+  border-radius: 50%;
+  color: #21e6a8;
+  font-size: 14px;
+  font-weight: 700;
+  background: rgba(33, 230, 168, 0.1);
+}
+
+.friendText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.friendName {
+  overflow: hidden;
+  color: #f5f5f8;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friendIntro {
+  max-width: 260px;
+  overflow: hidden;
+  color: #858596;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inviteLabel {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #f3c451;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(243, 196, 81, 0.1);
+}
+
+.friendMessage {
+  margin: 0;
+  padding: 16px 0;
+  color: #89899a;
+  font-size: 13px;
+  text-align: center;
+}
+
+.friendError {
+  margin: 0;
+  padding: 16px 0;
+  color: #ff6b72;
+  font-size: 13px;
+  text-align: center;
+}
+
+.inviteLabel {
+  flex-shrink: 0;
+  padding: 6px 10px;
+
+  color: #f3c451;
+  background: rgba(243, 196, 81, 0.1);
+
+  border: none;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.inviteLabel:disabled {
+  cursor: default;
+  opacity: 1;
+}

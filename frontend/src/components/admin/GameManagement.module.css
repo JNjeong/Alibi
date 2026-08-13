@@ -1,0 +1,78 @@
+.wrapper{
+    padding:0px;
+}
+
+.table{
+    width:100%;
+    border-collapse:collapse;
+    background:#1b1b2b;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.table th{
+    background:#2b2d42;
+    color:white;
+    padding:14px;
+}
+
+.table td{
+    padding:14px;
+    text-align:center;
+    color:#d4d4dd;
+    border-top:1px solid #34364d;
+}
+
+.table tr:hover{
+    background:#23253a;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.waiting {
+    background: #2b2d42;
+    color: #d4d4dd;
+}
+
+.playing {
+    background: #3b1f24;
+    color: #f0a0a8;
+}
+
+.finished {
+    background: #6368a3;
+    color: #d4d4dd;
+}
+
+.forced {
+    background: #dad757;
+    color: #070707;
+}
+
+.forceEndButton {
+    padding: 6px 12px;
+    border: 1px solid #5a5c72;
+    border-radius: 6px;
+    background: transparent;
+    color: #d4d4dd;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.forceEndButton:hover {
+    background: #3b1f24;
+    color: #f0a0a8;
+    border-color: #7a3d45;
+}
+
+.forceEndButton:active {
+    transform: scale(0.96);
+}

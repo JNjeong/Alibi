@@ -1,0 +1,132 @@
+.request-panel {
+  margin-top: 16px;
+  padding: 22px;
+  border: 1px solid rgba(206, 164, 52, 0.35);
+  border-radius: 22px;
+  background: rgba(22, 21, 25, 0.92);
+}
+
+.request-title {
+  margin: 0 0 18px;
+  color: #d5ad3c;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.request-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.request-user {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 12px;
+}
+
+.request-avatar {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(139, 132, 194, 0.32);
+  border-radius: 50%;
+  background: rgba(79, 75, 112, 0.28);
+  color: #aaa5ca;
+  font-weight: 700;
+}
+
+.request-info {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.request-info strong {
+  overflow: hidden;
+  color: #e9e6f2;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.request-info span {
+  overflow: hidden;
+  color: #817d91;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.request-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.accept-button,
+.reject-button {
+  min-width: 58px;
+  padding: 9px 13px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.accept-button {
+  border: 1px solid rgba(0, 211, 126, 0.45);
+  background: rgba(0, 211, 126, 0.14);
+  color: #00dc83;
+}
+
+.reject-button {
+  border: 1px solid rgba(220, 67, 75, 0.4);
+  background: rgba(220, 67, 75, 0.13);
+  color: #e15c63;
+}
+
+.accept-button:disabled,
+.reject-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.request-message,
+.request-error {
+  margin: 0;
+  color: #8d8998;
+  font-size: 14px;
+}
+
+.request-error {
+  color: #e15c63;
+}
+
+@media (max-width: 500px) {
+  .request-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .request-actions {
+    width: 100%;
+  }
+
+  .accept-button,
+  .reject-button {
+    flex: 1;
+  }
+}

@@ -1,0 +1,2213 @@
+/*
+ * ALIBI 게임 화면 가독성 개편
+ * --------------------------------------------------------------------------
+ * 기존 API, Socket, GameContext 동작은 건드리지 않고 메인 화면과 서브페이지의
+ * 글자 크기, 카드, 상태 배지, 여백, 반응형 규칙만 한 디자인 체계로 통일합니다.
+ */
+
+.alibi-game-root {
+  --surface-0: #080a12;
+  --surface-1: #0d101a;
+  --surface-2: #121622;
+  --surface-3: #181d2a;
+  --stroke: #2a3041;
+  --stroke-soft: rgba(255, 255, 255, 0.075);
+  --heading: #f7f2e8;
+  --body: #c1c5d0;
+  --subtle: #8d95a8;
+  --gold-strong: #e5c571;
+  --blue-strong: #77aee8;
+  --danger-strong: #f07178;
+  --success-strong: #78d7a7;
+  font-size: 14px;
+}
+
+/* 상단 헤더와 현재 단계 */
+.alibi-game-root .alibi-game-header {
+  min-height: 82px;
+  padding: 14px 30px;
+}
+
+.alibi-game-root .brand-mark {
+  width: 44px;
+  height: 44px;
+  font-size: 26px;
+}
+
+.alibi-game-root .game-logo {
+  font-size: 27px;
+}
+
+.alibi-game-root .brand-caption {
+  font-size: 10px;
+}
+
+.alibi-game-root .case-heading strong {
+  font-size: 18px;
+}
+
+.alibi-game-root .live-pill,
+.alibi-game-root .room-code {
+  font-size: 10px;
+}
+
+.alibi-game-root .main-game-player-avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.alibi-game-root .player-summary-text strong {
+  font-size: 14px;
+}
+
+.alibi-game-root .player-summary-text span,
+.alibi-game-root .text-button {
+  font-size: 12px;
+}
+
+.alibi-game-root .game-stage-strip {
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.7fr) minmax(650px, 1.3fr);
+  gap: 24px;
+  padding: 10px 28px;
+}
+
+.alibi-game-root .game-stage-summary {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, auto);
+  align-items: center;
+  justify-content: start;
+  gap: 4px 12px;
+}
+
+.alibi-game-root .game-stage-summary > span {
+  color: var(--gold-strong);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+}
+
+.alibi-game-root .game-stage-summary > strong {
+  color: var(--heading);
+  font-size: 16px;
+}
+
+.alibi-game-root .game-stage-summary > p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--subtle);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.alibi-game-root .game-stage-flow {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(78px, 1fr));
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alibi-game-root .game-stage-flow li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+  color: #5f6676;
+}
+
+.alibi-game-root .game-stage-flow li:not(:last-child)::after {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: -4px;
+  width: 14px;
+  height: 1px;
+  content: "";
+  background: #323747;
+}
+
+.alibi-game-root .game-stage-flow li > span {
+  position: relative;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #363c4c;
+  border-radius: 50%;
+  font-size: 9px;
+  background: #111520;
+}
+
+.alibi-game-root .game-stage-flow li > strong {
+  overflow: hidden;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alibi-game-root .game-stage-flow li.is-completed {
+  color: var(--success-strong);
+}
+
+.alibi-game-root .game-stage-flow li.is-completed > span {
+  border-color: #3e8063;
+  background: #152c23;
+}
+
+.alibi-game-root .game-stage-flow li.is-current {
+  color: var(--gold-strong);
+}
+
+.alibi-game-root .game-stage-flow li.is-current > span {
+  border-color: var(--gold);
+  background: rgba(197, 163, 94, 0.15);
+  box-shadow: 0 0 0 4px rgba(197, 163, 94, 0.08);
+}
+
+.alibi-game-root .game-stage-strip.is-answer .game-stage-flow li.is-current {
+  color: var(--danger-strong);
+}
+
+.alibi-game-root .game-stage-strip.is-answer .game-stage-flow li.is-current > span {
+  border-color: var(--danger-strong);
+  background: rgba(240, 113, 120, 0.13);
+}
+
+.alibi-game-root .game-toolbar {
+  min-height: 72px;
+  grid-template-columns: minmax(270px, 320px) minmax(630px, 1fr) minmax(300px, 350px);
+}
+
+.alibi-game-root .toolbar-timer {
+  padding: 10px 18px;
+}
+
+.alibi-game-root .toolbar-timer span,
+.alibi-game-root .toolbar-progress-heading span {
+  font-size: 10px;
+}
+
+.alibi-game-root .toolbar-timer small {
+  font-size: 10px;
+}
+
+.alibi-game-root .toolbar-timer time {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.alibi-game-root .main-game-nav button {
+  min-width: 128px;
+  padding: 0 13px;
+  font-size: 13px;
+}
+
+.alibi-game-root .main-game-nav button span {
+  font-size: 9px;
+}
+
+.alibi-game-root .toolbar-progress-heading strong,
+.alibi-game-root .toolbar-progress-heading b {
+  font-size: 12px;
+}
+
+.alibi-game-root .toolbar-round-dots li {
+  width: 22px;
+  height: 22px;
+  font-size: 9px;
+}
+
+/* 메인 3단 화면 */
+.alibi-game-root .alibi-game-content {
+  padding: 16px;
+}
+
+.alibi-game-root .game-workspace {
+  grid-template-columns: minmax(295px, 320px) minmax(680px, 1fr) minmax(330px, 360px);
+  gap: 14px;
+}
+
+.alibi-game-root .workspace-panel {
+  border-color: #242a39;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(18, 22, 34, 0.98), rgba(11, 14, 23, 0.98));
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.24);
+}
+
+.alibi-game-root .eyebrow,
+.alibi-game-root .section-label {
+  color: var(--gold-strong);
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.alibi-game-root .panel-heading {
+  padding: 20px 18px 15px;
+}
+
+.alibi-game-root .panel-heading h2 {
+  font-size: 20px;
+}
+
+.alibi-game-root .feed-heading-counts {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.alibi-game-root .conflict-count {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid rgba(240, 113, 120, 0.48);
+  border-radius: 999px;
+  color: #ff9ca1;
+  font-size: 10px;
+  font-weight: 800;
+  background: rgba(142, 38, 46, 0.18);
+}
+
+.alibi-game-root .record-count {
+  min-width: 30px;
+  min-height: 28px;
+  font-size: 11px;
+}
+
+.alibi-game-root .feed-filters {
+  padding: 0 14px 14px;
+}
+
+.alibi-game-root .feed-filters button {
+  padding: 9px 3px;
+  font-size: 12px;
+}
+
+.alibi-game-root .feed-scroll {
+  gap: 11px;
+  padding: 13px;
+}
+
+.alibi-game-root .feed-card {
+  padding: 14px;
+  border-radius: 10px;
+  background: #121622;
+}
+
+.alibi-game-root .feed-card.status-contradiction {
+  border-color: rgba(240, 113, 120, 0.62);
+  background:
+    linear-gradient(135deg, rgba(154, 40, 49, 0.21), transparent 66%),
+    #17141c;
+  box-shadow: inset 0 0 0 1px rgba(240, 113, 120, 0.1);
+}
+
+.alibi-game-root .feed-conflict-alert {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: -3px -3px 12px;
+  padding: 8px 9px;
+  border-radius: 7px;
+  color: #ffb1b5;
+  font-size: 11px;
+  font-weight: 800;
+  background: rgba(184, 46, 57, 0.18);
+}
+
+.alibi-game-root .feed-conflict-alert > span {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #f07178;
+  border-radius: 50%;
+  font-size: 10px;
+}
+
+.alibi-game-root .feed-type,
+.alibi-game-root .feed-card time,
+.alibi-game-root .feed-card-footer {
+  font-size: 10px;
+}
+
+.alibi-game-root .feed-avatar {
+  width: 34px;
+  height: 34px;
+  font-size: 12px;
+}
+
+.alibi-game-root .feed-author strong {
+  font-size: 13px;
+}
+
+.alibi-game-root .feed-author span {
+  font-size: 10px;
+}
+
+.alibi-game-root .feed-time {
+  margin-top: 12px;
+  padding: 4px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+
+.alibi-game-root .feed-card .feed-content {
+  color: #c4c7d0;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.alibi-game-root .status-chip {
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+}
+
+.alibi-game-root .panel-action {
+  margin: 0 13px 13px;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* 추리 보드: 6개 시간 카드 */
+.alibi-game-root .deduction-board-page {
+  grid-template-rows: auto auto minmax(280px, 1fr) auto;
+}
+
+.alibi-game-root .game-page-header {
+  min-height: 104px;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 28px;
+  border-bottom: 1px solid rgba(229, 197, 113, 0.14);
+  background: linear-gradient(90deg, rgba(197, 163, 94, 0.055), transparent 44%);
+}
+
+.alibi-game-root .game-page-heading-copy {
+  min-width: 0;
+}
+
+.alibi-game-root .game-page-heading-copy h1 {
+  margin: 7px 0 5px;
+  color: var(--heading);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(25px, 2.2vw, 34px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.alibi-game-root .game-page-heading-copy p {
+  max-width: 780px;
+  margin: 0;
+  color: var(--subtle);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.alibi-game-root .game-page-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.alibi-game-root .game-page-badge {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border: 1px solid #353b4c;
+  border-radius: 999px;
+  color: #abb2c2;
+  font-size: 11px;
+  font-weight: 800;
+  background: #151925;
+}
+
+.alibi-game-root .game-page-badge.is-gold {
+  border-color: rgba(229, 197, 113, 0.44);
+  color: #efd891;
+  background: rgba(152, 116, 43, 0.16);
+}
+
+.alibi-game-root .game-page-badge.is-live {
+  border-color: rgba(120, 215, 167, 0.42);
+  color: #a8efcc;
+  background: rgba(41, 119, 85, 0.18);
+}
+
+.alibi-game-root .game-page-badge.is-danger {
+  border-color: rgba(240, 113, 120, 0.48);
+  color: #ffafb4;
+  background: rgba(149, 39, 48, 0.18);
+}
+
+.alibi-game-root .board-legend {
+  max-width: 360px;
+  gap: 9px;
+}
+
+.alibi-game-root .board-legend span {
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid #2e3444;
+  border-radius: 999px;
+  color: #a4abbb;
+  font-size: 10px;
+  background: #131722;
+}
+
+.alibi-game-root .board-summary-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--stroke-soft);
+  background: #0d1019;
+}
+
+.alibi-game-root .board-summary-strip article {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 3px 12px;
+  padding: 13px 18px;
+  border-right: 1px solid var(--stroke-soft);
+}
+
+.alibi-game-root .board-summary-strip article:last-child {
+  border-right: 0;
+}
+
+.alibi-game-root .board-summary-strip span {
+  color: #9ba3b4;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.alibi-game-root .board-summary-strip strong {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  color: var(--heading);
+  font-size: 24px;
+}
+
+.alibi-game-root .board-summary-strip small {
+  color: #687084;
+  font-size: 9px;
+}
+
+.alibi-game-root .board-summary-strip article.has-danger {
+  background: rgba(142, 38, 46, 0.12);
+}
+
+.alibi-game-root .board-summary-strip article.has-danger span,
+.alibi-game-root .board-summary-strip article.has-danger strong {
+  color: #ff9399;
+}
+
+.alibi-game-root .deduction-scroll {
+  padding: 15px;
+  background: #090b13;
+}
+
+.alibi-game-root .board-hour-list {
+  min-width: max-content;
+  display: grid;
+  gap: 14px;
+}
+
+.alibi-game-root .board-hour-card {
+  overflow: hidden;
+  border: 1px solid #292f3f;
+  border-radius: 12px;
+  background: #0e111a;
+}
+
+.alibi-game-root .board-hour-heading {
+  position: sticky;
+  z-index: 6;
+  left: 0;
+  width: calc(100vw - 754px);
+  min-width: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 15px;
+  border-bottom: 1px solid #2b3141;
+  background: linear-gradient(90deg, #1a1e2a, #121620);
+}
+
+.alibi-game-root .board-hour-heading strong {
+  color: var(--gold-strong);
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+}
+
+.alibi-game-root .board-hour-heading span {
+  color: #7d8598;
+  font-size: 10px;
+}
+
+.alibi-game-root .board-hour-grid {
+  display: grid;
+  align-content: start;
+}
+
+.alibi-game-root .board-hour-grid .grid-corner,
+.alibi-game-root .board-hour-grid .grid-player,
+.alibi-game-root .board-hour-grid .grid-time,
+.alibi-game-root .board-hour-grid .deduction-cell {
+  min-height: 66px;
+  border-color: #252b3a;
+}
+
+.alibi-game-root .board-hour-grid .grid-corner {
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  color: #7c8496;
+  font-size: 10px;
+  font-weight: 800;
+  background: #151925;
+}
+
+.alibi-game-root .board-hour-grid .grid-player {
+  position: static;
+  min-height: 66px;
+  grid-template-columns: 30px minmax(0, 1fr);
+  column-gap: 9px;
+  padding: 9px 10px;
+  background: #151925;
+}
+
+.alibi-game-root .board-hour-grid .grid-player > span {
+  width: 30px;
+  height: 30px;
+  font-size: 11px;
+}
+
+.alibi-game-root .board-hour-grid .grid-player strong {
+  color: #e1e3e9;
+  font-size: 12px;
+}
+
+.alibi-game-root .board-hour-grid .grid-player small {
+  color: #747c90;
+  font-size: 9px;
+}
+
+.alibi-game-root .board-hour-grid .grid-player.is-me {
+  box-shadow: inset 0 3px 0 var(--gold);
+  background: linear-gradient(180deg, rgba(197, 163, 94, 0.13), #151925);
+}
+
+.alibi-game-root .board-hour-grid .grid-time {
+  position: sticky;
+  z-index: 3;
+  left: 0;
+  color: #c6cad4;
+  font-size: 12px;
+  font-weight: 800;
+  background: #141823;
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell {
+  min-height: 78px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 9px 10px;
+  background: #10131c;
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell:hover {
+  z-index: 1;
+  background: #191e2b;
+  box-shadow: inset 0 0 0 1px #4c566f;
+}
+
+.alibi-game-root .board-hour-grid .cell-status-row {
+  min-height: 18px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 5px !important;
+  overflow: visible !important;
+}
+
+.alibi-game-root .cell-state {
+  padding: 3px 6px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.alibi-game-root .cell-state.is-private {
+  color: #ead186;
+  background: rgba(197, 163, 94, 0.14);
+}
+
+.alibi-game-root .cell-state.is-evidence {
+  color: #9fc9f4;
+  background: rgba(76, 128, 184, 0.19);
+}
+
+.alibi-game-root .cell-state.is-conflict {
+  color: #fff;
+  background: #ad3f48;
+  box-shadow: 0 0 14px rgba(240, 80, 90, 0.22);
+}
+
+.alibi-game-root .cell-state.is-empty {
+  color: #5e6678;
+  background: #171b26;
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell strong {
+  color: #e0e2e8;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell > span:not(.unknown-mark):not(.cell-status-row) {
+  margin-top: 3px;
+  color: #858d9f;
+  font-size: 10px;
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell.is-mine {
+  background: rgba(197, 163, 94, 0.08);
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell.has-evidence {
+  background: rgba(65, 110, 160, 0.1);
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell.has-evidence::before,
+.alibi-game-root .board-hour-grid .deduction-cell.has-conflict::before {
+  display: none;
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell.has-conflict {
+  background:
+    linear-gradient(135deg, rgba(181, 49, 59, 0.25), transparent 75%),
+    #17131b;
+  box-shadow: inset 0 0 0 1px rgba(240, 113, 120, 0.52);
+}
+
+.alibi-game-root .board-hour-grid .deduction-cell.is-selected {
+  box-shadow: inset 0 0 0 2px var(--gold-strong);
+}
+
+.alibi-game-root .board-hour-grid .unknown-mark {
+  display: block;
+  color: #60687a;
+  font-size: 10px;
+}
+
+.alibi-game-root .board-hour-grid .note-mark {
+  position: static;
+  width: 7px;
+  height: 7px;
+  box-shadow: 0 0 0 3px rgba(216, 189, 105, 0.1);
+}
+
+.alibi-game-root .board-inspector {
+  min-height: 122px;
+  grid-template-columns: minmax(190px, 0.72fr) minmax(260px, 1.15fr) minmax(300px, 1fr);
+  gap: 18px;
+  padding: 15px 18px;
+  border-top-color: #303747;
+  background: #111520;
+}
+
+.alibi-game-root .board-inspector.has-conflict {
+  border-top-color: rgba(240, 113, 120, 0.72);
+  background: linear-gradient(90deg, rgba(147, 39, 47, 0.13), #111520 32%);
+}
+
+.alibi-game-root .inspector-summary {
+  grid-template-columns: auto 40px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.alibi-game-root .inspector-time {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.alibi-game-root .inspector-avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 13px;
+}
+
+.alibi-game-root .inspector-summary strong,
+.alibi-game-root .inspector-evidence strong {
+  color: #e5e7ec;
+  font-size: 13px;
+}
+
+.alibi-game-root .inspector-summary > div span,
+.alibi-game-root .inspector-evidence small {
+  color: #8991a3;
+  font-size: 10px;
+}
+
+.alibi-game-root .detail-label,
+.alibi-game-root .cell-note-editor > span {
+  font-size: 10px;
+}
+
+.alibi-game-root .inspector-evidence p {
+  color: #aab0bf;
+  font-size: 11px;
+}
+
+.alibi-game-root .inspector-evidence p.is-danger-text {
+  color: #ff8e95;
+  font-weight: 900;
+}
+
+.alibi-game-root .cell-note-editor > span {
+  display: flex;
+  justify-content: space-between;
+}
+
+.alibi-game-root .cell-note-editor > span small {
+  color: #626a7d;
+  font-size: 9px;
+}
+
+.alibi-game-root .cell-note-editor textarea {
+  height: 68px;
+  padding: 10px 11px;
+  border-color: #303747;
+  border-radius: 8px;
+  color: #d3d5dc;
+  font-size: 12px;
+  background: #0a0d15;
+}
+
+/* 공식 힌트와 채팅 */
+.alibi-game-root .main-game-right-panel {
+  grid-template-rows: minmax(245px, 0.44fr) minmax(280px, 0.56fr);
+}
+
+.alibi-game-root .official-hints-panel {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+.alibi-game-root .hints-title {
+  min-height: 64px;
+  padding: 13px 15px 11px;
+}
+
+.alibi-game-root .hints-title .eyebrow {
+  margin-bottom: 4px;
+  font-size: 9px;
+}
+
+.alibi-game-root .hints-title h3,
+.alibi-game-root .chat-title h3 {
+  font-size: 17px;
+}
+
+.alibi-game-root .hint-count {
+  min-width: 42px;
+  min-height: 30px;
+  border-radius: 999px;
+  color: var(--gold-strong);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.alibi-game-root .hint-empty-callout {
+  margin: 10px 11px 0;
+  padding: 12px;
+  border: 1px dashed #373d4d;
+  border-radius: 9px;
+  text-align: center;
+}
+
+.alibi-game-root .hint-empty-callout span {
+  color: #a9afbd;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.alibi-game-root .hint-empty-callout p {
+  margin: 4px 0 0;
+  color: #697184;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.alibi-game-root .official-hints-scroll {
+  gap: 9px;
+  padding: 10px 11px;
+}
+
+.alibi-game-root .compact-hint {
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 10px;
+  padding: 11px;
+  border-radius: 9px;
+  background: #121622;
+}
+
+.alibi-game-root .compact-hint.is-revealed {
+  border-color: rgba(229, 197, 113, 0.46);
+  background: linear-gradient(135deg, rgba(167, 127, 44, 0.13), #141721 70%);
+}
+
+.alibi-game-root .compact-hint.is-latest {
+  border-color: var(--gold-strong);
+  box-shadow: 0 0 0 1px rgba(229, 197, 113, 0.14), 0 10px 30px rgba(0, 0, 0, 0.22);
+}
+
+.alibi-game-root .compact-hint.is-locked {
+  opacity: 0.66;
+}
+
+.alibi-game-root .compact-hint .hint-round {
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+  font-size: 10px;
+}
+
+.alibi-game-root .hint-card-heading {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 17px;
+}
+
+.alibi-game-root .hint-state {
+  color: #70788b;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.alibi-game-root .compact-hint.is-revealed .hint-state {
+  color: #e9cf87;
+}
+
+.alibi-game-root .compact-hint strong {
+  color: #e7e3da;
+  font-size: 12px;
+  white-space: normal;
+}
+
+.alibi-game-root .compact-hint p {
+  margin-top: 5px;
+  color: #a1a7b6;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.alibi-game-root .hint-values {
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.alibi-game-root .hint-values span {
+  padding: 4px 6px;
+  border-radius: 5px;
+  color: #f0d58d;
+  font-size: 9px;
+}
+
+.alibi-game-root .chat-panel {
+  padding: 15px;
+}
+
+.alibi-game-root .chat-title > span,
+.alibi-game-root .online-count {
+  font-size: 10px;
+}
+
+.alibi-game-root .chat-message-meta strong,
+.alibi-game-root .chat-message time {
+  font-size: 10px;
+}
+
+.alibi-game-root .chat-message p {
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: #b9bdc8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.alibi-game-root .chat-form {
+  grid-template-columns: 1fr 38px;
+  border-radius: 9px;
+}
+
+.alibi-game-root .chat-form input {
+  padding: 11px 12px;
+  font-size: 12px;
+}
+
+/* 모든 서브페이지 공통 */
+.alibi-game-root .main-game-subpage-stage {
+  border: 1px solid #242a39;
+  border-radius: 14px;
+  background: #0c0f18;
+}
+
+.alibi-game-root .game-subpage {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  color: var(--body);
+  background:
+    radial-gradient(circle at 75% 0%, rgba(197, 163, 94, 0.04), transparent 32%),
+    #0c0f18;
+}
+
+.alibi-game-root .subpage-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.alibi-game-root .subpage-card-heading h2,
+.alibi-game-root .subpage-card-heading .section-title,
+.alibi-game-root .subpage-card-heading .question-title {
+  margin: 7px 0 0;
+  color: var(--heading);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.alibi-game-root .form-stage-notice {
+  display: grid;
+  gap: 3px;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(229, 197, 113, 0.28);
+  border-radius: 9px;
+  background: rgba(131, 100, 37, 0.1);
+}
+
+.alibi-game-root .form-stage-notice strong {
+  color: #ead28e;
+  font-size: 12px;
+}
+
+.alibi-game-root .form-stage-notice span {
+  color: #8f96a7;
+  font-size: 10px;
+}
+
+.alibi-game-root .form-response-message,
+.alibi-game-root .form-limit-alert {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(120, 215, 167, 0.28);
+  border-radius: 8px;
+  color: #a8e7c7;
+  font-size: 11px;
+  background: rgba(41, 119, 85, 0.1);
+}
+
+.alibi-game-root .form-limit-alert {
+  border-color: rgba(240, 113, 120, 0.32);
+  color: #ffa7ad;
+  background: rgba(149, 39, 48, 0.11);
+}
+
+/* 사건 브리핑 */
+.alibi-game-root .case-briefing {
+  display: block;
+  padding: 0;
+}
+
+.alibi-game-root .briefing-workspace {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.7fr) minmax(640px, 1.3fr);
+  gap: 22px;
+  padding: 24px 28px 30px;
+}
+
+.alibi-game-root .case-info {
+  gap: 18px;
+}
+
+.alibi-game-root .case-card,
+.alibi-game-root .objective,
+.alibi-game-root .location-map {
+  border: 1px solid var(--stroke);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #151925, #10131d);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.2);
+}
+
+.alibi-game-root .case-card,
+.alibi-game-root .objective {
+  padding: 22px;
+}
+
+.alibi-game-root .case-status-dot,
+.alibi-game-root .location-count,
+.alibi-game-root .target-count,
+.alibi-game-root .history-count,
+.alibi-game-root .pending-answer-count,
+.alibi-game-root .question-form-state {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid #363c4c;
+  border-radius: 999px;
+  color: #9ba3b4;
+  font-size: 10px;
+  font-weight: 800;
+  background: #111520;
+}
+
+.alibi-game-root .case-status-dot {
+  border-color: rgba(240, 113, 120, 0.38);
+  color: #ff9ca2;
+  background: rgba(149, 39, 48, 0.14);
+}
+
+.alibi-game-root .victim-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #2c3242;
+  border-radius: 12px;
+  background: #11141e;
+}
+
+.alibi-game-root .victim-summary > span {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(240, 113, 120, 0.42);
+  border-radius: 50%;
+  color: #ff9aa1;
+  font-size: 19px;
+  font-weight: 800;
+  background: rgba(149, 39, 48, 0.13);
+}
+
+.alibi-game-root .victim-summary small,
+.alibi-game-root .victim-summary strong,
+.alibi-game-root .victim-summary p {
+  display: block;
+}
+
+.alibi-game-root .victim-summary small {
+  color: #737b8e;
+  font-size: 10px;
+}
+
+.alibi-game-root .victim-summary strong {
+  margin-top: 2px;
+  color: #f1edf0;
+  font-size: 17px;
+}
+
+.alibi-game-root .victim-summary p {
+  margin: 3px 0 0;
+  color: #8e96a7;
+  font-size: 11px;
+}
+
+.alibi-game-root .case-fact-list {
+  margin: 16px 0 0;
+}
+
+.alibi-game-root .case-fact-list > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 11px 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.alibi-game-root .case-fact-list dt {
+  color: #7d8598;
+  font-size: 11px;
+}
+
+.alibi-game-root .case-fact-list dd {
+  margin: 0;
+  color: #d7dae2;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.alibi-game-root .case-description {
+  margin-top: 16px;
+  padding: 14px;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 9px 9px 0;
+  background: rgba(197, 163, 94, 0.075);
+}
+
+.alibi-game-root .case-description span {
+  color: #e3c574;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.alibi-game-root .case-description p {
+  margin: 6px 0 0;
+  color: #b8bdc9;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.alibi-game-root .objective {
+  background: linear-gradient(145deg, rgba(117, 27, 35, 0.19), #11141e 65%);
+}
+
+.alibi-game-root .objective-title {
+  margin: 7px 0 5px;
+  color: var(--heading);
+  font-size: 21px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.alibi-game-root .objective > p {
+  margin: 0;
+  color: #9299aa;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.alibi-game-root .objective-text {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alibi-game-root .objective-text li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #302e3a;
+  border-radius: 9px;
+  color: #d8d5da;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.alibi-game-root .objective-text li > span {
+  color: #d96b72;
+  font-size: 9px;
+}
+
+.alibi-game-root .objective-text li > strong {
+  font-size: 12px;
+}
+
+.alibi-game-root .right-panel {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.alibi-game-root .location-map {
+  gap: 18px;
+  padding: 22px;
+}
+
+.alibi-game-root .map-title {
+  margin: 7px 0 0;
+  font-family: inherit;
+  font-size: 21px;
+  letter-spacing: 0;
+}
+
+.alibi-game-root .map-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.alibi-game-root .room-card {
+  position: relative;
+  height: 112px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 3px;
+  padding: 14px;
+  overflow: hidden;
+  border-color: #2b3141;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #181c28, #10131c);
+}
+
+.alibi-game-root .room-card:hover {
+  border-color: rgba(229, 197, 113, 0.52);
+  background: linear-gradient(145deg, #202433, #151823);
+  transform: translateY(-2px);
+}
+
+.alibi-game-root .room-number {
+  position: absolute;
+  top: 9px;
+  right: 11px;
+  color: rgba(229, 197, 113, 0.35);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+}
+
+.alibi-game-root .room-card strong {
+  color: #e5e7ec;
+  font-size: 14px;
+}
+
+.alibi-game-root .room-card small {
+  color: #777f91;
+  font-size: 10px;
+}
+
+.alibi-game-root .briefing-footer {
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.alibi-game-root .briefing-footer p {
+  max-width: 560px;
+  margin: 0;
+  color: #7d8597;
+  font-size: 11px;
+}
+
+.alibi-game-root .next-btn {
+  width: auto;
+  min-width: 190px;
+  height: 48px;
+  padding: 0 18px;
+  border: 1px solid rgba(229, 197, 113, 0.44);
+  border-radius: 10px;
+  color: #f2da96;
+  background: rgba(145, 108, 36, 0.17);
+}
+
+/* 공식 진술 */
+.alibi-game-root .official-statement-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.alibi-game-root .statement-workspace {
+  min-height: 0;
+  display: grid;
+  flex: 1;
+  grid-template-columns: 285px minmax(0, 1fr);
+}
+
+.alibi-game-root .statement-sidebar {
+  border-right-color: var(--stroke);
+  background: #10131d;
+}
+
+.alibi-game-root .sidebar-header {
+  padding: 22px;
+}
+
+.alibi-game-root .sidebar-header h2 {
+  margin-top: 7px;
+  color: var(--heading);
+  font-size: 22px;
+}
+
+.alibi-game-root .sidebar-header p {
+  margin: 5px 0 0;
+  color: #798195;
+  font-size: 10px;
+}
+
+.alibi-game-root .sidebar-round {
+  color: var(--gold-strong);
+  font-size: 10px;
+}
+
+.alibi-game-root .round-card {
+  position: relative;
+  padding: 15px 20px;
+}
+
+.alibi-game-root .round-card.active {
+  border-left-color: var(--gold);
+  background: rgba(197, 163, 94, 0.08);
+}
+
+.alibi-game-root .round-title {
+  color: #d6b961;
+  font-size: 10px;
+}
+
+.alibi-game-root .round-time {
+  color: #d5d8e0;
+  font-size: 12px;
+}
+
+.alibi-game-root .round-status {
+  color: #737b8f;
+  font-size: 10px;
+}
+
+.alibi-game-root .public-time {
+  margin: 18px;
+  padding: 16px;
+  border-color: rgba(229, 197, 113, 0.3);
+  border-radius: 12px;
+  background: rgba(131, 100, 37, 0.1);
+}
+
+.alibi-game-root .public-time span,
+.alibi-game-root .public-time p {
+  font-size: 10px;
+}
+
+.alibi-game-root .public-time h3 {
+  margin: 6px 0 8px;
+  font-size: 23px;
+}
+
+.alibi-game-root .statement-progress-track {
+  height: 4px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.alibi-game-root .statement-progress-track > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a8873f, #e5c571);
+}
+
+.alibi-game-root .statement-form {
+  max-width: 1080px;
+  padding: 30px 36px;
+}
+
+.alibi-game-root .statement-header {
+  margin-bottom: 22px;
+  padding-left: 0;
+}
+
+.alibi-game-root .statement-header::before {
+  display: none;
+}
+
+.alibi-game-root .statement-header .section-title {
+  margin: 7px 0 0;
+  color: var(--heading);
+  font-size: 27px;
+}
+
+.alibi-game-root .statement-desc {
+  color: #8d95a8;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.alibi-game-root .statement-applied-hint {
+  margin: 9px 0 0;
+  color: #e3c879;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.alibi-game-root .status {
+  padding: 7px 12px;
+  font-size: 10px;
+}
+
+.alibi-game-root .status.error {
+  border: 1px solid rgba(240, 113, 120, 0.33);
+  color: #ff9fa5;
+  background: rgba(149, 39, 48, 0.14);
+}
+
+.alibi-game-root .statement-block {
+  padding: 24px;
+  border-color: var(--stroke);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #151925, #10131d);
+}
+
+.alibi-game-root .statement-grid {
+  gap: 16px;
+}
+
+.alibi-game-root .input-group label,
+.alibi-game-root .form-group label {
+  color: #b6bdcb;
+  font-size: 12px;
+}
+
+.alibi-game-root .input-group input,
+.alibi-game-root .input-group select,
+.alibi-game-root .input-group textarea,
+.alibi-game-root .form-group select {
+  min-height: 46px;
+  padding: 11px 12px;
+  border-color: #343b4d;
+  border-radius: 9px;
+  color: #eef0f4;
+  font-size: 13px;
+  background: #0b0e17;
+}
+
+.alibi-game-root .input-group textarea {
+  min-height: 130px;
+}
+
+.alibi-game-root .submit-btn {
+  min-height: 50px;
+  border: 1px solid rgba(229, 197, 113, 0.42);
+  border-radius: 10px;
+  color: #f2dc9b;
+  font-size: 13px;
+  background: rgba(145, 108, 36, 0.2);
+}
+
+/* 공식 Q&A */
+.alibi-game-root .official-question-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.alibi-game-root .question-workspace {
+  min-height: 0;
+  display: grid;
+  flex: 1;
+  grid-template-columns: 290px minmax(400px, 1fr) minmax(380px, 0.95fr);
+  gap: 18px;
+  padding: 24px 28px 30px;
+}
+
+.alibi-game-root .target-list,
+.alibi-game-root .question-form,
+.alibi-game-root .answer-panel,
+.alibi-game-root .history-panel {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #151925, #10131d);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
+}
+
+.alibi-game-root .target-list {
+  align-self: start;
+  padding: 20px;
+  border-right: 1px solid var(--stroke);
+}
+
+.alibi-game-root .player-grid {
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.alibi-game-root .player-card {
+  aspect-ratio: auto;
+  min-height: 62px;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 11px;
+  padding: 9px 11px;
+  border-color: #2d3445;
+  border-radius: 10px;
+  text-align: left;
+  background: #11151f;
+}
+
+.alibi-game-root .player-card:hover {
+  border-color: rgba(229, 197, 113, 0.5);
+  background: rgba(197, 163, 94, 0.07);
+  transform: translateX(2px);
+}
+
+.alibi-game-root .player-card.active {
+  border-color: var(--gold);
+  background: rgba(197, 163, 94, 0.12);
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+.alibi-game-root .player-card .avatar {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border: 1px solid color-mix(in srgb, var(--target-color), transparent 45%);
+  color: var(--target-color);
+  font-size: 14px;
+  background: color-mix(in srgb, var(--target-color), transparent 88%);
+}
+
+.alibi-game-root .target-player-copy {
+  min-width: 0;
+}
+
+.alibi-game-root .player-name {
+  margin: 0;
+  color: #eef0f4;
+  font-size: 13px;
+  text-align: left;
+}
+
+.alibi-game-root .player-card .player-status {
+  display: block;
+  margin-top: 3px;
+  padding: 0;
+  color: #727b8f;
+  font-size: 9px;
+  text-align: left;
+  background: transparent;
+}
+
+.alibi-game-root .question-count {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid rgba(229, 197, 113, 0.25);
+  border-radius: 9px;
+  color: #b9bfca;
+  font-size: 11px;
+  background: rgba(131, 100, 37, 0.09);
+}
+
+.alibi-game-root .question-count strong {
+  color: var(--gold-strong);
+  font-size: 15px;
+}
+
+.alibi-game-root .question-form {
+  align-self: start;
+  gap: 18px;
+}
+
+.alibi-game-root .question-form-state.is-open,
+.alibi-game-root .pending-answer-count.has-pending {
+  border-color: rgba(120, 215, 167, 0.38);
+  color: #9ee7c4;
+  background: rgba(41, 119, 85, 0.14);
+}
+
+.alibi-game-root .question-card {
+  gap: 18px;
+  padding: 20px;
+  border-color: #2d3445;
+  border-radius: 13px;
+  background: #11151f;
+}
+
+.alibi-game-root .selected-player {
+  padding: 11px 13px;
+  border-color: #343b4d;
+  border-radius: 9px;
+  background: #0b0e17;
+}
+
+.alibi-game-root .selected-player .player-avatar {
+  width: 38px;
+  height: 38px;
+  font-size: 13px;
+}
+
+.alibi-game-root .selected-player > span {
+  color: #edf0f5;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.alibi-game-root .type-list {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.alibi-game-root .type-btn {
+  min-height: 44px;
+  border-color: #343b4d;
+  border-radius: 9px;
+  color: #b5bdcb;
+  font-size: 11px;
+  background: #0b0e17;
+}
+
+.alibi-game-root .type-btn:hover,
+.alibi-game-root .type-btn.active {
+  border-color: rgba(229, 197, 113, 0.54);
+  color: #f1d98f;
+  background: rgba(145, 108, 36, 0.16);
+}
+
+.alibi-game-root .submit-question {
+  align-self: stretch;
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgba(229, 197, 113, 0.44);
+  border-radius: 10px;
+  color: #f3dc98;
+  font-size: 12px;
+  background: rgba(145, 108, 36, 0.2);
+}
+
+.alibi-game-root .qa-activity-column {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.alibi-game-root .answer-card {
+  margin-top: 14px;
+  padding: 17px;
+  border-color: #343b4d;
+  border-radius: 11px;
+  background: #11151f;
+}
+
+.alibi-game-root .answer-card-label {
+  color: #7c8496;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.alibi-game-root .answer-question {
+  margin-top: 8px;
+  color: #eef0f4;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.alibi-game-root .answer-buttons {
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.alibi-game-root .yes-btn,
+.alibi-game-root .no-btn {
+  height: 46px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+.alibi-game-root .empty-answer,
+.alibi-game-root .empty-history {
+  margin-top: 14px;
+  padding: 24px 15px;
+  border-color: #353b4b;
+  color: #777f91;
+  font-size: 11px;
+}
+
+.alibi-game-root .history-panel {
+  min-height: 280px;
+}
+
+.alibi-game-root .history-list {
+  max-height: 360px;
+  gap: 10px;
+  margin-top: 16px;
+  padding-right: 3px;
+  overflow-y: auto;
+}
+
+.alibi-game-root .history-card {
+  padding: 14px;
+  border-color: #2f3647;
+  border-radius: 10px;
+  background: #11151f;
+}
+
+.alibi-game-root .history-player {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  color: #737b8e;
+  font-size: 10px;
+}
+
+.alibi-game-root .history-player strong {
+  color: #c8ccd6;
+  font-size: 11px;
+}
+
+.alibi-game-root .history-question-row {
+  gap: 12px;
+}
+
+.alibi-game-root .history-question {
+  color: #d8dbe2;
+  font-size: 12px;
+}
+
+.alibi-game-root .history-answer {
+  padding: 4px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 최종 추리 */
+.alibi-game-root .final-deduction-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.alibi-game-root .final-deduction {
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 0;
+}
+
+.alibi-game-root .deduction-form {
+  padding: 32px 38px;
+}
+
+.alibi-game-root .deduction-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 26px;
+  text-align: left;
+}
+
+.alibi-game-root .deduction-header h2 {
+  margin: 7px 0 4px;
+  color: var(--heading);
+  font-size: 27px;
+}
+
+.alibi-game-root .deduction-header p {
+  margin: 0;
+  color: #8f96a8;
+  font-size: 12px;
+}
+
+.alibi-game-root .deduction-header .form-stage-notice {
+  width: 100%;
+  margin: 0;
+}
+
+.alibi-game-root .deduction-lock-state {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 11px;
+  border: 1px solid #363c4d;
+  border-radius: 999px;
+  color: #9299aa;
+  font-size: 10px;
+  font-weight: 800;
+  background: #151925;
+}
+
+.alibi-game-root .deduction-lock-state.is-open {
+  border-color: rgba(240, 113, 120, 0.45);
+  color: #ffadb2;
+  background: rgba(149, 39, 48, 0.15);
+}
+
+.alibi-game-root .deduction-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.alibi-game-root .deduction-select {
+  padding: 20px;
+  border-color: #2e3546;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #171b27, #11141e);
+}
+
+.alibi-game-root .select-header {
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.alibi-game-root .select-number {
+  color: var(--gold-strong);
+  font-size: 11px;
+}
+
+.alibi-game-root .select-title {
+  color: #d8dbe3;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.alibi-game-root .deduction-dropdown {
+  min-height: 48px;
+  border-color: #3a4255;
+  border-radius: 9px;
+  color: #edf0f4;
+  font-size: 13px;
+  background: #0a0d16;
+}
+
+.alibi-game-root .deduction-actions {
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.alibi-game-root .note-btn,
+.alibi-game-root .deduction-submit-btn {
+  height: 54px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.alibi-game-root .note-btn {
+  border-color: #3a4255;
+  background: #121621;
+}
+
+.alibi-game-root .deduction-submit-btn {
+  border-color: rgba(240, 113, 120, 0.46);
+  color: #ffd7d9;
+  background: rgba(149, 39, 48, 0.28);
+}
+
+.alibi-game-root .submission-status {
+  width: 340px;
+  border-left-color: var(--stroke);
+  background: #10131d;
+}
+
+.alibi-game-root .submission-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 22px;
+}
+
+.alibi-game-root .submission-header h2 {
+  margin: 7px 0 0;
+  color: var(--heading);
+  font-size: 21px;
+}
+
+.alibi-game-root .submission-header > strong {
+  color: var(--gold-strong);
+  font-size: 16px;
+}
+
+.alibi-game-root .status-list {
+  gap: 9px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.alibi-game-root .submission-status .player-status {
+  min-height: 58px;
+  padding: 10px 12px;
+  border: 1px solid #2e3546;
+  border-radius: 10px;
+  background: #151925;
+}
+
+.alibi-game-root .submission-status .player-info h4 {
+  font-size: 12px;
+}
+
+.alibi-game-root .submission-status .player-info p {
+  font-size: 10px;
+}
+
+.alibi-game-root .submission-notice {
+  margin: 16px;
+  padding: 14px;
+  border-radius: 10px;
+}
+
+/* 단계/힌트 알림을 더 크게 표시 */
+.alibi-game-root .game-toast {
+  right: 28px;
+  bottom: 28px;
+  max-width: min(520px, calc(100vw - 40px));
+  padding: 15px 18px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.alibi-game-root .game-toast span {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+}
+
+.alibi-game-root .game-toast strong {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.alibi-game-root .game-toast.is-hint {
+  border-width: 2px;
+  background:
+    radial-gradient(circle at top left, rgba(229, 197, 113, 0.16), transparent 50%),
+    rgba(12, 14, 23, 0.98);
+}
+
+/* 개인 타임라인도 공통 페이지 색과 크기에 맞춤 */
+.alibi-game-root .private-timeline-page {
+  padding: 28px;
+}
+
+.alibi-game-root .timeline-page-heading h2 {
+  font-size: clamp(27px, 2.6vw, 38px);
+}
+
+.alibi-game-root .timeline-page-heading p {
+  font-size: 13px;
+}
+
+/* 반응형 */
+@media (max-width: 1600px) {
+  .alibi-game-root .game-stage-strip {
+    grid-template-columns: minmax(280px, 0.55fr) minmax(600px, 1.45fr);
+  }
+
+  .alibi-game-root .game-stage-flow li > strong {
+    font-size: 9px;
+  }
+
+  .alibi-game-root .game-toolbar {
+    grid-template-columns: 275px minmax(560px, 1fr) 310px;
+  }
+
+  .alibi-game-root .main-game-nav button {
+    min-width: 116px;
+    font-size: 12px;
+  }
+
+  .alibi-game-root .game-workspace {
+    grid-template-columns: 290px minmax(620px, 1fr) 330px;
+  }
+
+  .alibi-game-root .board-hour-heading {
+    width: calc(100vw - 716px);
+  }
+
+  .alibi-game-root .question-workspace {
+    grid-template-columns: 250px minmax(360px, 1fr) minmax(340px, 0.9fr);
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .alibi-game-root .game-stage-strip {
+    display: block;
+    min-height: auto;
+  }
+
+  .alibi-game-root .game-stage-summary {
+    margin-bottom: 10px;
+  }
+
+  .alibi-game-root .game-stage-flow {
+    grid-template-columns: repeat(6, minmax(90px, 1fr));
+    overflow-x: auto;
+  }
+
+  .alibi-game-root .game-toolbar {
+    grid-template-columns: 250px minmax(480px, 1fr) 280px;
+  }
+
+  .alibi-game-root .game-workspace {
+    grid-template-columns: 260px minmax(540px, 1fr) 300px;
+  }
+
+  .alibi-game-root .board-hour-heading {
+    width: calc(100vw - 660px);
+  }
+
+  .alibi-game-root .briefing-workspace {
+    grid-template-columns: 340px minmax(540px, 1fr);
+  }
+
+  .alibi-game-root .map-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .alibi-game-root .question-workspace {
+    grid-template-columns: 245px minmax(0, 1fr);
+  }
+
+  .alibi-game-root .qa-activity-column {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(360px, 0.8fr) minmax(480px, 1.2fr);
+  }
+}
+
+@media (max-width: 980px) {
+  .alibi-game-root .game-page-header {
+    flex-direction: column;
+    padding: 22px 20px;
+  }
+
+  .alibi-game-root .game-page-header-actions,
+  .alibi-game-root .board-legend {
+    justify-content: flex-start;
+  }
+
+  .alibi-game-root .board-summary-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .alibi-game-root .board-inspector {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .alibi-game-root .cell-note-editor {
+    grid-column: 1 / -1;
+  }
+
+  .alibi-game-root .briefing-workspace,
+  .alibi-game-root .statement-workspace,
+  .alibi-game-root .question-workspace,
+  .alibi-game-root .qa-activity-column,
+  .alibi-game-root .final-deduction {
+    grid-template-columns: 1fr;
+  }
+
+  .alibi-game-root .statement-sidebar {
+    display: block;
+    border-right: 0;
+    border-bottom: 1px solid var(--stroke);
+  }
+
+  .alibi-game-root .round-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(140px, 1fr));
+    overflow-x: auto;
+  }
+
+  .alibi-game-root .public-time {
+    max-width: 320px;
+  }
+
+  .alibi-game-root .qa-activity-column {
+    grid-column: auto;
+  }
+
+  .alibi-game-root .submission-status {
+    width: auto;
+    border-top: 1px solid var(--stroke);
+    border-left: 0;
+  }
+
+  .alibi-game-root .status-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .alibi-game-root .game-stage-strip {
+    padding: 10px 14px;
+  }
+
+  .alibi-game-root .game-stage-summary > p {
+    display: none;
+  }
+
+  .alibi-game-root .game-page-heading-copy h1 {
+    font-size: 25px;
+  }
+
+  .alibi-game-root .board-summary-strip,
+  .alibi-game-root .board-inspector,
+  .alibi-game-root .objective-text,
+  .alibi-game-root .deduction-grid,
+  .alibi-game-root .status-list {
+    grid-template-columns: 1fr;
+  }
+
+  .alibi-game-root .board-summary-strip article {
+    border-right: 0;
+    border-bottom: 1px solid var(--stroke-soft);
+  }
+
+  .alibi-game-root .briefing-workspace,
+  .alibi-game-root .question-workspace {
+    padding: 18px 14px 24px;
+  }
+
+  .alibi-game-root .map-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .alibi-game-root .statement-form,
+  .alibi-game-root .deduction-form {
+    padding: 22px 16px;
+  }
+
+  .alibi-game-root .statement-grid,
+  .alibi-game-root .type-list {
+    grid-template-columns: 1fr;
+  }
+
+  .alibi-game-root .deduction-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .alibi-game-root .note-btn,
+  .alibi-game-root .deduction-submit-btn {
+    width: 100%;
+  }
+}

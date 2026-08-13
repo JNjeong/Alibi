@@ -1,0 +1,35 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test tests/game_flow.test.js",
+    "test:integration": "node --test tests/game_integration.test.js",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "test:gamesetter": "node --test tests/gamesetter_pure.test.js",
+    "cleanup:games": "node scripts/cleanup_invalid_playing_games.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.5.0",
+    "mongoose": "^9.8.1",
+    "multer": "^2.2.0",
+    "nstall": "^0.2.0",
+    "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "socket.io-client": "^4.8.3"
+  }
+}
