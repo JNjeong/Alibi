@@ -1,0 +1,85 @@
+.wrapper {
+    width: 100%;
+}
+
+.title {
+    margin-bottom: 24px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1b1b2b;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table th {
+    background: #2b2d42;
+    color: white;
+    padding: 14px;
+    text-align: center;
+}
+
+.table td {
+    padding: 14px;
+    text-align: center;
+    border-top: 1px solid #34364d;
+    color: #d4d4dd;
+}
+
+
+.table tr:hover {
+    background: #23253a;
+}
+
+.roleButton {
+    padding: 8px 14px;
+
+    background: #d82731;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.roleButton:hover {
+    background: #b71f28;
+}
+
+/*회원 검색*/
+
+.searchInput {
+    width: 320px;
+
+    margin-bottom: 20px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #2f3146;
+    border-radius: 8px;
+
+    background: #1b1b2b;
+
+    color: white;
+
+    font-size: 15px;
+}
+
+.searchInput::placeholder {
+    color: #8f94a8;
+}
+
+.active {
+    color: #22c55e;
+    font-weight: 700;
+
+}
