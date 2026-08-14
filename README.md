@@ -607,6 +607,7 @@ ALIBI/
 │   │   ├── socket/                 # 대기방·게임·채팅 이벤트
 │   │   ├── app.js                  # Express app
 │   │   └── server.js               # DB·Map·HTTP·Socket 시작
+│   ├── scripts/                    # 비정상적으로 플레이 중인 게임 확인 및 처리
 │   ├── tests/                      # 회귀·순수·통합 테스트
 │   ├── GameSetter.js               # 사건 생성·모순 규칙
 │   ├── .env.example
